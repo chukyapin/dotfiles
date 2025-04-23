@@ -12,7 +12,7 @@ config.font_size = 22
 -- window
 config.color_scheme = "Dracula"
 config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.9
+config.window_background_opacity = 0.8
 config.macos_window_background_blur = 0
 config.hide_tab_bar_if_only_one_tab = true
 
