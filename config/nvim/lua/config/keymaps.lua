@@ -24,6 +24,10 @@ map("n", "\\", ":vsplit<CR>", opts)
 -- V-BLOCK
 map("v", "v", "<C-v>")
 
+-- Indent
+map("v", "<C-t>", ">gv")
+map("v", "<C-d>", "<gv")
+
 -- Redo
 map("n", "U", "<C-r>")
 

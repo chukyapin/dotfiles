@@ -96,8 +96,8 @@ return {
     dashboard = { example = "github" },
     gitbrowse = {
       open = function(url)
-        -- vim.fn.system(" ~/dot/config/hypr/scripts/quake")
-        vim.fn.system(" ~/dotfiles/config")
+        vim.fn.system(" ~/dot/config/hypr/scripts/quake")
+        -- vim.fn.system(" ~/dotfiles/config")
         vim.ui.open(url)
       end,
     },
