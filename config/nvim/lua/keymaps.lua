@@ -43,9 +43,9 @@ map("v", "<C-d>", "<gv")
 map("n", "U", "<C-r>")
 
 -- Save & Quit
-map("n", "<A-w>", ":write<CR>")
-map("n", "<A-q>", ":quit<CR>")
-map("n", "<A-wq>", ":wq<CR>")
+map("n", "<leader>@", ":write<CR>")
+map("n", "<leader>!", ":quit<CR>")
+map("n", "<leader>~", ":wq<CR>")
 
 -- diagnostics
 map("n", "<A-d>", function()
