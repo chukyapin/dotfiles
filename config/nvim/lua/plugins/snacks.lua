@@ -21,15 +21,14 @@ return {
 	keys = {
 
 		{ "<Space>q", mode = { "n", "i" }, function() Snacks.bufdelete() end,                             silent = true },
-		{ "<space>n",       mode = { "n", "i" }, function() Snacks.notifier.show_history() end,                 desc = "Notification History" },
-		{ "<space>k",       mode = { "n", "i" }, function() Snacks.picker.keymaps() end,                        desc = "Keymaps" },
-		{ "<space>g",       mode = { "n", "i" }, function() Snacks.lazygit() end,                               desc = "Lazygit" },
-		{ "<space>h",       mode = { "n", "i" }, function() Snacks.picker.help() end,                           desc = "Help Pages" },
-		{ "<space>e",       mode = { "n", "i" }, function() Snacks.picker.explorer() end, silent = true },
+		{ "<space>n", mode = { "n", "i" }, function() Snacks.notifier.show_history() end,                 desc = "Notification History" },
+		{ "<space>k", mode = { "n", "i" }, function() Snacks.picker.keymaps() end,                        desc = "Keymaps" },
+		{ "<space>g", mode = { "n", "i" }, function() Snacks.lazygit() end,                               desc = "Lazygit" },
+		{ "<space>h", mode = { "n", "i" }, function() Snacks.picker.help() end,                           desc = "Help Pages" },
+		{ "<space>e", mode = { "n", "i" }, function() Snacks.picker.explorer({ layout = "sidebar" }) end, silent = true },
 		{ ";s",       mode = { "n", "i" }, function() Snacks.picker.smart() end,                          silent = true },
 		{ ";f",       mode = { "n", "i" }, function() Snacks.picker.files() end,                          desc = "Find Files" },
-		{ ";r",       mode = { "n", "i" }, function() Snacks.picker.grep() end,                           desc = "Grep" },
-		-- { ";b",       mode = { "n", "i" }, function() Snacks.picker.buffers() end,        desc = "Buffers" },
+		{ ";g",       mode = { "n", "i" }, function() Snacks.picker.grep() end,                           desc = "Grep" },
 		{
 			";b",
 			function()
@@ -53,17 +52,16 @@ return {
 						list = { keys = { ["d"] = "bufdelete" } },
 					},
 					-- In case you want to override the layout for this keymap
-					-- layout = "ivy",
+					layout = "ivy",
 				})
 			end,
 			desc = "[P]Snacks picker buffers",
 		},
 		{ ";d",    mode = { "n", "i" }, function() Snacks.picker.diagnostics() end,                             desc = "Diagnostics" },
-		{ "'d",    mode = { "n", "i" }, function() Snacks.picker.diagnostics_buffer() end,                      desc = "Buffer Diagnostics" },
-		{ ";l",    mode = { "n", "i" }, function() Snacks.picker.lines() end,             desc = "Lines",             silent = true },
+		{ ";l",    mode = { "n", "i" }, function() Snacks.picker.lines() end,                                   desc = "Lines",           silent = true },
 		{ "<C-,>", mode = { "n", "i" }, function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
 		{ "<C-/>", mode = { "n", "i" }, function() Snacks.terminal() end,                                       desc = "Toggle Terminal" },
-		{ "<M-b>", mode = { "n", "i" }, function() Snacks.picker.git_branches({ layout = "select" }) end,       desc = "Branches" },
+		{ "'b",    mode = { "n", "i" }, function() Snacks.picker.git_branches({ layout = "select" }) end,       desc = "Branches" },
 		-- { "<C-j>r",    mode = { "n", "i" }, function() Snacks.picker.recent() end,                                  silent = true },
 		-- {
 		-- 		local curdir = vim.bo.filetype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%:p:h")
@@ -75,7 +73,7 @@ return {
 		-- 	silent = true
 		-- },
 		-- { "<C-j>:", mode = { "n", "i" }, function() Snacks.picker.command_history() end, silent = true },
-		-- { "<C-j>s", mode = { "n", "i" }, function() Snacks.picker.git_status() end,      silent = true },
+		{ "'s",    mode = { "n", "i" }, function() Snacks.picker.git_status() end,                              silent = true },
 		-- { "<C-j>b", mode = { "n", "i" }, function() Snacks.picker.git_log_line() end,    silent = true },
 		-- { "<C-j>j", mode = { "n", "i" }, function() Snacks.picker.resume() end,          silent = true },
 		-- { "<C-j>k", mode = { "n", "i" }, function() Snacks.picker.pickers() end,         silent = true },
