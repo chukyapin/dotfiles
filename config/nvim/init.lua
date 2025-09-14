@@ -6,11 +6,11 @@ require("autocmds")
 require("keymaps")
 require("lsp")
 
-require("tokyonight").setup({
+require("solarized-osaka").setup({
   transparent = true,
   styles = {
     sidebars = "transparent",
     floats = "transparent",
   },
 })
-vim.cmd([[colorscheme tokyonight]])
+vim.cmd([[colorscheme solarized-osaka]])
