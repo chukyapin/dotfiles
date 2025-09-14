@@ -1,5 +1,4 @@
 local wezterm = require("wezterm") --[[@as Wezterm]]
-local os = require("os")
 
 local act = wezterm.action
 local M = {}
@@ -19,22 +18,15 @@ end)
 function M.setup(config)
 	-- config.disable_default_key_bindings = true
 	config.keys = {
-		{
-			key = ",",
-			mods = "CMD",
-			action = act.SpawnCommandInNewTab({
-				args = { "/opt/homebrew/bin/nvim", os.getenv("WEZTERM_CONFIG_FILE") },
-			}),
-		},
 		-- Scrollback
-		{ mods = "ALT|CTRL", key = "k", action = act.ScrollByPage(-0.5) },
-		{ mods = "ALT|CTRL", key = "j", action = act.ScrollByPage(0.5) },
+		{ mods = "SHIFT|CTRL", key = "k", action = act.ScrollByPage(-0.5) },
+		{ mods = "SHIFT|CTRL", key = "j", action = act.ScrollByPage(0.5) },
 		-- New Tab
 		{ mods = "SHIFT|CTRL", key = "t", action = act.SpawnTab("CurrentPaneDomain") },
 		-- Splits
 		{ mods = "SHIFT|CTRL", key = "Enter", action = M.smart_split },
 		{ mods = "SHIFT|CTRL", key = "|", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-		{ mods = "SHIFT|CTRL", key = "_", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+		{ mods = "SHIFT|CTRL", key = "-", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 		{ mods = "SHIFT|CTRL", key = "(", action = act.DecreaseFontSize },
 		{ mods = "SHIFT|CTRL", key = ")", action = act.IncreaseFontSize },
 		-- Acivate Tabs
@@ -62,10 +54,10 @@ function M.setup(config)
 		M.split_nav("resize", "CTRL", "RightArrow", "Left"),
 		M.split_nav("resize", "CTRL", "UpArrow", "Up"),
 		M.split_nav("resize", "CTRL", "DownArrow", "Down"),
-		M.split_nav("move", "SHIFT|CTRL", "h", "Left"),
-		M.split_nav("move", "SHIFT|CTRL", "j", "Down"),
-		M.split_nav("move", "SHIFT|CTRL", "k", "Up"),
-		M.split_nav("move", "SHIFT|CTRL", "l", "Right"),
+		M.split_nav("move", "CTRL|SHIFT", "h", "Left"),
+		M.split_nav("move", "CTRL|SHIFT", "j", "Down"),
+		M.split_nav("move", "CTRL|SHIFT", "k", "Up"),
+		M.split_nav("move", "CTRL|SHIFT", "l", "Right"),
 	}
 end
 

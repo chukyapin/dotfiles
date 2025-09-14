@@ -4,6 +4,6 @@ return {
     "smjonas/inc-rename.nvim",
     cmd = "IncRename",
     config = true,
-    vim.keymap.set("n", "<leader>rn", ":IncRename "),
+    -- vim.keymap.set("n", "<leader>rn", ":IncRename "),
   },
 }

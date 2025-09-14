@@ -28,6 +28,7 @@ fish_add_path ~/.local/bin/pnpm-bins
 fish_add_path ~/.local/share/bob-nvim/bin
 fish_add_path ~/.local/share/bob-nvim/nvim-linux64/bin
 fish_add_path /var/lib/flatpak/exports/bin/
+fish_add_path ~/go
 fish_add_path ~/.dotnet/tools
 # fish_add_path ~/.local/share/mise/shims/
 

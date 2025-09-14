@@ -5,37 +5,31 @@ require("tabs").setup(config)
 require("keys").setup(config)
 
 config.automatically_reload_config = true
-config.window_background_opacity = 0.7
-config.macos_window_background_blur = 60
+config.window_background_opacity = 0.75
+config.macos_window_background_blur = 20
 config.hide_tab_bar_if_only_one_tab = true
+config.tab_bar_at_bottom = false
 config.audible_bell = "Disabled"
+
+-- ウィンドウフレーム設定
+config.window_frame = {
+	font = wezterm.font("JetBrains Mono", { weight = "Bold" }),
+	font_size = 14,
+	inactive_titlebar_bg = "none",
+	active_titlebar_bg = "none",
+}
 
 config.cursor_blink_ease_in = "Constant"
 config.cursor_blink_ease_out = "Constant"
 
--- config.color_scheme = "AdventureTime"
+config.color_scheme = "tokyonight_ night"
 
 config.underline_thickness = 3
 config.cursor_thickness = 4
 config.underline_position = -6
 config.enable_kitty_graphics = true
 
--- if wezterm.target_triple:find("windows") then
--- 	config.default_prog = { "pwsh" }
 config.window_decorations = "RESIZE"
--- 	wezterm.on("gui-startup", function(cmd)
--- 		local screen = wezterm.gui.screens().active
--- 		local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
--- 		local gui = window:gui_window()
--- 		local width = 0.7 * screen.width
--- 		local height = 0.7 * screen.height
--- 		gui:set_inner_size(width, height)
--- 		gui:set_position((screen.width - width) / 2, (screen.height - height) / 2)
--- 	end)
--- else
--- 	config.term = "wezterm"
--- 	config.window_decorations = "NONE"
--- end
 
 -- Fonts
 config.font_size = 14

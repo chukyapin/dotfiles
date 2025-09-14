@@ -1,125 +1,278 @@
+---- dashboard で picker を開いて移動する際に発生するチラツキを防止する
+local preventFlicker = function(handler)
+  vim.schedule(function()
+    Snacks.bufdelete()
+  end)
+  vim.schedule(function()
+    -- ここの順番が逆だとno-neck-painがエラーになる
+    vim.cmd([[:NoNeckPain]])
+    vim.cmd([[:BarbarEnable]])
+  end)
+  vim.schedule(function()
+    handler()
+  end)
+end
+
 return {
-  "snacks.nvim",
-  priorty = 1000,
+  "folke/snacks.nvim",
+  priority = 1000,
   lazy = false,
+	-- stylua: ignore start
+	keys = {
+
+		{ "<Space>q", mode = { "n", "i" }, function() Snacks.bufdelete() end,                             silent = true },
+		{ "<space>n",       mode = { "n", "i" }, function() Snacks.notifier.show_history() end,                 desc = "Notification History" },
+		{ "<space>k",       mode = { "n", "i" }, function() Snacks.picker.keymaps() end,                        desc = "Keymaps" },
+		{ "<space>g",       mode = { "n", "i" }, function() Snacks.lazygit() end,                               desc = "Lazygit" },
+		{ "<space>h",       mode = { "n", "i" }, function() Snacks.picker.help() end,                           desc = "Help Pages" },
+		{ "<space>e",       mode = { "n", "i" }, function() Snacks.picker.explorer() end, silent = true },
+		{ ";s",       mode = { "n", "i" }, function() Snacks.picker.smart() end,                          silent = true },
+		{ ";f",       mode = { "n", "i" }, function() Snacks.picker.files() end,                          desc = "Find Files" },
+		{ ";r",       mode = { "n", "i" }, function() Snacks.picker.grep() end,                           desc = "Grep" },
+		-- { ";b",       mode = { "n", "i" }, function() Snacks.picker.buffers() end,        desc = "Buffers" },
+		{
+			";b",
+			function()
+				Snacks.picker.buffers({
+					-- I always want my buffers picker to start in normal mode
+					on_show = function()
+						vim.cmd.stopinsert()
+					end,
+					finder = "buffers",
+					format = "buffer",
+					hidden = false,
+					unloaded = true,
+					current = true,
+					sort_lastused = true,
+					win = {
+						input = {
+							keys = {
+								["d"] = "bufdelete",
+							},
+						},
+						list = { keys = { ["d"] = "bufdelete" } },
+					},
+					-- In case you want to override the layout for this keymap
+					-- layout = "ivy",
+				})
+			end,
+			desc = "[P]Snacks picker buffers",
+		},
+		{ ";d",    mode = { "n", "i" }, function() Snacks.picker.diagnostics() end,                             desc = "Diagnostics" },
+		{ "'d",    mode = { "n", "i" }, function() Snacks.picker.diagnostics_buffer() end,                      desc = "Buffer Diagnostics" },
+		{ ";l",    mode = { "n", "i" }, function() Snacks.picker.lines() end,             desc = "Lines",             silent = true },
+		{ "<C-,>", mode = { "n", "i" }, function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
+		{ "<C-/>", mode = { "n", "i" }, function() Snacks.terminal() end,                                       desc = "Toggle Terminal" },
+		{ "<M-b>", mode = { "n", "i" }, function() Snacks.picker.git_branches({ layout = "select" }) end,       desc = "Branches" },
+		-- { "<C-j>r",    mode = { "n", "i" }, function() Snacks.picker.recent() end,                                  silent = true },
+		-- {
+		-- 		local curdir = vim.bo.filetype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%:p:h")
+		-- 	"<C-j>G",
+		-- 	mode = { "n", "i" },
+		-- 	function()
+		-- 		Snacks.picker.grep({ dirs = { curdir } })
+		-- 	end,
+		-- 	silent = true
+		-- },
+		-- { "<C-j>:", mode = { "n", "i" }, function() Snacks.picker.command_history() end, silent = true },
+		-- { "<C-j>s", mode = { "n", "i" }, function() Snacks.picker.git_status() end,      silent = true },
+		-- { "<C-j>b", mode = { "n", "i" }, function() Snacks.picker.git_log_line() end,    silent = true },
+		-- { "<C-j>j", mode = { "n", "i" }, function() Snacks.picker.resume() end,          silent = true },
+		-- { "<C-j>k", mode = { "n", "i" }, function() Snacks.picker.pickers() end,         silent = true },
+		-- { "<C-j>p", mode = { "n", "i" }, function() Snacks.picker.projects() end,        silent = true },
+		-- --- @diagnostic disable-next-line: undefined-field todo_commentsはsnacks以外に定義があるため無視
+		-- { "<C-j>m", mode = { "n", "i" }, function() Snacks.picker.todo_comments() end,   silent = true },
+	},
+  -- stylua: ignore end
+  ---@type snacks.Config
   opts = {
-    statuscolumn = { folds = { open = false } },
-    notifier = { sort = { "added" } },
-    scroll = { debug = false },
     image = {
-      force = false,
-      enabled = true,
-      debug = { request = false, convert = false, placement = false },
-      math = { enabled = true },
-      doc = { inline = true, float = true },
+      doc = {
+        inline = false,
+      },
+    },
+    dashboard = {
+      sections = {
+        { section = "header" },
+        {
+          pane = 2,
+          section = "terminal",
+          cmd = "colorscript -e square",
+          height = 5,
+          padding = 1,
+        },
+        { section = "keys", gap = 3, padding = 10 },
+        {
+          pane = 2,
+          icon = " ",
+          desc = "Browse Repo",
+          padding = 1,
+          key = "b",
+          action = function()
+            Snacks.gitbrowse()
+          end,
+        },
+        function()
+          local in_git = Snacks.git.get_root() ~= nil
+          local cmds = {
+            {
+              title = "Notifications",
+              cmd = "gh notify -s -a -n5",
+              action = function()
+                vim.ui.open("https://github.com/notifications")
+              end,
+              key = "n",
+              icon = " ",
+              height = 5,
+              enabled = true,
+            },
+            {
+              title = "Open Issues",
+              cmd = "gh issue list -L 3",
+              key = "i",
+              action = function()
+                vim.fn.jobstart("gh issue list --web", { detach = true })
+              end,
+              icon = " ",
+              height = 7,
+            },
+            {
+              icon = " ",
+              title = "Open PRs",
+              cmd = "gh pr list -L 3",
+              key = "P",
+              action = function()
+                vim.fn.jobstart("gh pr list --web", { detach = true })
+              end,
+              height = 7,
+            },
+            {
+              icon = " ",
+              title = "Git Status",
+              cmd = "git --no-pager diff --stat -B -M -C",
+              height = 10,
+            },
+          }
+          return vim.tbl_map(function(cmd)
+            return vim.tbl_extend("force", {
+              pane = 2,
+              section = "terminal",
+              enabled = in_git,
+              padding = 1,
+              ttl = 5 * 60,
+              indent = 3,
+            }, cmd)
+          end, cmds)
+        end,
+        { section = "startup" },
+      },
     },
     picker = {
-      formatters = {
-        file = {
-          filename_first = true,
-        },
+      main = {
+        current = true,
       },
-      previewers = {
-        diff = { builtin = false },
-        git = { builtin = false },
+      actions = {
+        insert_filename = function(picker)
+          local item = picker:current()
+          if item then
+            local path = item.text or item.filename or item.path
+            local filename = vim.fn.fnamemodify(path, ":t")
+            vim.schedule(function()
+              vim.api.nvim_put({ filename }, "", true, true)
+            end)
+            picker:close()
+          end
+        end,
       },
-      debug = { scores = false, leaks = false, explorer = false, files = false, proc = true },
       sources = {
-        explorer = {
-          layout = {
-            preset = "sidebar",
-            preview = { main = true, enabled = false },
-          },
+        lines = {
+          sort = { fields = { "idx", "score:desc" } },
+          matcher = { fuzzy = false },
+          ---@diagnostic disable-next-line: assign-type-mismatch 普通にプレビュー
+          layout = { preview = true },
         },
-        files_with_symbols = {
-          multi = { "files", "lsp_symbols" },
-          filter = {
-            ---@param p snacks.Picker
-            ---@param filter snacks.picker.Filter
-            transform = function(p, filter)
-              local symbol_pattern = filter.pattern:match("^.-@(.*)$")
-              -- store the current file buffer
-              if filter.source_id ~= 2 then
-                local item = p:current()
-                if item and item.file then
-                  filter.meta.buf = vim.fn.bufadd(item.file)
-                end
-              end
-
-              if symbol_pattern and filter.meta.buf then
-                filter.pattern = symbol_pattern
-                filter.current_buf = filter.meta.buf
-                filter.source_id = 2
-              else
-                filter.source_id = 1
-              end
-            end,
+        recent = {
+          sort = { fields = { "idx", "score:desc" } },
+          matcher = { fuzzy = false },
+          hidden = true,
+        },
+        files = {
+          hidden = true,
+        },
+        command_history = {
+          sort = { fields = { "idx", "score:desc" } },
+          matcher = { fuzzy = false },
+        },
+        explorer = {
+          focus = "input",
+          auto_close = true,
+          matcher = { sort_empty = false },
+          hidden = true,
+          win = {
+            list = {
+              keys = {
+                ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+                ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+                ["<C-w>t"] = { "tab", mode = { "i", "n" } },
+                -- TODO: そのままoil.nvimで対象を開く
+                -- ["<C-o>"] = { mode = { "i", "n" }, },
+              },
+            },
           },
+          ---@diagnostic disable-next-line: assign-type-mismatch 普通にプレビュー
+          layout = { preview = true },
         },
       },
       win = {
-        list = {
-          keys = {
-            ["<c-i>"] = { "toggle_input", mode = { "n", "i" } },
-          },
-        },
         input = {
           keys = {
-            ["<c-l>"] = { "toggle_lua", mode = { "n", "i" } },
-            ["<c-i>"] = { "toggle_input", mode = { "n", "i" } },
-            -- ["<c-t>"] = { "edit_tab", mode = { "n", "i" } },
-            -- ["<c-t>"] = { "yankit", mode = { "n", "i" } },
-            -- ["<Esc>"] = { "close", mode = { "n", "i" } },
+            ["<esc>"] = { "close", mode = { "i", "n" } },
+            ["<c-o>"] = { "qflist", mode = { "i", "n" } },
+            ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+            ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+            ["<c-]>"] = { "toggle_live", mode = { "i", "n" } },
+            ["<C-v>"] = { "edit_vsplit", mode = { "i", "n" } },
+            ["<C-w>t"] = { "tab", mode = { "i", "n" } },
+            -- ["<C-j>"] = { "history_forward", mode = { "i", "n" } },
+            -- ["<C-k>"] = { "history_back", mode = { "i", "n" } },
+            -- ["<C-h>"] = { "toggle_help_input", mode = { "i", "n" } },
+            ["<D-CR>"] = { "insert_filename", mode = { "i", "n" } },
+            -- TODO: 正規表現切り替えやignoredはなぜか効かない...
           },
         },
       },
-      actions = {
-        yankit = { action = "yank", notify = true },
-        toggle_lua = function(p)
-          local opts = p.opts --[[@as snacks.picker.grep.Config]]
-          opts.ft = not opts.ft and "lua" or nil
-          p:find()
-        end,
+      layout = {
+        cycle = true,
+        preset = "vertical",
+        layout = {
+          backdrop = false,
+          width = 120,
+          min_width = 80,
+          height = 0.9,
+          min_height = 30,
+          box = "vertical",
+          border = "rounded",
+          title = "{title} {live} {flags}",
+          title_pos = "center",
+          { win = "preview", title = "{preview}", height = 0.5, border = "bottom" },
+          { win = "input", height = 1, border = "bottom" },
+          { win = "list", border = "none" },
+        },
+      },
+      formatters = {
+        file = {
+          filename_first = true,
+          truncate = 100,
+        },
       },
     },
-    profiler = {
-      runtime = "~/projects/neovim/runtime/",
-      presets = {
-        on_stop = function()
-          Snacks.profiler.scratch()
-        end,
-      },
-    },
-    indent = {
-      chunk = { enabled = true },
-    },
-    dashboard = { example = "github" },
-    gitbrowse = {
-      open = function(url)
-        vim.fn.system(" ~/dot/config/hypr/scripts/quake")
-        -- vim.fn.system(" ~/dotfiles/config")
-        vim.ui.open(url)
+  },
+  init = function()
+    vim.api.nvim_create_autocmd("ColorScheme", {
+      callback = function()
+        vim.api.nvim_set_hl(0, "SnacksPickerDir", { link = "LineNr" })
+        vim.api.nvim_set_hl(0, "SnacksDashboardHeader", { fg = "#ba55d3" })
       end,
-    },
-  },
-    -- stylua: ignore
-    keys = {
-    { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart find files" },
-    { ";r", function() Snacks.picker.grep() end, desc = "Grep" },
-    -- find
-    { ";b", function() Snacks.picker.buffers() end, desc = "Buffers" },
-    { "<C-,>", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-    { ";f", function() Snacks.picker.files() end, desc = "Find Files" },
-    -- Grep
-    -- seearch
-    { "<leader>k", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
-    { "<leader>h", function() Snacks.picker.help() end, desc = "Help Pages" },
-    { ";d", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
-    { "'d", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diagnostics" },
-    -- LSP
-    -- Others
-    -- { "<leader>n", function() Snacks.notifier.show_history() end, desc = "Notification History" },
-    { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
-    { "<c-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
-  },
+    })
+  end,
 }

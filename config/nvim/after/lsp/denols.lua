@@ -1,4 +1,4 @@
 return {
   workspace_required = true,
-  root_markers = { "deno.json", "deno.jsonc" },
+  root_makers = { "deno.json", "deno.jsonc" },
 }

@@ -8,10 +8,8 @@ local vue_plugin = {
 }
 
 return {
-  -- root_markersはデフォルトだと .git も含まれており、Denoプロジェクトでも有効になってしまうのを避けるため設定し直している
-  root_markers = { "package.json", "tsconfig.json", "jsconfig.json" },
   workspace_required = true,
-
+  root_markers = { "package.json", "tsconfig.json", "jsconfig.json" },
   settings = {
     vtsls = {
       tsserver = {

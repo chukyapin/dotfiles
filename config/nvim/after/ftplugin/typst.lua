@@ -1,6 +1,6 @@
 local map = vim.keymap.set
 
-map("n", "<leader>p", ":TypstPreview<CR>", { buffer = 0 })
+map("n", "<leader>re", ":write<CR> :TypstPreview<CR>", { buffer = 0 })
 
 -- vim.cmd([[
 -- setlocal wrapmargin=0
