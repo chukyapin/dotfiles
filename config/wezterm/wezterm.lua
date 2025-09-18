@@ -32,7 +32,7 @@ config.enable_kitty_graphics = true
 config.window_decorations = "RESIZE"
 
 -- Fonts
-config.font_size = 14
+config.font_size = 16
 config.font = wezterm.font({ family = "Fira Code" })
 config.bold_brightens_ansi_colors = true
 config.font_rules = {
