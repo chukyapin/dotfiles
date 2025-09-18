@@ -1,4 +1,5 @@
 local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
@@ -17,8 +18,8 @@ map("v", "<leader>d", '"_d')
 map("v", "<leader>D", '"_D')
 
 -- Move a blocks of text up/down
-map("n", "<A-k>", ":m .-2<CR>==", { silent = true })
-map("n", "<A-j>", ":m .+1<CR>==", { silent = true })
+map("n", "<A-k>", ":m .-2<CR>==", opts)
+map("n", "<A-j>", ":m .+1<CR>==", opts)
 
 -- Emacs
 map("n", "<C-w>", 'vb"_d')
@@ -28,9 +29,9 @@ map("n", "-", ":split<CR>")
 map("n", "\\", ":vsplit<CR>")
 
 -- Buffer
-map("n", "L", ":BufferNext<CR>", { silent = true })
-map("n", "H", ":BufferPrevious<CR>", { silent = true })
-map("n", "<Space>w", ":BufferCloseAllButVisible<CR>", { silent = true })
+map("n", "L", ":BufferNext<CR>", opts)
+map("n", "H", ":BufferPrevious<CR>", opts)
+map("n", "<leader>w", ":BufferCloseAllButVisible<CR>", opts)
 
 -- V-BLOCK
 map("v", "v", "<C-v>")
@@ -43,14 +44,9 @@ map("v", "<C-d>", "<gv")
 map("n", "U", "<C-r>")
 
 -- Save & Quit
-map("n", "<leader>@", ":write<CR>")
-map("n", "<leader>!", ":quit<CR>")
-map("n", "<leader>~", ":wq<CR>")
-
--- diagnostics
-map("n", "<A-d>", function()
-  vim.diagnostic.jump({ float = false, count = 1 })
-end)
+map("n", "<leader>@", ":write<CR>", opts)
+map("n", "<leader>!", ":quit<CR>", opts)
+map("n", "<leader>~", ":wq<CR>", opts)
 
 -- Move window
 map("n", "<C-k>", "<c-w>k")
@@ -58,9 +54,14 @@ map("n", "<C-j>", "<c-w>j")
 map("n", "<C-h>", "<c-w>h")
 map("n", "<C-l>", "<c-w>l")
 
-map({ "n", "v" }, "m", "%", { silent = true })
+map({ "n", "v" }, "m", "%")
 
-map("n", "<space>y", ":%+y<CR>")
-map("n", "<space>d", ":%+d<CR>")
+map("n", "<leader>y", ":%+y<CR>", opts)
+map("n", "<leader>d", ":%+d<CR>", opts)
 
-map("n", "<space>lf", vim.lsp.buf.format)
+map("n", "<leader>lf", vim.lsp.buf.format)
+
+-- diagnostic
+vim.keymap.set("n", "<A-d>", function()
+  vim.diagnostic.jump({ float = false, count = 1 })
+end)
