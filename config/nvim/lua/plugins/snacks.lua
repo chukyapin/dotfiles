@@ -22,15 +22,15 @@ return {
 
 		{ "<Space>q", mode = { "n", }, function() Snacks.bufdelete() end,                             silent = true },
 		{ "<Space>k", mode = { "n", }, function() Snacks.picker.keymaps() end,                        desc = "Keymaps" },
-		{ "<space>h", mode = { "n", }, function() Snacks.picker.help() end,                           desc = "Help Pages" },
-		{ "<space>e", mode = { "n", }, function() Snacks.picker.explorer({ layout = "sidebar" }) end, silent = true },
-		{ ";r",       mode = { "n", }, function() Snacks.picker.recent() end,                         silent = true },
-		{ "'g",       mode = { "n", }, function() Snacks.lazygit() end,                               desc = "Lazygit" },
-		{ ";s",       mode = { "n", }, function() Snacks.picker.smart() end,                          silent = true },
-		{ ";f",       mode = { "n", }, function() Snacks.picker.files() end,                          desc = "Find Files" },
-		{ ";g",       mode = { "n", }, function() Snacks.picker.grep() end,                           desc = "Grep" },
+		{ "<C-j>e", mode = { "n", }, function() Snacks.picker.explorer({ layout = "sidebar" }) end, silent = true },
+		{ "<C-j>r",       mode = { "n", }, function() Snacks.picker.recent() end,                         silent = true },
+		{ "<C-j>s",       mode = { "n", }, function() Snacks.picker.smart() end,                          silent = true },
+		{ "<C-j>f",       mode = { "n", }, function() Snacks.picker.files() end,                          desc = "Find Files" },
+		{ "<C-j>g",       mode = { "n", }, function() Snacks.picker.grep() end,                           desc = "Grep" },
+		{ "<C-j>l",    mode = { "n", "i" }, function() Snacks.picker.lines() end,                                   desc = "Lines",           silent = true },
+		{ "<C-j>d",    mode = { "n", "i" }, function() Snacks.picker.diagnostics() end,                             desc = "Diagnostics" },
 		{
-			";b",
+			"<C-j>b",
 			function()
 				Snacks.picker.buffers({
 					-- I always want my buffers picker to start in normal mode
@@ -58,7 +58,7 @@ return {
 			desc = "[P]Snacks picker buffers",
 		},
 		{
-			";G",
+			"<C-j>G",
 			mode = { "n", "i" },
 			function()
 				local curdir = vim.bo.filetype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%:p:h")
@@ -66,10 +66,9 @@ return {
 			end,
 			silent = true
 		},
-		{ ";d",    mode = { "n", "i" }, function() Snacks.picker.diagnostics() end,                             desc = "Diagnostics" },
-		{ ";l",    mode = { "n", "i" }, function() Snacks.picker.lines() end,                                   desc = "Lines",           silent = true },
-		{ "<C-,>", mode = { "n", "i" }, function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-		{ "<C-/>", mode = { "n", "i" }, function() Snacks.terminal() end,                                       desc = "Toggle Terminal" },
+		{ "'g",       mode = { "n", }, function() Snacks.lazygit() end,                               desc = "Lazygit" },
+		-- { "<C-,>", mode = { "n", "i" }, function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
+		-- { "<C-/>", mode = { "n", "i" }, function() Snacks.terminal() end,                                       desc = "Toggle Terminal" },
 		{ "'b",    mode = { "n", "i" }, function() Snacks.picker.git_branches({ layout = "select" }) end,       desc = "Branches" },
 		-- { "<C-j>:", mode = { "n", "i" }, function() Snacks.picker.command_history() end, silent = true },
 		{ "'s",    mode = { "n", "i" }, function() Snacks.picker.git_status() end,                              silent = true },
@@ -112,17 +111,17 @@ return {
         function()
           local in_git = Snacks.git.get_root() ~= nil
           local cmds = {
-            {
-              title = "Notifications",
-              cmd = "gh notify -s -a -n5",
-              action = function()
-                vim.ui.open("https://github.com/notifications")
-              end,
-              key = "n",
-              icon = " ",
-              height = 5,
-              enabled = true,
-            },
+            -- {
+            --   title = "Notifications",
+            --   cmd = "gh notify -s -a -n5",
+            --   action = function()
+            --     vim.ui.open("https://github.com/notifications")
+            --   end,
+            --   key = "n",
+            --   icon = " ",
+            --   height = 5,
+            --   enabled = true,
+            -- },
             {
               title = "Open Issues",
               cmd = "gh issue list -L 3",

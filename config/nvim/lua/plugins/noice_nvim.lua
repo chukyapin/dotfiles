@@ -6,7 +6,7 @@ return {
     "rcarriga/nvim-notify",
   },
   keys = {
-    { "<A-j>n", ":NoicePick<CR>", silent = true },
+    { "<C-j>n", ":NoicePick<CR>", silent = true },
   },
   opts = {
     lsp = {

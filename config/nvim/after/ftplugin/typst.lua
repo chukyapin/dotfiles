@@ -1,3 +1,3 @@
 local map = vim.keymap.set
 
-map("n", "<leader>re", ":write<CR> :TypstPreview<CR>", { buffer = 0, silent = true })
+map("n", "<space>re", ":write<CR> :TypstPreview<CR>", { buffer = 0, silent = true })
