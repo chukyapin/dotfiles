@@ -20,15 +20,15 @@ return {
 	-- stylua: ignore start
 	keys = {
 
-		{ "<Space>q", mode = { "n", }, function() Snacks.bufdelete() end,                             silent = true },
-		{ "<Space>k", mode = { "n", }, function() Snacks.picker.keymaps() end,                        desc = "Keymaps" },
+		{ "<Space>q", mode = { "n", }, function() Snacks.bufdelete() end, silent = true },
+		{ "<Space>k", mode = { "n", }, function() Snacks.picker.keymaps() end, desc = "Keymaps" },
 		{ "<C-j>e", mode = { "n", }, function() Snacks.picker.explorer({ layout = "sidebar" }) end, silent = true },
-		{ "<C-j>r",       mode = { "n", }, function() Snacks.picker.recent() end,                         silent = true },
-		{ "<C-j>s",       mode = { "n", }, function() Snacks.picker.smart() end,                          silent = true },
-		{ "<C-j>f",       mode = { "n", }, function() Snacks.picker.files() end,                          desc = "Find Files" },
-		{ "<C-j>g",       mode = { "n", }, function() Snacks.picker.grep() end,                           desc = "Grep" },
-		{ "<C-j>l",    mode = { "n", "i" }, function() Snacks.picker.lines() end,                                   desc = "Lines",           silent = true },
-		{ "<C-j>d",    mode = { "n", "i" }, function() Snacks.picker.diagnostics() end,                             desc = "Diagnostics" },
+		{ "<C-j>r", mode = { "n", }, function() Snacks.picker.recent() end, silent = true },
+		{ "<C-j>s", mode = { "n", }, function() Snacks.picker.smart() end, silent = true },
+		{ "<C-j>f", mode = { "n", }, function() Snacks.picker.files() end, desc = "Find Files" },
+		{ "<C-j>g", mode = { "n", }, function() Snacks.picker.grep() end, desc = "Grep" },
+		{ "<C-j>l", mode = { "n", "i" }, function() Snacks.picker.lines() end, desc = "Lines",           silent = true },
+		{ "<C-j>d", mode = { "n", "i" }, function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
 		{
 			"<C-j>b",
 			function()
@@ -61,13 +61,13 @@ return {
 			"<C-j>G",
 			mode = { "n", "i" },
 			function()
-				local curdir = vim.bo.filetype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%:p:h")
+				local curdir = vim.bo.filetype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%::h")
 				Snacks.picker.grep({ dirs = { curdir } })
 			end,
 			silent = true
 		},
 		{ "'g",       mode = { "n", }, function() Snacks.lazygit() end,                               desc = "Lazygit" },
-		-- { "<C-,>", mode = { "n", "i" }, function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
+		{ ",,", mode = { "n", "i" }, function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
 		-- { "<C-/>", mode = { "n", "i" }, function() Snacks.terminal() end,                                       desc = "Toggle Terminal" },
 		{ "'b",    mode = { "n", "i" }, function() Snacks.picker.git_branches({ layout = "select" }) end,       desc = "Branches" },
 		-- { "<C-j>:", mode = { "n", "i" }, function() Snacks.picker.command_history() end, silent = true },
@@ -82,6 +82,7 @@ return {
   -- stylua: ignore end
   ---@type snacks.Config
   opts = {
+    indent = { enabled = true },
     image = {
       doc = {
         inline = false,
@@ -94,10 +95,10 @@ return {
           pane = 2,
           section = "terminal",
           cmd = "colorscript -e square",
-          height = 5,
+          height = 7,
           padding = 1,
         },
-        { section = "keys", gap = 3, padding = 10 },
+        { section = "keys", gap = 2, padding = 10 },
         {
           pane = 2,
           icon = " ",
@@ -209,6 +210,7 @@ return {
               keys = {
                 ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
                 ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+                ["<C-CR>"] = { "edit_vsplit", mode = { "i", "n" } },
                 ["<C-w>t"] = { "tab", mode = { "i", "n" } },
                 -- TODO: そのままoil.nvimで対象を開く
                 -- ["<C-o>"] = { mode = { "i", "n" }, },
@@ -227,7 +229,7 @@ return {
             ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
             ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
             ["<c-]>"] = { "toggle_live", mode = { "i", "n" } },
-            ["<C-v>"] = { "edit_vsplit", mode = { "i", "n" } },
+            ["<C-CR>"] = { "edit_vsplit", mode = { "i", "n" } },
             ["<C-w>t"] = { "tab", mode = { "i", "n" } },
             -- ["<C-j>"] = { "history_forward", mode = { "i", "n" } },
             -- ["<C-k>"] = { "history_back", mode = { "i", "n" } },
