@@ -16,6 +16,16 @@ map("n", "<space>D", '"_D')
 map("v", "<space>d", '"_d')
 map("v", "<space>D", '"_D')
 
+-- Increment/decrement
+map("n", "+", "<C-a>")
+map("n", "-", "<C-x>")
+
+-- Inner words
+map("o", "i<space>", "iw")
+
+-- Select all
+map("n", "<C-a>", "gg<S-v>G")
+
 -- Move a blocks of text up/down
 map("n", "K", ":m .-2<CR>==", opts)
 map("n", "J", ":m .+1<CR>==", opts)
@@ -28,8 +38,9 @@ map("n", "_", ":split<CR>")
 map("n", "|", ":vsplit<CR>")
 
 -- Buffer
-map("n", "L", ":BufferNext<CR>", opts)
-map("n", "H", ":BufferPrevious<CR>", opts)
+map("n", "tn", ":tabedit ", opts)
+map("n", "<tab>", ":BufferNext<CR>", opts)
+map("n", "<s-tab>", ":BufferPrevious<CR>", opts)
 map("n", "<space>w", ":BufferCloseAllButVisible<CR>", opts)
 
 -- V-BLOCK
