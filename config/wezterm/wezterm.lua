@@ -5,19 +5,11 @@ require("tabs").setup(config)
 require("keys").setup(config)
 
 config.automatically_reload_config = true
-config.window_background_opacity = 0.75
-config.macos_window_background_blur = 20
+config.window_background_opacity = 0.70
+config.macos_window_background_blur = 30
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = false
 config.audible_bell = "Disabled"
-
--- ウィンドウフレーム設定
-config.window_frame = {
-	font = wezterm.font("JetBrains Mono", { weight = "Bold" }),
-	font_size = 14,
-	inactive_titlebar_bg = "none",
-	active_titlebar_bg = "none",
-}
 
 config.cursor_blink_ease_in = "Constant"
 config.cursor_blink_ease_out = "Constant"
@@ -34,6 +26,7 @@ config.window_decorations = "RESIZE"
 -- Fonts
 config.font_size = 16
 config.font = wezterm.font({ family = "Fira Code" })
+
 config.bold_brightens_ansi_colors = true
 config.font_rules = {
 	{

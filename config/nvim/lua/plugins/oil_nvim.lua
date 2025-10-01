@@ -14,7 +14,7 @@ return {
       ["<C-CR>"] = { "actions.select", opts = { vertical = true } },
       ["<C-s>"] = { "actions.select", opts = { horizontal = true } },
       ["<C-t>"] = { "actions.select", opts = { tab = true } },
-      ["<space>p"] = "actions.preview",
+      ["<C-p>"] = "actions.preview",
       ["<C-l>"] = "actions.refresh",
       ["-"] = { "actions.parent", mode = "n" },
       ["<space>h"] = { "actions.open_cwd", mode = "n" },
@@ -23,6 +23,14 @@ return {
       ["gx"] = "actions.open_external",
       ["g."] = { "actions.toggle_hidden", mode = "n" },
       ["gy"] = "actions.yank_entry",
+      ["<Space>y"] = {
+        callback = function()
+          local oil = require("oil")
+          local current_path = oil.get_current_dir()
+          require("yazi").yazi(nil, current_path)
+        end,
+        desc = "yazi: Open current directory",
+      },
       ["gR"] = {
         callback = function()
           local oil = require("oil")
@@ -43,7 +51,7 @@ return {
       },
     },
     view_options = {
-      show_hidden = true,
+      show_open = true,
     },
   },
 }

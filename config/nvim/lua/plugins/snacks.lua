@@ -1,17 +1,17 @@
 ---- dashboard で picker を開いて移動する際に発生するチラツキを防止する
-local preventFlicker = function(handler)
-  vim.schedule(function()
-    Snacks.bufdelete()
-  end)
-  vim.schedule(function()
-    -- ここの順番が逆だとno-neck-painがエラーになる
-    vim.cmd([[:NoNeckPain]])
-    vim.cmd([[:BarbarEnable]])
-  end)
-  vim.schedule(function()
-    handler()
-  end)
-end
+-- local preventFlicker = function(handler)
+--   vim.schedule(function()
+--     Snacks.bufdelete()
+--   end)
+--   vim.schedule(function()
+--     -- ここの順番が逆だとno-neck-painがエラーになる
+--     vim.cmd([[:NoNeckPain]])
+--     vim.cmd([[:BarbarEnable]])
+--   end)
+--   vim.schedule(function()
+--     handler()
+--   end)
+-- end
 
 return {
   "folke/snacks.nvim",
@@ -20,15 +20,15 @@ return {
 	-- stylua: ignore start
 	keys = {
 
-		{ "<Space>q", mode = { "n", }, function() Snacks.bufdelete() end, silent = true },
-		{ "<Space>k", mode = { "n", }, function() Snacks.picker.keymaps() end, desc = "Keymaps" },
-		{ "<C-j>e", mode = { "n", }, function() Snacks.picker.explorer({ layout = "sidebar" }) end, silent = true },
-		{ "<C-j>r", mode = { "n", }, function() Snacks.picker.recent() end, silent = true },
-		{ "<C-j>s", mode = { "n", }, function() Snacks.picker.smart() end, silent = true },
-		{ "<C-j>f", mode = { "n", }, function() Snacks.picker.files() end, desc = "Find Files" },
-		{ "<C-j>g", mode = { "n", }, function() Snacks.picker.grep() end, desc = "Grep" },
-		{ "<C-j>l", mode = { "n", "i" }, function() Snacks.picker.lines() end, desc = "Lines",           silent = true },
-		{ "<C-j>d", mode = { "n", "i" }, function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
+		{ "<Space>q", mode = "n", function() Snacks.bufdelete() end, silent = true },
+		{ "<Space>k", mode = "n", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+		{ "<C-j>e", function() Snacks.picker.explorer({ layout = "sidebar" }) end, silent = true },
+		{ "<C-j>r", function() Snacks.picker.recent() end, silent = true },
+		{ "<C-j>s", function() Snacks.picker.smart() end, silent = true },
+		{ "<C-j>f", function() Snacks.picker.files() end, desc = "Find Files" },
+		{ "<C-j>g", function() Snacks.picker.grep() end, desc = "Grep" },
+		{ "<C-j>l", function() Snacks.picker.lines() end, desc = "Lines",           silent = true },
+		{ "<C-j>d", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
 		{
 			"<C-j>b",
 			function()
@@ -39,7 +39,7 @@ return {
 					end,
 					finder = "buffers",
 					format = "buffer",
-					hidden = false,
+					open = false,
 					unloaded = true,
 					current = true,
 					sort_lastused = true,
@@ -66,13 +66,13 @@ return {
 			end,
 			silent = true
 		},
-		{ "'g",       mode = { "n", }, function() Snacks.lazygit() end,                               desc = "Lazygit" },
-		{ ",,", mode = { "n", "i" }, function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
+		{ "'g", function() Snacks.lazygit() end,                               desc = "Lazygit" },
+		{ ",,", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
 		-- { "<C-/>", mode = { "n", "i" }, function() Snacks.terminal() end,                                       desc = "Toggle Terminal" },
-		{ "'b",    mode = { "n", "i" }, function() Snacks.picker.git_branches({ layout = "select" }) end,       desc = "Branches" },
+		{ "'b", function() Snacks.picker.git_branches({ layout = "select" }) end,       desc = "Branches" },
 		-- { "<C-j>:", mode = { "n", "i" }, function() Snacks.picker.command_history() end, silent = true },
-		{ "'s",    mode = { "n", "i" }, function() Snacks.picker.git_status() end,                              silent = true },
-		{ "'l",    mode = { "n", "i" }, function() Snacks.picker.git_log_line() end,                            silent = true },
+		{ "'s", function() Snacks.picker.git_status() end,                              silent = true },
+		{ "'l", function() Snacks.picker.git_log_line() end,                            silent = true },
 		-- { "<C-j>j", mode = { "n", "i" }, function() Snacks.picker.resume() end,          silent = true },
 		-- { "<C-j>k", mode = { "n", "i" }, function() Snacks.picker.pickers() end,         silent = true },
 		-- { "<C-j>p", mode = { "n", "i" }, function() Snacks.picker.projects() end,        silent = true },
@@ -82,6 +82,7 @@ return {
   -- stylua: ignore end
   ---@type snacks.Config
   opts = {
+    explorer = { enable = true },
     indent = { enabled = true },
     image = {
       doc = {
@@ -191,10 +192,10 @@ return {
         recent = {
           sort = { fields = { "idx", "score:desc" } },
           matcher = { fuzzy = false },
-          hidden = true,
+          open = true,
         },
         files = {
-          hidden = true,
+          open = true,
         },
         command_history = {
           sort = { fields = { "idx", "score:desc" } },
@@ -204,7 +205,7 @@ return {
           -- focus = "input",
           auto_close = true,
           matcher = { sort_empty = false },
-          hidden = true,
+          open = true,
           win = {
             list = {
               keys = {

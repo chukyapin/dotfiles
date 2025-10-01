@@ -17,25 +17,27 @@ map("v", "<space>d", '"_d')
 map("v", "<space>D", '"_D')
 
 -- Increment/decrement
-map("n", "+", "<C-a>")
-map("n", "-", "<C-x>")
+-- map("n", "+", "<C-a>")
+-- map("n", "-", "<C-x>")
 
 -- Inner words
 map("o", "i<space>", "iw")
 
 -- Select all
-map("n", "<C-a>", "gg<S-v>G")
+-- map("n", "<C-a>", "gg<S-v>G")
 
 -- Move a blocks of text up/down
-map("n", "K", ":m .-2<CR>==", opts)
-map("n", "J", ":m .+1<CR>==", opts)
+-- map("n", "K", ":m .-2<CR>==", opts)
+-- map("n", "J", ":m .+1<CR>==", opts)
 
 -- Emacs
 map("n", "<C-w>", 'vb"_d')
 
 -- Split window
-map("n", "_", ":split<CR>")
-map("n", "|", ":vsplit<CR>")
+-- map("n", "_", ":split<CR>")
+map("n", "ss", ":split<CR>")
+-- map("n", "|", ":vsplit<CR>")
+map("n", "sv", ":vsplit<CR>")
 
 -- Buffer
 map("n", "tn", ":tabedit ", opts)
@@ -66,12 +68,7 @@ map("n", "sl", "<c-w>l")
 
 map({ "n", "v" }, "m", "%")
 
--- map("n", "<space>y", ":%+y<CR>", opts)
--- map("n", "<space>d", ":%+d<CR>", opts)
+map("n", "<space><space>y", ":%+y<CR>", opts)
+map("n", "<space><space>d", ":%+d<CR>", opts)
 
 -- map("n", "<space>lf", vim.lsp.buf.format)
-
--- diagnostic
-vim.keymap.set("n", "<A-d>", function()
-  vim.diagnostic.jump({ float = false, count = 1 })
-end)

@@ -44,8 +44,10 @@ return {
   init = function()
     vim.api.nvim_create_autocmd("ColorScheme", {
       callback = function()
-        vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#efef33", bold = true })
-        vim.api.nvim_set_hl(0, "FlashMatch", { fg = "#3d59a1", bold = true })
+        -- vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#efef33", bold = true })
+        vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#ecbe7b", bold = true })
+        -- vim.api.nvim_set_hl(0, "FlashMatch", { fg = "#3d59a1", bold = true })
+        vim.api.nvim_set_hl(0, "FlashMatch", { fg = "#64b5f6", bold = true })
       end,
     })
   end,

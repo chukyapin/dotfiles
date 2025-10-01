@@ -5,8 +5,8 @@ return {
   event = { "BufNewFile", "BufRead" },
   opts = {
     animation = false,
-    sidebar_filetypes = {
-      ["no-neck-pain"] = {},
-    },
+    -- sidebar_filetypes = {
+    --   ["no-neck-pain"] = {},
+    -- },
   },
 }

@@ -9,7 +9,11 @@ local vue_plugin = {
 
 return {
   workspace_required = true,
-  root_markers = { "package.json", "tsconfig.json", "jsconfig.json" },
+  root_dir = function(bufnr, on_dir)
+    local root_markers = { "package.json", "tsconfig.json", "jsconfig.json" }
+    local project_root = vim.fs.root(bufnr, root_makers)
+    on_dir(project_root)
+  end,
   settings = {
     vtsls = {
       tsserver = {

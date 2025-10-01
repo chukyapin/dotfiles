@@ -54,10 +54,10 @@ function M.setup(config)
 		M.split_nav("resize", "CTRL", "RightArrow", "Left"),
 		M.split_nav("resize", "CTRL", "UpArrow", "Up"),
 		M.split_nav("resize", "CTRL", "DownArrow", "Down"),
-		M.split_nav("move", "CTRL|SHIFT", "h", "Left"),
-		M.split_nav("move", "CTRL|SHIFT", "j", "Down"),
-		M.split_nav("move", "CTRL|SHIFT", "k", "Up"),
-		M.split_nav("move", "CTRL|SHIFT", "l", "Right"),
+		M.split_nav("move", "ALT", "h", "Left"),
+		M.split_nav("move", "ALT", "j", "Down"),
+		M.split_nav("move", "ALT", "k", "Up"),
+		M.split_nav("move", "ALT", "l", "Right"),
 	}
 end
 

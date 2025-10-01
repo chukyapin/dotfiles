@@ -28,13 +28,15 @@ fish_add_path ~/.local/bin/pnpm-bins
 fish_add_path ~/.local/share/bob-nvim/bin
 fish_add_path ~/.local/share/bob-nvim/nvim-linux64/bin
 fish_add_path /var/lib/flatpak/exports/bin/
-fish_add_path ~/go
 fish_add_path ~/.dotnet/tools
-# fish_add_path ~/.local/share/mise/shims/
 
 set -gx EDITOR (which nvim)
 set -gx VISUAL $EDITOR
 set -gx SUDO_EDITOR $EDITOR
+
+# Go
+set -x GOPATH ~/go
+fish_add_path $GOPATH $GOPATH/bin
 
 # Tmux
 abbr t tmux
@@ -56,7 +58,9 @@ alias la 'eza --color=always --icons --group-directories-first --all'
 alias ll 'eza --color=always --icons --group-directories-first --all --long'
 abbr l ll
 abbr lg lazygit
+abbr ld lazydocker
 abbr j z
+abbr ji zi
 abbr ncdu "ncdu --color dark"
 
 # Editor
@@ -70,3 +74,4 @@ abbr vudo sudoedit
 alias lazyvim "NVIM_APPNAME=lazyvim nvim"
 abbr lv lazyvim
 alias bt "coredumpctl -1 gdb -A '-ex \"bt\" -q -batch' 2>/dev/null | awk '/Program terminated with signal/,0' | bat -l cpp --no-pager --style plain"
+~/.local/bin/mise activate fish | source
