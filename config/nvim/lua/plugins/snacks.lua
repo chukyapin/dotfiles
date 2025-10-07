@@ -1,4 +1,4 @@
----- dashboard で picker を開いて移動する際に発生するチラツキを防止する
+-- dashboard で picker を開いて移動する際に発生するチラツキを防止する
 -- local preventFlicker = function(handler)
 --   vim.schedule(function()
 --     Snacks.bufdelete()
@@ -20,8 +20,8 @@ return {
 	-- stylua: ignore start
 	keys = {
 
-		{ "<Space>q", mode = "n", function() Snacks.bufdelete() end, silent = true },
-		{ "<Space>k", mode = "n", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+		{ "<Space>q", function() Snacks.bufdelete() end, silent = true },
+		{ "<Space>k", function() Snacks.picker.keymaps({ layout = "default" }) end, desc = "Keymaps" },
 		{ "<C-j>e", function() Snacks.picker.explorer({ layout = "sidebar" }) end, silent = true },
 		{ "<C-j>r", function() Snacks.picker.recent() end, silent = true },
 		{ "<C-j>s", function() Snacks.picker.smart() end, silent = true },
@@ -52,7 +52,7 @@ return {
 						list = { keys = { ["d"] = "bufdelete" } },
 					},
 					-- In case you want to override the layout for this keymap
-					layout = "ivy",
+					layout = "default",
 				})
 			end,
 			desc = "[P]Snacks picker buffers",
@@ -74,7 +74,7 @@ return {
 		{ "'s", function() Snacks.picker.git_status() end,                              silent = true },
 		{ "'l", function() Snacks.picker.git_log_line() end,                            silent = true },
 		-- { "<C-j>j", mode = { "n", "i" }, function() Snacks.picker.resume() end,          silent = true },
-		-- { "<C-j>k", mode = { "n", "i" }, function() Snacks.picker.pickers() end,         silent = true },
+		{ "<C-j>k", function() Snacks.picker.pickers() end,         silent = true },
 		-- { "<C-j>p", mode = { "n", "i" }, function() Snacks.picker.projects() end,        silent = true },
 		-- --- @diagnostic disable-next-line: undefined-field todo_commentsはsnacks以外に定義があるため無視
 		-- { "<C-j>m", mode = { "n", "i" }, function() Snacks.picker.todo_comments() end,   silent = true },
