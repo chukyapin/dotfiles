@@ -30,6 +30,9 @@ fish_add_path ~/.local/share/bob-nvim/nvim-linux64/bin
 fish_add_path /var/lib/flatpak/exports/bin/
 fish_add_path ~/.dotnet/tools
 
+# set -Ux PATH $HOME/.emacs.d/bin $PATH
+fish_add_path ~/.emacs.d/bin
+
 set -gx EDITOR (which nvim)
 set -gx VISUAL $EDITOR
 set -gx SUDO_EDITOR $EDITOR
