@@ -34,9 +34,7 @@ map("o", "i<space>", "iw")
 map("n", "<C-w>", 'vb"_d')
 
 -- Split window
--- map("n", "_", ":split<CR>")
 map("n", "ss", ":split<CR>")
--- map("n", "|", ":vsplit<CR>")
 map("n", "sv", ":vsplit<CR>")
 
 -- Buffer
