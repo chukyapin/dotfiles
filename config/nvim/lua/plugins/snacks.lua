@@ -1,27 +1,11 @@
--- dashboard で picker を開いて移動する際に発生するチラツキを防止する
--- local preventFlicker = function(handler)
---   vim.schedule(function()
---     Snacks.bufdelete()
---   end)
---   vim.schedule(function()
---     -- ここの順番が逆だとno-neck-painがエラーになる
---     vim.cmd([[:NoNeckPain]])
---     vim.cmd([[:BarbarEnable]])
---   end)
---   vim.schedule(function()
---     handler()
---   end)
--- end
-
 return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
 	-- stylua: ignore start
 	keys = {
-
 		{ "<Space>q", function() Snacks.bufdelete() end, silent = true },
-		{ "<Space>k", function() Snacks.picker.keymaps({ layout = "default" }) end, desc = "Keymaps" },
+		-- { "<Space>k", {mode = "n"},function() Snacks.picker.keymaps({ layout = "default" }) end, desc = "Keymaps" },
 		{ "<C-j>e", function() Snacks.picker.explorer({ layout = "sidebar" }) end, silent = true },
 		{ "<C-j>r", function() Snacks.picker.recent() end, silent = true },
 		{ "<C-j>s", function() Snacks.picker.smart() end, silent = true },
@@ -96,10 +80,10 @@ return {
           pane = 2,
           section = "terminal",
           cmd = "colorscript -e square",
-          height = 7,
+          height = 5,
           padding = 1,
         },
-        { section = "keys", gap = 2, padding = 10 },
+        { section = "keys", gap = 1, padding = 1 },
         {
           pane = 2,
           icon = " ",
@@ -113,17 +97,17 @@ return {
         function()
           local in_git = Snacks.git.get_root() ~= nil
           local cmds = {
-            -- {
-            --   title = "Notifications",
-            --   cmd = "gh notify -s -a -n5",
-            --   action = function()
-            --     vim.ui.open("https://github.com/notifications")
-            --   end,
-            --   key = "n",
-            --   icon = " ",
-            --   height = 5,
-            --   enabled = true,
-            -- },
+            {
+              title = "Notifications",
+              cmd = "gh notify -s -a -n5",
+              action = function()
+                vim.ui.open("https://github.com/notifications")
+              end,
+              key = "n",
+              icon = " ",
+              height = 5,
+              enabled = true,
+            },
             {
               title = "Open Issues",
               cmd = "gh issue list -L 3",
