@@ -11,7 +11,7 @@ return {
   workspace_required = true,
   root_dir = function(bufnr, on_dir)
     local root_markers = { "package.json", "tsconfig.json", "jsconfig.json" }
-    local project_root = vim.fs.root(bufnr, root_makers)
+    local project_root = vim.fs.root(bufnr, root_markers)
     on_dir(project_root)
   end,
   settings = {
