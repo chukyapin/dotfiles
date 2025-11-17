@@ -3,12 +3,14 @@
 --   cond = true,
 -- }
 return {
-  "craftzdog/solarized-osaka.nvim",
+  -- "craftzdog/solarized-osaka.nvim",
+  "folke/tokyonight.nvim",
   priority = 1000,
   config = function()
     local transparent = true -- set to true if you would like to enable transparency
 
-    require("solarized-osaka").setup({
+    -- require("solarized-osaka").setup({
+    require("tokyonight").setup({
       style = "night",
       transparent = transparent,
       styles = {
@@ -17,6 +19,6 @@ return {
       },
     })
 
-    vim.cmd("colorscheme solarized-osaka")
+    -- vim.cmd("colorscheme solarized-osaka")
   end,
 }
