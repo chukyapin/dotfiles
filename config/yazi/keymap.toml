@@ -1,0 +1,27 @@
+[mgr]  
+prepend_keymap = [  
+  { on = "-", run = "leave", desc = "親ディレクトリへ移動" },
+  { on = "<C-c>", run = "plugin system-clipboard" },
+  { on = "<C-i>", run = "forward" },
+  { on = "<C-o>", run = "back" },
+  { on = "<C-p>", run = "plugin toggle-pane max-preview" },
+  { on = "<C-v>", run = "shell 'cb paste' --block", desc = "Paste from clipboard" },
+  { on = "<Enter>", run = "plugin smart-enter" },
+  { on = "<ESC>", run = "close" },
+  { on = "q", run = "close" },
+  { on = "o", run = "create" },
+  { on = "e", run = "plugin bunny" },
+  { on = "f", run = "plugin fzf", desc = "fzf under current directory" },
+  { on = "z", run = "plugin zoxide", desc = "zoxide" },
+  { on = ["<Space>", "g"], run = "shell --block -- lazygit" },
+  { on = ["<Space>", "w"], run = 'shell --block --interactive -- magick "$0" "$0.webp"', desc = "Convert an image to WebP" },
+  { on = ["<Space>", "v"], run = 'shell --block --interactive -- magick -quality 35 "$0" "$0.avif"', desc = "Convert an image to WebP" },
+  { on = ["g", "?"], run = "help" },
+  { on = ["g", "r"], run = 'shell -- ya emit cd "$(git rev-parse --show-toplevel)"' },
+  { on = ["i", "<Space>"], run = "cd --interactive", desc = "パスを入力してcd" },
+]
+
+[input]  
+prepend_keymap = [  
+  { on = "<Esc>", run = "close", desc = "Cancel input" }
+]

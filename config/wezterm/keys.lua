@@ -1,9 +1,9 @@
-local wezterm = require("wezterm") --[[@as Wezterm]]
+local wezterm = require("wezterm")
 
 local act = wezterm.action
 local M = {}
 
--- M.mod = wezterm.target_triple:find("windows") and "SHIFT|CTRL" or "SHIFT|SUPER"
+M.mod = wezterm.target_triple:find("windows") and "SHIFT|CTRL" or "SHIFT|SUPER"
 
 M.smart_split = wezterm.action_callback(function(window, pane)
 	local dim = pane:get_dimensions()
@@ -14,9 +14,8 @@ M.smart_split = wezterm.action_callback(function(window, pane)
 	end
 end)
 
----@param config Config
 function M.setup(config)
-	-- config.disable_default_key_bindings = true
+	config.disable_default_key_bindings = true
 	config.keys = {
 		-- Scrollback
 		{ mods = "SHIFT|CTRL", key = "k", action = act.ScrollByPage(-0.5) },
@@ -30,9 +29,9 @@ function M.setup(config)
 		{ mods = "SHIFT|CTRL", key = "(", action = act.DecreaseFontSize },
 		{ mods = "SHIFT|CTRL", key = ")", action = act.IncreaseFontSize },
 		-- Acivate Tabs
-		{ mods = "ALT|CTRL", key = ".", action = act({ ActivateTabRelative = 1 }) },
-		{ mods = "ALT|CTRL", key = ",", action = act({ ActivateTabRelative = -1 }) },
-		{ mods = "SHIFT|CTRL", key = "R", action = act.RotatePanes("Clockwise") },
+		{ mods = "ALT", key = ".", action = act({ ActivateTabRelative = 1 }) },
+		{ mods = "ALT", key = ",", action = act({ ActivateTabRelative = -1 }) },
+		-- { mods = "SHIFT|CTRL", jey = "R", action = act.RotatePanes("Clockwise") },
 		-- show the pane selection mode, but have it swap the active and selected panes
 		{ mods = "SHIFT|CTRL", key = "S", action = act.PaneSelect({}) },
 		-- Clipboard
@@ -54,10 +53,10 @@ function M.setup(config)
 		M.split_nav("resize", "CTRL", "RightArrow", "Left"),
 		M.split_nav("resize", "CTRL", "UpArrow", "Up"),
 		M.split_nav("resize", "CTRL", "DownArrow", "Down"),
-		M.split_nav("move", "ALT", "h", "Left"),
-		M.split_nav("move", "ALT", "j", "Down"),
-		M.split_nav("move", "ALT", "k", "Up"),
-		M.split_nav("move", "ALT", "l", "Right"),
+		M.split_nav("move", "CTRL", "h", "Left"),
+		M.split_nav("move", "CTRL", "j", "Down"),
+		M.split_nav("move", "CTRL", "k", "Up"),
+		M.split_nav("move", "CTRL", "l", "Right"),
 	}
 end
 
@@ -75,7 +74,8 @@ function M.split_nav(resize_or_move, mods, key, dir)
 			if resize_or_move == "resize" then
 				win:perform_action({ AdjustPaneSize = { dir, 3 } }, pane)
 			else
-				local panes = pane:tab():panes_with_info()
+				local panes = pane(":")
+				panes_with_info()
 				local is_zoomed = false
 				for _, p in ipairs(panes) do
 					if p.is_zoomed then

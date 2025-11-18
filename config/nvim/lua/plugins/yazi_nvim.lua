@@ -14,7 +14,6 @@ return {
   opts = {
     keymaps = {
       open_file_in_vertical_split = "<c-CR>",
-
       open_file_in_horizontal_split = "<c-s>",
       send_to_quickfix_list = "<c-s-o>",
       grep_in_directory = "<M-6>", -- ignore

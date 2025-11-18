@@ -1,8 +1,9 @@
+vim.cmd("colorscheme tokyonight")
+
 vim.opt.encoding = "utf-8"
 vim.opt.fileencodings = "utf-8,sjis"
 vim.opt.fileformats = "unix,dos,mac"
 
-vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.pumheight = 10
 vim.opt.number = true
@@ -25,7 +26,7 @@ vim.opt.shell = "fish"
 vim.opt.cmdheight = 0
 vim.opt.mouse = ""
 
---Hightlight
+-- Highlight
 vim.api.nvim_set_hl(0, "YankHighlight", { reverse = true })
 vim.api.nvim_set_hl(0, "Visual", { bg = "#565612" })
 

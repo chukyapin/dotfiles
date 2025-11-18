@@ -9,19 +9,14 @@ map("n", "x", '"_x')
 -- map("n", "<space>P", '"0P')
 -- map("v", "<space>p", '"0p')
 map("n", "<space>c", '"_c')
-map("n", "<space>C", '"_C')
+map("n", "<space>C", "_C")
 map("v", "<space>C", '"_C')
 map("n", "<space>d", '"_d')
-map("n", "<space>D", '"_D')
 map("v", "<space>d", '"_d')
 map("v", "<space>D", '"_D')
 
--- Increment/decrement
--- map("n", "+", "<C-a>")
--- map("n", "-", "<C-x>")
-
 -- Inner words
-map("o", "i<space>", "iw")
+map("o", "<space>", "iw")
 
 -- Select all
 -- map("n", "<C-a>", "gg<S-v>G")
@@ -33,16 +28,14 @@ map("o", "i<space>", "iw")
 -- Emacs
 map("n", "<C-w>", 'vb"_d')
 
--- Split window
-map("n", "ss", ":split<CR>")
-map("n", "sv", ":vsplit<CR>")
-
 -- Buffer
 map("n", "tn", ":tabedit ", opts)
-map("n", "<tab>", ":BufferNext<CR>", opts)
-map("n", "<s-tab>", ":BufferPrevious<CR>", opts)
+map("n", "<space>l", ":BufferNext<CR>", opts)
+map("n", "<space>h", ":BufferPrevious<CR>", opts)
 map("n", "<space>w", ":BufferCloseAllButVisible<CR>", opts)
 
+-- I use norm so much this makes sense
+map({ "n", "v" }, "<space>n", ":norm ")
 -- V-BLOCK
 map("v", "v", "<C-v>")
 
@@ -54,9 +47,13 @@ map("v", "<C-d>", "<gv")
 map("n", "U", "<C-r>")
 
 -- Save & Quit
-map("n", "<space>@", ":write<CR>", opts)
+map("n", "<sPace>@", ":write<CR>", opts)
 map("n", "<space>!", ":quit<CR>", opts)
 map("n", "<space>~", ":wq<CR>", opts)
+
+-- Split window
+map("n", "ss", ":split<CR>")
+map("n", "sv", ":vsplit<CR>")
 
 -- Move window
 map("n", "sk", "<c-w>k")
@@ -69,4 +66,4 @@ map({ "n", "v" }, "m", "%")
 map("n", "<space><space>y", ":%+y<CR>", opts)
 map("n", "<space><space>d", ":%+d<CR>", opts)
 
--- map("n", "<space>lf", vim.lsp.buf.format)
+-- mapu"n", "<space>lf", vim.lsp.buf.format)

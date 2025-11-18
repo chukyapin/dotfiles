@@ -10,7 +10,7 @@ return {
   ---@type blink.cmp.Config
   opts = {
     keymap = {
-      preset = "super-tab",
+      preset = "enter",
       ["<F5>"] = { "show", "show_documentation", "hide_documentation" },
     },
     completion = {
@@ -59,7 +59,7 @@ return {
       default = { "lsp", "path", "snippets", "buffer" },
       per_filetype = {
         lua = { "lazydev", "lsp", "path", "snippets", "buffer" },
-        markdown = { "lsp", "path", "snippets" },
+        markdown = { "path", "snippets" },
       },
       providers = {
         lazydev = {

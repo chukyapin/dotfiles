@@ -1,9 +1,12 @@
 return {
   -- Incremental rename
-  {
-    "smjonas/inc-rename.nvim",
-    cmd = "IncRename",
-    config = true,
-    -- vim.keymap.set("n", "<leader>rn", ":IncRename "),
-  },
+  "smjonas/inc-rename.nvim",
+  -- config = function()
+  --   require("inc_rename").setup()
+  --   vim.keymap.set("n", "<space>rn", function()
+  --     return ":IncRename " .. vim.fn.expand("<cword>")
+  --   end, { expr = true, desc = "Incremental rename" })
+  -- end,
+  cmd = "IncRename",
+  config = true,
 }

@@ -23,6 +23,7 @@ return {
         shuttle = "]w",
         vsplit = "<C-CR>", -- Ctrl+Enter
         split = "s",
+        quit = "<ESC>",
       },
     },
     diagnostic = {

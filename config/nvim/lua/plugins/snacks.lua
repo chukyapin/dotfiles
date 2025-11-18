@@ -6,10 +6,10 @@ return {
 	keys = {
 		{ "<Space>q", function() Snacks.bufdelete() end, silent = true },
 		-- { "<Space>k", {mode = "n"},function() Snacks.picker.keymaps({ layout = "default" }) end, desc = "Keymaps" },
+		{ "<C-j>f", function() Snacks.picker.files() end, desc = "Find Files" },
 		{ "<C-j>e", function() Snacks.picker.explorer({ layout = "sidebar" }) end, silent = true },
 		{ "<C-j>r", function() Snacks.picker.recent() end, silent = true },
 		{ "<C-j>s", function() Snacks.picker.smart() end, silent = true },
-		{ "<C-j>f", function() Snacks.picker.files() end, desc = "Find Files" },
 		{ "<C-j>g", function() Snacks.picker.grep() end, desc = "Grep" },
 		{ "<C-j>l", function() Snacks.picker.lines() end, desc = "Lines",           silent = true },
 		{ "<C-j>d", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
@@ -66,6 +66,7 @@ return {
   -- stylua: ignore end
   ---@type snacks.Config
   opts = {
+    notifier = { sort = { "added" } },
     explorer = { enable = true },
     indent = { enabled = true },
     image = {
@@ -97,17 +98,17 @@ return {
         function()
           local in_git = Snacks.git.get_root() ~= nil
           local cmds = {
-            {
-              title = "Notifications",
-              cmd = "gh notify -s -a -n5",
-              action = function()
-                vim.ui.open("https://github.com/notifications")
-              end,
-              key = "n",
-              icon = " ",
-              height = 5,
-              enabled = true,
-            },
+            -- {
+            --   title = "Notifications",
+            --   cmd = "gh notify -s -a -n5",
+            --   action = function()
+            --     vim.ui.open("https://github.com/notifications")
+            --   end,
+            --   key = "n",
+            --   icon = " ",
+            --   height = 5,
+            --   enabled = true,
+            -- },
             {
               title = "Open Issues",
               cmd = "gh issue list -L 3",
@@ -179,7 +180,11 @@ return {
           open = true,
         },
         files = {
+          hidden = true,
           open = true,
+        },
+        grep = {
+          hidden = true,
         },
         command_history = {
           sort = { fields = { "idx", "score:desc" } },
@@ -187,6 +192,7 @@ return {
         },
         explorer = {
           -- focus = "input",
+          hidden = true,
           auto_close = true,
           matcher = { sort_empty = false },
           open = true,
