@@ -3,7 +3,7 @@ local wezterm = require("wezterm") --[[@as Wezterm]]
 local act = wezterm.action
 local M = {}
 
--- M.mod = wezterm.target_triple:find("windows") and "SHIFT|CTRL" or "SHIFT|SUPER"
+M.mod = wezterm.target_triple:find("windows") and "SHIFT|CTRL" or "SHIFT|SUPER"
 
 M.smart_split = wezterm.action_callback(function(window, pane)
 	local dim = pane:get_dimensions()
@@ -54,10 +54,10 @@ function M.setup(config)
 		M.split_nav("resize", "CTRL", "RightArrow", "Left"),
 		M.split_nav("resize", "CTRL", "UpArrow", "Up"),
 		M.split_nav("resize", "CTRL", "DownArrow", "Down"),
-		M.split_nav("move", "ALT", "h", "Left"),
-		M.split_nav("move", "ALT", "j", "Down"),
-		M.split_nav("move", "ALT", "k", "Up"),
-		M.split_nav("move", "ALT", "l", "Right"),
+		M.split_nav("move", "CTRL", "h", "Left"),
+		M.split_nav("move", "CTRL", "j", "Down"),
+		M.split_nav("move", "CTRL", "k", "Up"),
+		M.split_nav("move", "CTRL", "l", "Right"),
 	}
 end
 

@@ -21,7 +21,7 @@ map("v", "<space>D", '"_D')
 -- map("n", "-", "<C-x>")
 
 -- Inner words
-map("o", "i<space>", "iw")
+map("o", "<space>", "iw")
 
 -- Select all
 -- map("n", "<C-a>", "gg<S-v>G")
@@ -34,13 +34,13 @@ map("o", "i<space>", "iw")
 map("n", "<C-w>", 'vb"_d')
 
 -- Split window
-map("n", "ss", ":split<CR>")
-map("n", "sv", ":vsplit<CR>")
+map("n", "-", ":split<CR>")
+map("n", "+", ":vsplit<CR>")
 
 -- Buffer
 map("n", "tn", ":tabedit ", opts)
-map("n", "<tab>", ":BufferNext<CR>", opts)
-map("n", "<s-tab>", ":BufferPrevious<CR>", opts)
+map("n", "<space>l", ":BufferNext<CR>", opts)
+map("n", "<space>h", ":BufferPrevious<CR>", opts)
 map("n", "<space>w", ":BufferCloseAllButVisible<CR>", opts)
 
 -- V-BLOCK
