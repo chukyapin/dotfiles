@@ -5,7 +5,7 @@ require("tabs").setup(config)
 require("keys").setup(config)
 
 config.automatically_reload_config = true
-config.window_background_opacity = 0.70
+config.window_background_opacity = 0.55
 config.macos_window_background_blur = 30
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = false
@@ -14,7 +14,7 @@ config.audible_bell = "Disabled"
 config.cursor_blink_ease_in = "Constant"
 config.cursor_blink_ease_out = "Constant"
 
-config.color_scheme = "tokyonight_ night"
+-- config.color_scheme = "tokyonight_ night"
 
 config.underline_thickness = 3
 config.cursor_thickness = 4

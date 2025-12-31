@@ -12,17 +12,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     local opts = { buffer = ev.buf }
     -- 定義に移動 (Lspsaga goto_definition は期待しない定義に飛んでしまうことがある)
-    vim.keymap.set("n", "<C-]>", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "v<C-]>", function()
+    vim.keymap.set("n", "<C-'>", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "v<C-'>", function()
       vim.cmd([[ vsplit ]])
       vim.lsp.buf.definition()
     end, opts)
-    vim.keymap.set("n", "g<C-]>", function()
+    vim.keymap.set("n", "s<C-'>", function()
       vim.cmd([[ split ]])
       vim.lsp.buf.definition()
     end, opts)
     -- 定義をホバー
-    -- vim.keymap.set("n", "<C-j>i", "<cmd>Lspsaga hover_doc<CR>", opts)
+    vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
     -- 実装へ移動
     -- vim.keymap.set("n", "<C-j>i", vim.lsp.buf.implementation, opts)
     -- 実装をホバー
