@@ -1,4 +1,4 @@
-local wezterm = require("wezterm") --[[@as Wezterm]]
+local wezterm = require("wezterm")
 
 local act = wezterm.action
 local M = {}
@@ -16,28 +16,28 @@ end)
 
 ---@param config Config
 function M.setup(config)
-	-- config.disable_default_key_bindings = true
+	config.disable_default_key_bindings = true
 	config.keys = {
 		-- Scrollback
-		{ mods = "SHIFT|CTRL", key = "k", action = act.ScrollByPage(-0.5) },
-		{ mods = "SHIFT|CTRL", key = "j", action = act.ScrollByPage(0.5) },
+		{ mods = "ALT|SHIFT", key = "k", action = act.ScrollByPage(-0.5) },
+		{ mods = "ALT|SHIFT", key = "j", action = act.ScrollByPage(0.5) },
 		-- New Tab
 		{ mods = "SHIFT|CTRL", key = "t", action = act.SpawnTab("CurrentPaneDomain") },
 		-- Splits
 		{ mods = "SHIFT|CTRL", key = "Enter", action = M.smart_split },
-		{ mods = "SHIFT|CTRL", key = "|", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-		{ mods = "SHIFT|CTRL", key = "-", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+		{ mods = "ALT", key = "'", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+		{ mods = "ALT", key = ";", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 		{ mods = "SHIFT|CTRL", key = "(", action = act.DecreaseFontSize },
 		{ mods = "SHIFT|CTRL", key = ")", action = act.IncreaseFontSize },
 		-- Acivate Tabs
-		{ mods = "ALT|CTRL", key = ".", action = act({ ActivateTabRelative = 1 }) },
-		{ mods = "ALT|CTRL", key = ",", action = act({ ActivateTabRelative = -1 }) },
+		{ mods = "ALT", key = ".", action = act({ ActivateTabRelative = 1 }) },
+		{ mods = "ALT", key = ",", action = act({ ActivateTabRelative = -1 }) },
 		{ mods = "SHIFT|CTRL", key = "R", action = act.RotatePanes("Clockwise") },
 		-- show the pane selection mode, but have it swap the active and selected panes
 		{ mods = "SHIFT|CTRL", key = "S", action = act.PaneSelect({}) },
 		-- Clipboard
 		{ mods = "SHIFT|CTRL", key = "c", action = act.CopyTo("Clipboard") },
-		{ mods = "SHIFT|CTRL", key = "Space", action = act.QuickSelect },
+		{ mods = "SHIFT|CTRL", key = "f", action = act.QuickSelect },
 		{ mods = "SHIFT|CTRL", key = "X", action = act.ActivateCopyMode },
 		{ mods = "SHIFT|CTRL", key = "f", action = act.Search("CurrentSelectionOrEmptyString") },
 		{ mods = "SHIFT|CTRL", key = "v", action = act.PasteFrom("Clipboard") },

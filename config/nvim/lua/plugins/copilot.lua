@@ -1,47 +1,62 @@
--- return {
---   "zbirenbaum/copilot.lua",
---   cmd = "Copilot",
---   event = "InsertEnter",
---   opts = {
---     suggestion = {
---       auto_trigger = true,
---       keymap = {
---         accept = "<D-k>",
---       },
---     },
---     filetypes = {
---       javascript = true,
---       typescript = true,
---       lua = true,
---       go = true,
---       vue = true,
---       python = true,
---       rust = true,
---       ["*"] = false,
---     },
---   },
--- }
 return {
   "zbirenbaum/copilot.lua",
   cmd = "Copilot",
   event = "InsertEnter",
-  config = function()
-    require("copilot").setup({
-      suggestion = { enabled = false },
-      panel = { enabled = false },
-      server_opts_overrides = {
-        trace = "verbose",
-        cmd = {
-          vim.fn.expand("~/.local/share/mise/shims/copilot-language-server"),
-          "--stdio",
-        },
-        settings = {
-          advanced = {
-            listCount = 10,
-            inlineSuggestCount = 3,
-          },
-        },
+  opts = {
+    suggestion = {
+      aouto_trigger = true,
+      keymap = {
+        accept = "<D-k>",
+        next = "<D-]>",
+        prev = "<D-[>",
       },
-    })
+    },
+    filetypes = {
+      javascript = true,
+      typescript = true,
+      lua = true,
+      go = true,
+      vue = true,
+      python = true,
+      rust = true,
+      css = true,
+      gitcommit = true,
+      ["*"] = false,
+    },
+  },
+  config = function(_, opts)
+    require("copilot").setup(opts)
+    -- 追加の accept キー: Insert モードで <C-k> を Copilot の accept に割り当て
+    -- 一部の端末で <D-k> が機能しない場合の代替手段として
+    vim.keymap.set("i", "<C-k>", function()
+      local ok, suggestion = pcall(require, "copilot.suggestion")
+      if ok then
+        suggestion.accept()
+      end
+    end, { silent = true, desc = "Copilot Accept" })
   end,
 }
+-- return {
+--   "zbirenbaum/copilot.lua",
+--   cmd = "Copilot",
+--   event = "InsertEnter",
+--   config = function()
+--     require("copilot").setup({
+--       suggestion = { enabled = true },
+--       panel = { enabled = true },
+--       server_opts_overrides = {
+--         trace = "verbose",
+--         cmd = {
+--           vim.fn.expand("~/.local/share/mise/shims/copilot-language-server"),
+--           "--stdio",
+--         },
+--         settings = {
+--           advanced = {
+--             listCount = 10,
+--             inlineSuggestCount = 3,
+--           },
+--         },
+--       },
+--     })
+--   end,
+-- }

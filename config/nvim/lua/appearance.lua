@@ -3,10 +3,9 @@ vim.opt.fileencodings = "utf-8,sjis"
 vim.opt.fileformats = "unix,dos,mac"
 
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.pumheight = 10
-vim.opt.number = true
-vim.opt.relativenumber = true
 
 vim.opt.autoindent = true
 vim.opt.smartindent = true
@@ -30,8 +29,8 @@ vim.api.nvim_set_hl(0, "YankHighlight", { reverse = true })
 vim.api.nvim_set_hl(0, "Visual", { bg = "#565612" })
 
 -- Split Behavior
-vim.opt.splitbelow = true -- Holizontal splits open berow
-vim.opt.splitright = true -- Vertical splits open to the right
+vim.opt.splitbelow = true -- holizontal splits open berow
+vim.opt.splitright = true -- vertical splits open to the right
 
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])

@@ -16,6 +16,10 @@ return {
         augend.constant.alias.bool,
         augend.semver.alias.semver,
         augend.constant.new({ elements = { "let", "const" } }),
+        augend.case.new({
+          types = { "camelCase", "snake_case", "PascalCase", "SCREAMING_SNAKE_CASE" },
+          cyclic = true,
+        }),
       },
     })
   end,

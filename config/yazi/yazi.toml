@@ -1,0 +1,34 @@
+[mgr]
+show_hidden = true
+linemode = "mtime"
+
+[[plugin.prepend_fetchers]]
+id   = "git"
+name = "*"
+run  = "git"
+
+[[plugin.prepend_fetchers]]
+id   = "git"
+name = "*/"
+run  = "git"
+
+[preview]
+max_width  = 3600
+max_height = 2338
+
+[opener]  
+preview = [
+  { run = 'qlmanage -p "$0"', desc = "Quick Look Preview"}
+]
+gimp = [  
+  { run = 'LANG=ja gimp -n "$0"', desc = "GIMP"}
+]
+
+[open]  
+prepend_rules = [
+  { mime = "image/*", use = "preview" },
+  { mime = "video/webm", use = "open" },
+]
+append_rules = [
+  { mime = "image/*", use = "gimp" },
+]

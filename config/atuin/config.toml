@@ -113,7 +113,10 @@ show_preview = true
 ## version (and whether an update is available), a keymap hint, and the total
 ## amount of commands in your history.
 # show_help = true
-store_failed = false
+
+deduplicate = "full"
+filter = "exit_code == 0"
+
 ## Defaults to true. This matches history against a set of default regex, and will not save it if we get a match. Defaults include
 ## 1. AWS key id
 ## 2. Github pat (old and new)

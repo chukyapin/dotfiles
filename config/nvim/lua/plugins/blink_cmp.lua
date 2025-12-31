@@ -10,7 +10,7 @@ return {
   ---@type blink.cmp.Config
   opts = {
     keymap = {
-      preset = "super-tab",
+      preset = "enter",
       ["<F5>"] = { "show", "show_documentation", "hide_documentation" },
     },
     completion = {

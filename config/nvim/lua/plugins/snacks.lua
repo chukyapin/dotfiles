@@ -5,7 +5,7 @@ return {
 	-- stylua: ignore start
 	keys = {
 		{ "<Space>q", function() Snacks.bufdelete() end, silent = true },
-		-- { "<Space>k", {mode = "n"},function() Snacks.picker.keymaps({ layout = "default" }) end, desc = "Keymaps" },
+		{ "<C-j>k", function() Snacks.picker.pickers() end,         silent = true },
 		{ "<C-j>e", function() Snacks.picker.explorer({ layout = "sidebar" }) end, silent = true },
 		{ "<C-j>r", function() Snacks.picker.recent() end, silent = true },
 		{ "<C-j>s", function() Snacks.picker.smart() end, silent = true },
@@ -50,15 +50,15 @@ return {
 			end,
 			silent = true
 		},
-		{ "'g", function() Snacks.lazygit() end,                               desc = "Lazygit" },
+		{ "'g", function() Snacks.lazygit() end, desc = "Lazygit" },
 		{ ",,", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-		-- { "<C-/>", mode = { "n", "i" }, function() Snacks.terminal() end,                                       desc = "Toggle Terminal" },
 		{ "'b", function() Snacks.picker.git_branches({ layout = "select" }) end,       desc = "Branches" },
-		-- { "<C-j>:", mode = { "n", "i" }, function() Snacks.picker.command_history() end, silent = true },
 		{ "'s", function() Snacks.picker.git_status() end,                              silent = true },
 		{ "'l", function() Snacks.picker.git_log_line() end,                            silent = true },
+		-- { "<Space>k", {mode = "n"},function() Snacks.picker.keymaps({ layout = "default" }) end, desc = "Keymaps" },
+		-- { "<C-/>", mode = { "n", "i" }, function() Snacks.terminal() end,                                       desc = "Toggle Terminal" },
+		-- { "<C-j>:", mode = { "n", "i" }, function() Snacks.picker.command_history() end, silent = true },
 		-- { "<C-j>j", mode = { "n", "i" }, function() Snacks.picker.resume() end,          silent = true },
-		{ "<C-j>k", function() Snacks.picker.pickers() end,         silent = true },
 		-- { "<C-j>p", mode = { "n", "i" }, function() Snacks.picker.projects() end,        silent = true },
 		-- --- @diagnostic disable-next-line: undefined-field todo_commentsはsnacks以外に定義があるため無視
 		-- { "<C-j>m", mode = { "n", "i" }, function() Snacks.picker.todo_comments() end,   silent = true },
@@ -66,6 +66,9 @@ return {
   -- stylua: ignore end
   ---@type snacks.Config
   opts = {
+    statuscolumn = { folds = { open = false } },
+    notifier = { sort = { "added" } },
+    scroll = { debug = false },
     explorer = { enable = true },
     indent = { enabled = true },
     image = {
@@ -97,17 +100,17 @@ return {
         function()
           local in_git = Snacks.git.get_root() ~= nil
           local cmds = {
-            {
-              title = "Notifications",
-              cmd = "gh notify -s -a -n5",
-              action = function()
-                vim.ui.open("https://github.com/notifications")
-              end,
-              key = "n",
-              icon = " ",
-              height = 5,
-              enabled = true,
-            },
+            -- {
+            --   title = "Notifications",
+            --   cmd = "gh notify -s -a -n5",
+            --   action = function()
+            --     vim.ui.open("https://github.com/notifications")
+            --   end,
+            --   key = "n",
+            --   icon = " ",
+            --   height = 5,
+            --   enabled = true,
+            -- },
             {
               title = "Open Issues",
               cmd = "gh issue list -L 3",
