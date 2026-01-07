@@ -1,6 +1,7 @@
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
+vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
 -- Do things witout affecting the registers
@@ -35,14 +36,6 @@ end, { expr = true })
 -- Inner words
 map("o", "<space>", "iw")
 
--- Move a blocks of text up/down
--- map("n", "K", ":m .-2<CR>==", opts)
--- map("n", "J", ":m .+1<CR>==", opts)
-
--- Emacs like keybind
--- map("i", "<C-a>", "<Home>", opts)
--- map("i", "<C-e>", "<End>", opts)
-
 -- Buffer
 map("n", "tn", ":tabedit ", opts)
 map("n", "<space>l", ":BufferNext<CR>", opts)
@@ -64,17 +57,7 @@ map("n", "<space>@", ":write<CR>", opts)
 map("n", "<space>!", ":quit<CR>", opts)
 map("n", "<space>~", ":wq<CR>", opts)
 
--- Split window
-map("n", "-", ":split<CR>")
-map("n", "+", ":vsplit<CR>")
-
--- Move window
-map("n", "sk", "<c-w>k")
-map("n", "sj", "<c-w>j")
-map("n", "sh", "<c-w>h")
-map("n", "sl", "<c-w>l")
-
-map({ "n", "v" }, "m", "%")
+map({ "n", "v", "o" }, "m", "%")
 
 map("n", "<space><space>y", ":%+y<CR>", opts)
 map("n", "<space><space>d", ":%+d<CR>", opts)

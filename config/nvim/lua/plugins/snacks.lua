@@ -5,7 +5,7 @@ return {
 	-- stylua: ignore start
 	keys = {
 		{ "<Space>q", function() Snacks.bufdelete() end, silent = true },
-		{ "<C-j>k", function() Snacks.picker.pickers() end,         silent = true },
+		{ "<C-J>k", function() Snacks.picker.pickers() end,         silent = true },
 		{ "<C-j>e", function() Snacks.picker.explorer({ layout = "sidebar" }) end, silent = true },
 		{ "<C-j>r", function() Snacks.picker.recent() end, silent = true },
 		{ "<C-j>s", function() Snacks.picker.smart() end, silent = true },

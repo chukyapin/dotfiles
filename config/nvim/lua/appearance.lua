@@ -12,6 +12,7 @@ vim.opt.smartindent = true
 vim.opt.hlsearch = true
 vim.opt.scrolloff = 10
 vim.opt.helplang = "ja"
+vim.cmd("cabbrev h belowright vertical help")
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.ignorecase = true
