@@ -22,7 +22,7 @@ return {
             desc = "Goto/Apply Next Edit Suggestion",
           },
           {
-            "<c-.>",
+            "<C-.>",
             function()
               require("sidekick.cli").toggle()
             end,
@@ -30,7 +30,7 @@ return {
             mode = { "n", "t", "i", "x" },
           },
           {
-            "<leader>aa",
+            "<space>ff",
             function()
               require("sidekick.cli").toggle()
             end,

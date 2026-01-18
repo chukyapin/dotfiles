@@ -4,21 +4,25 @@ local act = wezterm.action
 return {
 	keys = {
 		{ key = "Enter", mods = "SHIFT|CTRL", action = act.EmitEvent("user-defined-0") },
-		{ key = ",", mods = "ALT|CTRL", action = act.ActivateTabRelative(-1) },
-		{
-			key = ",",
-			mods = "SUPER",
-			action = act.SpawnCommandInNewTab({
-				args = { "/opt/homebrew/bin/nvim", "/Users/metal/.config/wezterm/wezterm.lua" },
-				domain = "CurrentPaneDomain",
-			}),
-		},
-		{ key = ".", mods = "ALT|CTRL", action = act.ActivateTabRelative(1) },
+		{ key = "'", mods = "ALT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+		{ key = "(", mods = "SHIFT|CTRL", action = act.DecreaseFontSize },
+		{ key = ")", mods = "SHIFT|CTRL", action = act.IncreaseFontSize },
+		{ key = ",", mods = "ALT", action = act.ActivateTabRelative(-1) },
+		{ key = ".", mods = "ALT", action = act.ActivateTabRelative(1) },
+		{ key = ";", mods = "ALT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 		{ key = "C", mods = "CTRL", action = act.CopyTo("Clipboard") },
 		{ key = "D", mods = "CTRL", action = act.ShowDebugOverlay },
 		{ key = "F", mods = "CTRL", action = act.Search("CurrentSelectionOrEmptyString") },
+		{ key = "J", mods = "ALT", action = act.ScrollByPage(0.5) },
+		{ key = "K", mods = "ALT", action = act.ScrollByPage(-0.5) },
 		{ key = "M", mods = "CTRL", action = act.TogglePaneZoomState },
 		{ key = "P", mods = "CTRL", action = act.ActivateCommandPalette },
+		{ key = "R", mods = "CTRL", action = act.RotatePanes("Clockwise") },
+		{
+			key = "S",
+			mods = "CTRL",
+			action = act.PaneSelect({ alphabet = "", mode = "Activate", show_pane_ids = false }),
+		},
 		{ key = "T", mods = "CTRL", action = act.SpawnTab("CurrentPaneDomain") },
 		{
 			key = "U",
@@ -27,7 +31,14 @@ return {
 		},
 		{ key = "V", mods = "CTRL", action = act.PasteFrom("Clipboard") },
 		{ key = "X", mods = "CTRL", action = act.ActivateCopyMode },
-		{ key = "phys:Space", mods = "SHIFT|CTRL", action = act.QuickSelect },
+		{ key = "h", mods = "CTRL", action = act.EmitEvent("SplitNav_move_Left") },
+		{ key = "j", mods = "CTRL", action = act.EmitEvent("SplitNav_move_Down") },
+		{ key = "k", mods = "CTRL", action = act.EmitEvent("SplitNav_move_Up") },
+		{ key = "l", mods = "CTRL", action = act.EmitEvent("SplitNav_move_Right") },
+		{ key = "LeftArrow", mods = "CTRL", action = act.EmitEvent("SplitNav_resize_Right") },
+		{ key = "RightArrow", mods = "CTRL", action = act.EmitEvent("SplitNav_resize_Left") },
+		{ key = "UpArrow", mods = "CTRL", action = act.EmitEvent("SplitNav_resize_Up") },
+		{ key = "DownArrow", mods = "CTRL", action = act.EmitEvent("SplitNav_resize_Down") },
 	},
 
 	key_tables = {

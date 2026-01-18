@@ -15,7 +15,7 @@ set -gx fish_cursor_visual block
 set -gx fish_cursor_replace_one underscore
 
 # Path
-set -x fish_user_paths
+set -e fish_user_paths
 fish_add_path /bin
 fish_add_path ~/.cargo/bin
 fish_add_path ~/.local/bin
@@ -29,6 +29,9 @@ fish_add_path ~/.local/share/bob-nvim/bin
 fish_add_path ~/.local/share/bob-nvim/nvim-linux64/bin
 fish_add_path /var/lib/flatpak/exports/bin/
 fish_add_path ~/.dotnet/tools
+
+set -gx DENO_INSTALL "~/.deno"
+fish_add_path ~/.deno/bin
 
 # set -Ux PATH $HOME/.emacs.d/bin $PATH
 fish_add_path ~/.emacs.d/bin

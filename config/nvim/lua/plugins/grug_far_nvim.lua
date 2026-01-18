@@ -1,7 +1,8 @@
 return {
   "MagicDuck/grug-far.nvim",
   keys = {
-    { "gru", ":GrugFar<CR>", mode = { "n", "v" }, silent = true },
+    { "gru", ":GrugFar<CR>", mode = { "n" }, silent = true },
+    { "gru", ":GrugFarWithin<CR>", mode = { "v" }, silent = true },
   },
   opts = {
     keymaps = {

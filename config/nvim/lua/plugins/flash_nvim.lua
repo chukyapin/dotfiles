@@ -3,17 +3,17 @@ return {
   cond = true,
   event = "VeryLazy",
   opts = {
-    -- label = {
-    --   distance = false,
-    -- },
-    -- modes = {
-    --   search = {
-    --     enabled = false,
-    --   },
-    -- char = {
-    -- enabled = false,
-    -- },
-    -- },
+    label = {
+      distance = false,
+    },
+    modes = {
+      search = {
+        enabled = false,
+      },
+      char = {
+        enabled = false,
+      },
+    },
   },
   keys = {
     {

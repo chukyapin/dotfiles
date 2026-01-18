@@ -7,18 +7,16 @@ return {
     { "nvim-lua/plenary.nvim", lazy = true },
   },
   keys = {
-    { "<Space>-", "<cmd>Yazi<cr>", desc = "Yazi" },
+    { "<Space>a", "<cmd>Yazi<cr>", desc = "Yazi" },
     { "<Space>+", "<cmd>Yazi toggle<cr>", desc = "Yazi restore" },
   },
   ---@type YaziConfig | {}
   opts = {
     keymaps = {
-      open_file_in_vertical_split = "<c-CR>",
+      open_file_in_vertical_split = "<C-CR>",
 
-      open_file_in_horizontal_split = "<c-s>",
+      open_file_in_horizontal_split = "<C-s>",
       send_to_quickfix_list = "<c-s-o>",
-      grep_in_directory = "<M-6>", -- ignore
-      open_and_pick_window = "<M-6>", -- ignore
       cycle_open_buffers = "<M-6>", -- ignore
     },
   },

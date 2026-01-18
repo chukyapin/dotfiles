@@ -1,18 +1,68 @@
+local grepCurrentVueTag = function()
+  if vim.fn.expand("%:e") ~= "vue" then
+    vim.notify("vueファイルでのみ実行できます", vim.log.levels.warn)
+    return
+  end
+
+  local name = vim.fn.expand("%:t:r")
+  if name == "" then
+    vim.notify("ファイル名を取得できません", vim.log.levels.warn)
+    return
+  end
+
+  local pattern = string.format("</?%s(\\s|/|>|$)", name)
+  snacks.picker.grep({
+    search = pattern,
+    live = false,
+    need_search = false,
+    args = { "--pcre2" },
+  })
+end
+
+local git_recent = require("snacks.git_recent")
+
+--     {
+--       "<c-j><space>f",
+--       mode = { "n", "i" },
+--       function()
+--         local curdir = vim.bo.filetype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%:p:h")
+--         snacks.picker.files({ dirs = { curdir } })
+--       end,
+--       silent = true
+--     },
+--     { "<c-j>e", mode = { "n", "i" }, function()
+--       git_recent.picker({max_commit_count = 30})
+--     end, silent = true },
+--     { "<c-j>r", mode = { "n", "i" }, function() snacks.picker.recent() end, silent = true },
+--     {
+--       "<c-j><space>g",
+--       mode = { "n", "i" },
+--       function()
+--         local curdir = vim.bo.filetype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%:p:h")
+--         snacks.picker.grep({ dirs = { curdir } })
+--       end,
+--       silent = true
+--     },
+--     {
+--       "<c-j>v",
+--       mode = { "n", "i" },
+--       grepcurrentvuetag,
+--       silent = true,
+--     },
+
 return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
 	-- stylua: ignore start
 	keys = {
-		{ "<Space>q", function() Snacks.bufdelete() end, silent = true },
-		{ "<C-J>k", function() Snacks.picker.pickers() end,         silent = true },
-		{ "<C-j>e", function() Snacks.picker.explorer({ layout = "sidebar" }) end, silent = true },
-		{ "<C-j>r", function() Snacks.picker.recent() end, silent = true },
-		{ "<C-j>s", function() Snacks.picker.smart() end, silent = true },
-		{ "<C-j>f", function() Snacks.picker.files() end, desc = "Find Files" },
-		{ "<C-j>g", function() Snacks.picker.grep() end, desc = "Grep" },
-		{ "<C-j>l", function() Snacks.picker.lines() end, desc = "Lines",           silent = true },
-		{ "<C-j>d", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
+		{ "<c-j>k", function() Snacks.picker.pickers() end, silent = true },
+		{ "<c-j>e", function() Snacks.picker.explorer({ layout = "sidebar" }) end, silent = true },
+--     { "<c-j>t", mode = { "n", "i" }, function() snacks.picker.explorer() end, silent = true },
+		{ "<c-j>s", function() Snacks.picker.smart() end, silent = true },
+		{ "<c-j>f", function() Snacks.picker.files() end, silent = true, desc = "find files" },
+		{ "<c-j>g", function() Snacks.picker.grep() end, desc = "grep", "silen = ture" },
+		{ "<c-j>l", function() Snacks.picker.lines() end, desc = "lines", silent = true },
 		{
 			"<C-j>b",
 			function()
@@ -20,7 +70,7 @@ return {
 					-- I always want my buffers picker to start in normal mode
 					on_show = function()
 						vim.cmd.stopinsert()
-					end,
+          end,
 					finder = "buffers",
 					format = "buffer",
 					open = false,
@@ -45,7 +95,7 @@ return {
 			"<C-j>G",
 			mode = { "n", "i" },
 			function()
-				local curdir = vim.bo.filetype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%::h")
+				local curdir = vim.bo.filetpickersype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%::h")
 				Snacks.picker.grep({ dirs = { curdir } })
 			end,
 			silent = true
@@ -55,10 +105,14 @@ return {
 		{ "'b", function() Snacks.picker.git_branches({ layout = "select" }) end,       desc = "Branches" },
 		{ "'s", function() Snacks.picker.git_status() end,                              silent = true },
 		{ "'l", function() Snacks.picker.git_log_line() end,                            silent = true },
-		-- { "<Space>k", {mode = "n"},function() Snacks.picker.keymaps({ layout = "default" }) end, desc = "Keymaps" },
+    { "'d", function() Snacks.picker.git_diff() end, silent = true },
+    { "'f", function() Snacks.picker.git_log_file() end, silent = true },
+
+    -- { "<C-j>o", mode = { "n", "i" }, function() Snacks.picker.lsp_workspace_symbols() end, silent = true },
+    -- { "<C-j>j", mode = { "n", "i" }, function() Snacks.picker.lsp_symbols() end, silent = true },
+
 		-- { "<C-/>", mode = { "n", "i" }, function() Snacks.terminal() end,                                       desc = "Toggle Terminal" },
 		-- { "<C-j>:", mode = { "n", "i" }, function() Snacks.picker.command_history() end, silent = true },
-		-- { "<C-j>j", mode = { "n", "i" }, function() Snacks.picker.resume() end,          silent = true },
 		-- { "<C-j>p", mode = { "n", "i" }, function() Snacks.picker.projects() end,        silent = true },
 		-- --- @diagnostic disable-next-line: undefined-field todo_commentsはsnacks以外に定義があるため無視
 		-- { "<C-j>m", mode = { "n", "i" }, function() Snacks.picker.todo_comments() end,   silent = true },
@@ -69,12 +123,16 @@ return {
     statuscolumn = { folds = { open = false } },
     notifier = { sort = { "added" } },
     scroll = { debug = false },
-    explorer = { enable = true },
+    explorer = {
+      enable = true,
+      hidden = true,
+    },
     indent = { enabled = true },
     image = {
-      doc = {
-        inline = false,
-      },
+      force = false,
+      enabled = true,
+      math = { enabled = true },
+      doc = { inline = true, float = true },
     },
     dashboard = {
       sections = {
@@ -84,14 +142,14 @@ return {
           section = "terminal",
           cmd = "colorscript -e square",
           height = 5,
-          padding = 1,
+          padding = 2,
         },
         { section = "keys", gap = 1, padding = 1 },
         {
           pane = 2,
           icon = " ",
           desc = "Browse Repo",
-          padding = 1,
+          padding = 2,
           key = "b",
           action = function()
             Snacks.gitbrowse()
@@ -102,7 +160,7 @@ return {
           local cmds = {
             -- {
             --   title = "Notifications",
-            --   cmd = "gh notify -s -a -n5",
+            -- cmd = "gh notify -s -a -n5",
             --   action = function()
             --     vim.ui.open("https://github.com/notifications")
             --   end,
@@ -143,7 +201,7 @@ return {
               pane = 2,
               section = "terminal",
               enabled = in_git,
-              padding = 1,
+              padding = 2,
               ttl = 5 * 60,
               indent = 3,
             }, cmd)
@@ -170,6 +228,11 @@ return {
         end,
       },
       sources = {
+        git_recent = git_recent.source_config(),
+        git_status = { layout = { layout = { width = 180 } } },
+        git_diff = { layout = { layout = { width = 180 } } },
+        git_log_file = { layout = { layout = { width = 180 } } },
+        git_log_line = { layout = { layout = { width = 180 } } },
         lines = {
           sort = { fields = { "idx", "score:desc" } },
           matcher = { fuzzy = false },
@@ -179,25 +242,42 @@ return {
         recent = {
           sort = { fields = { "idx", "score:desc" } },
           matcher = { fuzzy = false },
-          open = true,
+          hidden = true,
+          -- open = true,
         },
         files = {
-          open = true,
+          -- open = true,
+          hidden = true,
         },
-        command_history = {
-          sort = { fields = { "idx", "score:desc" } },
-          matcher = { fuzzy = false },
+        -- command_history = {
+        --   sort = { fields = { "idx", "score:desc" } },
+        --   matcher = { fuzzy = false },
+        -- },
+        grep = {
+          hidden = true,
+        },
+        select = {
+          kinds = {
+            sidekick_cli = {
+              layout = { preset = "vscode" },
+            },
+            sidekick_prompt = {
+              layout = { preset = "vscode" },
+            },
+          },
         },
         explorer = {
           -- focus = "input",
           auto_close = true,
           matcher = { sort_empty = false },
-          open = true,
+          hidden = true,
+          -- open = true,
           win = {
             list = {
               keys = {
-                ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
-                ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+                --                 ["<c-]>"] = { "toggle_live", mode = { "i", "n" } },
+                ["<C-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+                ["<C-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
                 ["<C-CR>"] = { "edit_vsplit", mode = { "i", "n" } },
                 ["<C-w>t"] = { "tab", mode = { "i", "n" } },
                 -- TODO: そのままoil.nvimで対象を開く
@@ -213,15 +293,15 @@ return {
         input = {
           keys = {
             ["<esc>"] = { "close", mode = { "i", "n" } },
-            ["<c-o>"] = { "qflist", mode = { "i", "n" } },
-            ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
-            ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
-            ["<c-]>"] = { "toggle_live", mode = { "i", "n" } },
+            ["<C-o>"] = { "qflist", mode = { "i", "n" } },
+            ["<C-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+            ["<C-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+            ["<C-]>"] = { "toggle_live", mode = { "i", "n" } },
             ["<C-CR>"] = { "edit_vsplit", mode = { "i", "n" } },
             ["<C-w>t"] = { "tab", mode = { "i", "n" } },
-            -- ["<C-j>"] = { "history_forward", mode = { "i", "n" } },
-            -- ["<C-k>"] = { "history_back", mode = { "i", "n" } },
-            -- ["<C-h>"] = { "toggle_help_input", mode = { "i", "n" } },
+            ["<C-j>"] = { "history_forward", mode = { "i", "n" } },
+            ["<C-k>"] = { "history_back", mode = { "i", "n" } },
+            ["<C-h>"] = { "toggle_help_input", mode = { "i", "n" } },
             ["<D-CR>"] = { "insert_filename", mode = { "i", "n" } },
             -- TODO: 正規表現切り替えやignoredはなぜか効かない...
           },
@@ -251,6 +331,12 @@ return {
           truncate = 100,
         },
       },
+      previewers = {
+        diff = {
+          style = "terminal",
+          -- NOTE: side-by-sideにすると横幅がおかしくなるので諦める
+        },
+      },
     },
   },
   init = function()
@@ -258,6 +344,8 @@ return {
       callback = function()
         vim.api.nvim_set_hl(0, "SnacksPickerDir", { link = "LineNr" })
         vim.api.nvim_set_hl(0, "SnacksDashboardHeader", { fg = "#ba55d3" })
+        -- vim.api.nvim_set_hl(0, "SnacksDashboardHeader", { fg = ":#000000" })
+        git_recent.setup_highlights()
       end,
     })
   end,

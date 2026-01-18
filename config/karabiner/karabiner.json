@@ -3250,9 +3250,10 @@
                                 ],
                                 "from": { "key_code": "j" },
                                 "to": [
-                                    { "key_code": "quote" },
-                                    { "key_code": "quote" },
-                                    { "key_code": "left_arrow" },
+                                    {
+                                        "key_code": "j",
+                                        "modifiers": ["control"]
+                                    },
                                     {
                                         "set_variable": {
                                             "name": "layer-semicolon",
@@ -3518,32 +3519,6 @@
                                         "modifiers": ["shift"]
                                     },
                                     { "key_code": "left_arrow" },
-                                    {
-                                        "set_variable": {
-                                            "name": "layer-semicolon",
-                                            "value": 0
-                                        }
-                                    },
-                                    {
-                                        "set_variable": {
-                                            "name": "__layer",
-                                            "value": 0
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "layer-semicolon",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": { "key_code": "t" },
-                                "to": [
-                                    { "shell_command": "  \n    output=$(date \"+%Y-%m-%d\")  \n\n    osascript <<EOF  \n      set prev to the clipboard  \n      set the clipboard to \"$output\"  \n      tell application \"System Events\"  \n        keystroke \"v\" using command down  \n        delay 0.1\n      end tell  \n      set the clipboard to prev  \nEOF \n  " },
                                     {
                                         "set_variable": {
                                             "name": "layer-semicolon",

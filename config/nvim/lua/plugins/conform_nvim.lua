@@ -17,12 +17,12 @@ return {
 
     return {
       formatters_by_ft = {
+        bash = { "shfmt" },
         lua = { "stylua" },
         go = { "goimports" },
-        bash = { "shfmt" },
-        zsh = { "shfmt" },
         python = { "ruff_organize_imports", "ruff_fix", "ruff_format" },
         sql = { "sleek" },
+        zsh = { "shfmt" },
 
         -- Web
         typescript = web_formatter,

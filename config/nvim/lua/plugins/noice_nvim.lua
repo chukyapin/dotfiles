@@ -11,11 +11,12 @@ return {
   opts = {
     lsp = {
       signature = {
-        enabled = false,
+        enabled = true,
       },
     },
     presets = {
       command_palette = true,
+      inc_rename = true,
     },
     messages = {
       enabled = true,
