@@ -18,8 +18,10 @@ function M.setup(config)
 	config.disable_default_key_bindings = true
 	config.keys = {
 		-- Scrollback
-		{ mods = "ALT|SHIFT", key = "k", action = act.ScrollByPage(-0.5) },
-		{ mods = "ALT|SHIFT", key = "j", action = act.ScrollByPage(0.5) },
+		-- { mods = "CTRL|SHIFT", key = "k", action = act.ScrollByPage(-0.5) },
+		-- { mods = "CTRL|SHIFT", key = "j", action = act.ScrollByPage(0.5) },
+		{ mods = "ALT", key = "k", action = act.ScrollByPage(-0.5) },
+		{ mods = "ALT", key = "j", action = act.ScrollByPage(0.5) },
 		-- New Tab
 		{ mods = "SHIFT|CTRL", key = "t", action = act.SpawnTab("CurrentPaneDomain") },
 		-- Splits
@@ -35,11 +37,12 @@ function M.setup(config)
 		-- show the pane selection mode, but have it swap the active and selected panes
 		{ mods = "SHIFT|CTRL", key = "S", action = act.PaneSelect({}) },
 		-- Clipboard
-		{ mods = "SHIFT|CTRL", key = "c", action = act.CopyTo("Clipboard") },
-		{ mods = "SHIFT|CTRL", key = "f", action = act.QuickSelect },
-		{ mods = "SHIFT|CTRL", key = "X", action = act.ActivateCopyMode },
+		-- { mods = "SHIFT|CTRL", key = "c", action = act.CopyTo("Clipboard") },
+		{ mods = "CMD", key = "c", action = act.CopyTo("Clipboard") },
+		-- { mods = "SHIFT|CTRL", key = "f", action = act.QuickSelect },
+		{ mods = "SHIFT|CTRL", key = "c", action = act.ActivateCopyMode },
 		{ mods = "SHIFT|CTRL", key = "f", action = act.Search("CurrentSelectionOrEmptyString") },
-		{ mods = "SHIFT|CTRL", key = "v", action = act.PasteFrom("Clipboard") },
+		{ mods = "CMD", key = "v", action = act.PasteFrom("Clipboard") },
 		{
 			mods = "SHIFT|CTRL",
 			key = "u",
@@ -53,10 +56,10 @@ function M.setup(config)
 		M.split_nav("resize", "CTRL", "RightArrow", "Left"),
 		M.split_nav("resize", "CTRL", "UpArrow", "Up"),
 		M.split_nav("resize", "CTRL", "DownArrow", "Down"),
-		M.split_nav("move", "CTRL", "h", "Left"),
-		M.split_nav("move", "CTRL", "j", "Down"),
-		M.split_nav("move", "CTRL", "k", "Up"),
-		M.split_nav("move", "CTRL", "l", "Right"),
+		M.split_nav("move", "ALT", "h", "Left"),
+		M.split_nav("move", "ALT", "j", "Down"),
+		M.split_nav("move", "ALT", "k", "Up"),
+		M.split_nav("move", "ALT", "l", "Right"),
 	}
 end
 

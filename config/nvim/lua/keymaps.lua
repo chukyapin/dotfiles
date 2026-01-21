@@ -27,6 +27,8 @@ vim.keymap.set({ "n", "x" }, "k", function()
   return "gk"
 end, { expr = true })
 
+map("n", "<C-j>", ":echo C-j pressed <CR>")
+
 -- Inner words
 map("o", "<space>", "iw")
 
@@ -42,8 +44,8 @@ map("n", "<space>w", ":CloseBuffers<CR>", opts)
 map("v", "v", "<C-v>")
 
 --  Split
-map("n", "-", ":split<CR>")
-map("n", "+", ":vsplit<CR>")
+map("n", "-", ":split<CR>", opts)
+map("n", "+", ":vsplit<CR>", opts)
 
 -- Move
 map("n", "sh", "<C-w>h")
@@ -56,14 +58,14 @@ map("v", "<C-t>", ">gv")
 map("v", "<C-d>", "<gv")
 
 -- Redo
-map("n", "U", "<C-r>")
+-- map("n", "U", "<C-r>")
 
 -- Save & Quit
 map("n", "<space>@", ":write<CR>", opts)
 map("n", "<space>!", ":quit<CR>", opts)
 map("n", "<space>~", ":wq<CR>", opts)
 
-map({ "n", "v", "o" }, "m", "%")
+-- map({ "n", "v", "o" }, "m", "%")
 
 map("n", "<space><space>y", ":%+y<CR>", opts)
 map("n", "<space><space>d", ":%+d<CR>", opts)

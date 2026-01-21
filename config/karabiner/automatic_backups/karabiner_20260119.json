@@ -5,6 +5,7 @@
                 "rules": [
                     {
                         "description": "ctrl + hdk (only for Obsidian.app)_rev02",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -67,6 +68,7 @@
                     },
                     {
                         "description": "ctrl + bfpnae (only for Obsidian.app)_rev02",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -152,6 +154,7 @@
                     },
                     {
                         "description": "Change Fn + h/j/k/l to Arrows",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -2556,6 +2559,22 @@
                         ]
                     },
                     {
+                        "description": "Return_or_enter to option",
+                        "manipulators": [
+                            {
+                                "from": { "key_code": "return_or_enter" },
+                                "to": [
+                                    {
+                                        "key_code": "left_option",
+                                        "modifiers": ["any"]
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "return_or_enter" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "right_shift to right_option",
                         "manipulators": [
                             {
@@ -2565,7 +2584,9 @@
                                         "key_code": "right_option",
                                         "modifiers": ["any"]
                                     }
-                                ]
+                                ],
+                                "to_if_alone": { "key_code": "japanese_kana" },
+                                "type": "basic"
                             }
                         ]
                     },
@@ -2574,7 +2595,7 @@
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "m",
+                                    "key_code": "spacebar",
                                     "modifiers": { "mandatory": ["left_command"] }
                                 },
                                 "to": [{ "key_code": "0" }],
@@ -2582,7 +2603,7 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "j",
+                                    "key_code": "m",
                                     "modifiers": { "mandatory": ["left_command"] }
                                 },
                                 "to": [{ "key_code": "1" }],
@@ -2590,23 +2611,7 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "k",
-                                    "modifiers": { "mandatory": ["left_command"] }
-                                },
-                                "to": [{ "key_code": "2" }],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "l",
-                                    "modifiers": { "mandatory": ["left_command"] }
-                                },
-                                "to": [{ "key_code": "3" }],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "u",
+                                    "key_code": "j",
                                     "modifiers": { "mandatory": ["left_command"] }
                                 },
                                 "to": [{ "key_code": "4" }],
@@ -2614,7 +2619,7 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "i",
+                                    "key_code": "k",
                                     "modifiers": { "mandatory": ["left_command"] }
                                 },
                                 "to": [{ "key_code": "5" }],
@@ -2622,7 +2627,7 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "o",
+                                    "key_code": "l",
                                     "modifiers": { "mandatory": ["left_command"] }
                                 },
                                 "to": [{ "key_code": "6" }],
@@ -2630,7 +2635,7 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "7",
+                                    "key_code": "u",
                                     "modifiers": { "mandatory": ["left_command"] }
                                 },
                                 "to": [{ "key_code": "7" }],
@@ -2638,10 +2643,34 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "8",
+                                    "key_code": "i",
                                     "modifiers": { "mandatory": ["left_command"] }
                                 },
                                 "to": [{ "key_code": "8" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "o",
+                                    "modifiers": { "mandatory": ["left_command"] }
+                                },
+                                "to": [{ "key_code": "9" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "comma",
+                                    "modifiers": { "mandatory": ["left_command"] }
+                                },
+                                "to": [{ "key_code": "2" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "period",
+                                    "modifiers": { "mandatory": ["left_command"] }
+                                },
+                                "to": [{ "key_code": "3" }],
                                 "type": "basic"
                             },
                             {
@@ -2784,23 +2813,7 @@
                         ]
                     },
                     {
-                        "description": "Return_or_enter to option",
-                        "manipulators": [
-                            {
-                                "from": { "key_code": "return_or_enter" },
-                                "to": [
-                                    {
-                                        "key_code": "left_option",
-                                        "modifiers": ["any"]
-                                    }
-                                ],
-                                "to_if_alone": [{ "key_code": "return_or_enter" }],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "right_command",
+                        "description": "right_command to japanese kana",
                         "manipulators": [
                             {
                                 "from": { "key_code": "right_command" },
@@ -2811,7 +2824,7 @@
                         ]
                     },
                     {
-                        "description": "Control to ESC",
+                        "description": "Left_control to ESC",
                         "manipulators": [
                             {
                                 "from": { "key_code": "left_control" },
@@ -3237,9 +3250,10 @@
                                 ],
                                 "from": { "key_code": "j" },
                                 "to": [
-                                    { "key_code": "quote" },
-                                    { "key_code": "quote" },
-                                    { "key_code": "left_arrow" },
+                                    {
+                                        "key_code": "j",
+                                        "modifiers": ["control"]
+                                    },
                                     {
                                         "set_variable": {
                                             "name": "layer-semicolon",
@@ -3265,14 +3279,8 @@
                                 ],
                                 "from": { "key_code": "k" },
                                 "to": [
-                                    {
-                                        "key_code": "open_bracket",
-                                        "modifiers": ["shift"]
-                                    },
-                                    {
-                                        "key_code": "open_bracket",
-                                        "modifiers": ["shift"]
-                                    },
+                                    { "key_code": "grave_accent_and_tilde" },
+                                    { "key_code": "grave_accent_and_tilde" },
                                     { "key_code": "left_arrow" },
                                     {
                                         "set_variable": {
@@ -3534,32 +3542,6 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": { "key_code": "t" },
-                                "to": [
-                                    { "shell_command": "  \n    output=$(date \"+%Y-%m-%d\")  \n\n    osascript <<EOF  \n      set prev to the clipboard  \n      set the clipboard to \"$output\"  \n      tell application \"System Events\"  \n        keystroke \"v\" using command down  \n        delay 0.1\n      end tell  \n      set the clipboard to prev  \nEOF \n  " },
-                                    {
-                                        "set_variable": {
-                                            "name": "layer-semicolon",
-                                            "value": 0
-                                        }
-                                    },
-                                    {
-                                        "set_variable": {
-                                            "name": "__layer",
-                                            "value": 0
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "layer-semicolon",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
                                 "from": { "key_code": "u" },
                                 "to": [
                                     {
@@ -3796,7 +3778,7 @@
                                 ],
                                 "from": {
                                     "key_code": "h",
-                                    "modifiers": { "mandatory": ["command"] }
+                                    "modifiers": { "mandatory": ["option"] }
                                 },
                                 "to": [
                                     {
@@ -3817,7 +3799,7 @@
                                 ],
                                 "from": {
                                     "key_code": "l",
-                                    "modifiers": { "mandatory": ["command"] }
+                                    "modifiers": { "mandatory": ["option"] }
                                 },
                                 "to": [
                                     {
@@ -3825,6 +3807,22 @@
                                         "modifiers": ["control"]
                                     }
                                 ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "com.github.wez.wezterm"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "u",
+                                    "modifiers": { "mandatory": ["option"] }
+                                },
+                                "to": [{ "key_code": "f7" }],
                                 "type": "basic"
                             },
                             {
@@ -3953,64 +3951,6 @@
                                     },
                                     { "key_code": "spacebar" }
                                 ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "com.github.wez.wezterm"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "l",
-                                    "modifiers": { "mandatory": ["option"] }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "tab",
-                                        "modifiers": ["control", "shift"]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "com.github.wez.wezterm"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "h",
-                                    "modifiers": { "mandatory": ["option"] }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "tab",
-                                        "modifiers": ["control"]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "com.github.wez.wezterm"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "u",
-                                    "modifiers": { "mandatory": ["command"] }
-                                },
-                                "to": [{ "key_code": "f7" }],
                                 "type": "basic"
                             },
                             {
@@ -4791,6 +4731,16 @@
                     }
                 ]
             },
+            "devices": [
+                {
+                    "disable_built_in_keyboard_if_exists": true,
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 33,
+                        "vendor_id": 1278
+                    }
+                }
+            ],
             "name": "HHKB",
             "selected": true,
             "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }

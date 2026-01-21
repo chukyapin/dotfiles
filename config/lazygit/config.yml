@@ -1,4 +1,5 @@
 gui:
+  nerdFontsVersion: "6"
   authorColors: {}
   branchColors: {}
   scrollHeight: 2

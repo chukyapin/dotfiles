@@ -37,9 +37,9 @@ vim.filetype.add({
 })
 
 -- Yankした範囲をハイライトさせる
-vim.api.nvim_create_autocmd("TextYankPost", {
-  pattern = "*",
-  callback = function()
-    vim.highlight.on_yank({ higroup = "YankHighlight", timeout = 150 })
-  end,
-})
+-- vim.api.nvim_create_autocmd("TextYankPost", {
+--   pattern = "*",
+--   callback = function()
+--     vim.highlight.on_yank({ higroup = "YankHighlight", timeout = 150 })
+--   end,
+-- })

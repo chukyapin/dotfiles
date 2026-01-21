@@ -39,15 +39,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set({ "n", "i" }, "<space><tab>", "<cmd>Lspsaga code_action<CR>", opts)
 
     -- 次の診断へ移動
-    vim.keymap.set("n", "<A-j>", function()
+    vim.keymap.set("n", "<C-f15>", function()
       vim.diagnostic.jump({ float = false, count = 1 })
     end, opts)
     -- 前の診断へ移動
-    vim.keymap.set("n", "<A-k>", function()
+    vim.keymap.set("n", "<C-f16>", function()
       vim.diagnostic.jump({ float = false, count = -1 })
     end, opts)
-
-    -- 診断をフローティングウィンドウで表示する
     vim.keymap.set("n", "<A-f>", function()
       vim.diagnostic.open_float({
         scope = "cursor",
@@ -65,27 +63,27 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     -- 保存時に自動フォーマット
-    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-    if client.supports_method("textDocument/formatting") then
-      local set_auto_format = function(lsp_name, pattern)
-        if client.name == lsp_name then
-          print(string.format("[%s] Enable auto-format on save", lsp_name))
-          vim.api.nvim_clear_autocmds({ group = augroup })
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            group = augroup,
-            pattern = pattern,
-            callback = function()
-              print("[LSP] " .. client.name .. " format")
-              vim.lsp.buf.format({ buffer = ev.buf, async = false })
-            end,
-          })
-        end
-      end
-
-      set_auto_format("rust_analyzer", { "*.rs" })
-      set_auto_format("denols", { "*.ts", "*.js" })
-      set_auto_format("gopls", { "*.go" })
-    end
+    -- local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+    -- if client.supports_method("textDocument/formatting") then
+    --   local set_auto_format = function(lsp_name, pattern)
+    --     if client.name == lsp_name then
+    --       print(string.format("[%s] Enable auto-format on save", lsp_name))
+    --       vim.api.nvim_clear_autocmds({ group = augroup })
+    --       vim.api.nvim_create_autocmd("BufWritePre", {
+    --         group = augroup,
+    --         pattern = pattern,
+    --         callback = function()
+    --           print("[LSP] " .. client.name .. " format")
+    --           vim.lsp.buf.format({ buffer = ev.buf, async = false })
+    --         end,
+    --       })
+    --     end
+    --   end
+    --
+    --   set_auto_format("rust_analyzer", { "*.rs" })
+    --   set_auto_format("denols", { "*.ts", "*.js" })
+    --   set_auto_format("gopls", { "*.go" })
+    -- end
 
     -- inlay hint
     if client.supports_method("textDocument/inlayHint") then
@@ -95,7 +93,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- 深刻度が高い方を優先して表示
     vim.diagnostic.config({ severity_sort = true })
 
-    local signs = { Error = "●", Warn = "●", Hint = "●", Info = "●" }
+    local signs = { Error = "", Warn = "", Hint = "", Info = "" }
     vim.diagnostic.config({
       signs = {
         text = {
@@ -125,7 +123,8 @@ if not vim.g.vscode then
     "jsonls",
     "lua_ls",
     "pyright",
-    "ruff",
+    -- "basedpyright",
+    -- "ruff",
     "rust_analyzer",
     "sqls",
     "svelte",

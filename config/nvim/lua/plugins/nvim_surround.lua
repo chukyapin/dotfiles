@@ -1,7 +1,7 @@
 return {
   "kylechui/nvim-surround",
   cond = true,
-  ekent = "VeryLazy",
+  event = "VeryLazy",
   opts = {
     surrounds = {
       ["/"] = {

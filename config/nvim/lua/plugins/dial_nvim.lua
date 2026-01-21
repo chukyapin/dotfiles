@@ -18,10 +18,10 @@ return {
         augend.constant.new({ elements = { "&&", "||" }, word = false, cyclic = true }),
         augend.constant.new({ elements = { "==", "!=" }, word = false, cyclic = true }),
         augend.constant.new({ elements = { "let", "const" } }),
-        augend.case.new({
-          types = { "camelCase", "snake_case", "PascalCase", "SCREAMING_SNAKE_CASE" },
-          cyclic = true,
-        }),
+        -- augend.case.new({
+        --   types = { "camelCase", "snake_case", "PascalCase", "SCREAMING_SNAKE_CASE" },
+        --   cyclic = true,
+        -- }),
       },
     })
   end,

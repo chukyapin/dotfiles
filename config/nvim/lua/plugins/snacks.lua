@@ -301,7 +301,7 @@ return {
             ["<C-w>t"] = { "tab", mode = { "i", "n" } },
             ["<C-j>"] = { "history_forward", mode = { "i", "n" } },
             ["<C-k>"] = { "history_back", mode = { "i", "n" } },
-            ["<C-h>"] = { "toggle_help_input", mode = { "i", "n" } },
+            -- ["<C-h>"] = { "toggle_help_input", mode = { "i", "n" } },
             ["<D-CR>"] = { "insert_filename", mode = { "i", "n" } },
             -- TODO: 正規表現切り替えやignoredはなぜか効かない...
           },
@@ -319,7 +319,7 @@ return {
           box = "vertical",
           border = "rounded",
           title = "{title} {live} {flags}",
-          title_pos = "center",
+          Title_pos = "center",
           { win = "preview", title = "{preview}", height = 0.5, border = "bottom" },
           { win = "input", height = 1, border = "bottom" },
           { win = "list", border = "none" },

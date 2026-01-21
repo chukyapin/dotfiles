@@ -117,6 +117,14 @@ show_preview = true
 deduplicate = "full"
 filter = "exit_code == 0"
 
+
+store_failed = false
+
+history_filter = [
+  "^rm ",
+  "^a ",
+  "^z ",
+]
 ## Defaults to true. This matches history against a set of default regex, and will not save it if we get a match. Defaults include
 ## 1. AWS key id
 ## 2. Github pat (old and new)
