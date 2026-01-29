@@ -6,14 +6,9 @@ return {
     "rcarriga/nvim-notify",
   },
   keys = {
-    { "<C-j>n", ":NoicePick<CR>", silent = true },
+    { "<C-y>n", ":NoicePick<CR>", silent = true },
   },
   opts = {
-    lsp = {
-      signature = {
-        enabled = true,
-      },
-    },
     presets = {
       command_palette = true,
       inc_rename = true,

@@ -1,5 +1,14 @@
--- Python ファイルではタブ幅 = インデント幅 = 4 に固定
-vim.opt_local.tabstop = 4 -- タブ文字を画面上で幅4として表示
-vim.opt_local.shiftwidth = 4 -- 自動インデント等の幅を4に
-vim.opt_local.softtabstop = 4 -- <Tab>, <BS> での幅も4に
-vim.opt_local.expandtab = true -- <Tab> でスペースを挿入
+local map = vim.keymap.set
+local opts = { buffer = 0, noremap = true, silent = true }
+
+local tabwidth = 4
+vim.opt_local.expandtab = true
+vim.opt_local.tabstop = tabwidth
+vim.opt_local.softtabstop = tabwidth
+vim.opt_local.shiftwidth = tabwidth
+
+-- " F5: 今開いているファイルを Python で実行
+map("n", "F5", ':w<CR>:!python3 " % "<CR>', opts)
+
+-- " F6: 仮想環境の Python で実行（venv 下を想定）
+map("n", "<F6>", ':w<CR>:!./venv/bin/python " % "<CR>', opts)

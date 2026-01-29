@@ -3,8 +3,6 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local M = {}
 
-M.mod = wezterm.target_triple:find("windows") and "SHIFT|CTRL" or "SHIFT|SUPER"
-
 M.smart_split = wezterm.action_callback(function(window, pane)
 	local dim = pane:get_dimensions()
 	if dim.pixel_height > dim.pixel_width then
@@ -18,48 +16,48 @@ function M.setup(config)
 	config.disable_default_key_bindings = true
 	config.keys = {
 		-- Scrollback
-		-- { mods = "CTRL|SHIFT", key = "k", action = act.ScrollByPage(-0.5) },
-		-- { mods = "CTRL|SHIFT", key = "j", action = act.ScrollByPage(0.5) },
-		{ mods = "ALT", key = "k", action = act.ScrollByPage(-0.5) },
-		{ mods = "ALT", key = "j", action = act.ScrollByPage(0.5) },
+		{ mods = "SHIFT|SUPER", key = "k", action = act.ScrollByPage(-0.5) },
+		{ mods = "SHIFT|SUPER", key = "j", action = act.ScrollByPage(0.5) },
+		-- { mods = "ALT", key = "k", action = act.ScrollByPage(-0.5) },
+		-- { mods = "ALT", key = "j", action = act.ScrollByPage(0.5) },
+
 		-- New Tab
 		{ mods = "SHIFT|CTRL", key = "t", action = act.SpawnTab("CurrentPaneDomain") },
 		-- Splits
-		{ mods = "SHIFT|CTRL", key = "Enter", action = M.smart_split },
-		{ mods = "ALT", key = "'", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-		{ mods = "ALT", key = ";", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-		{ mods = "SHIFT|CTRL", key = "(", action = act.DecreaseFontSize },
-		{ mods = "SHIFT|CTRL", key = ")", action = act.IncreaseFontSize },
+		{ mods = "SHIFT|SUPER", key = "Enter", action = M.smart_split },
+		{ mods = "SHIFT|SUPER", key = "'", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+		{ mods = "SHIFT|SUPER", key = ";", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+		{ mods = "SHIFT|SUPER", key = "(", action = act.DecreaseFontSize },
 		-- Acivate Tabs
-		{ mods = "ALT", key = ".", action = act({ ActivateTabRelative = 1 }) },
-		{ mods = "ALT", key = ",", action = act({ ActivateTabRelative = -1 }) },
-		{ mods = "SHIFT|CTRL", key = "R", action = act.RotatePanes("Clockwise") },
+		{ mods = "SHIFT|SUPER", key = ">", action = act({ ActivateTabRelative = 1 }) },
+		{ mods = "SHIFT|SUPER", key = "<", action = act({ ActivateTabRelative = -1 }) },
+		{ mods = "SHIFT|SUPER", key = "R", action = act.RotatePanes("Clockwise") },
 		-- show the pane selection mode, but have it swap the active and selected panes
-		{ mods = "SHIFT|CTRL", key = "S", action = act.PaneSelect({}) },
-		-- Clipboard
-		-- { mods = "SHIFT|CTRL", key = "c", action = act.CopyTo("Clipboard") },
+		{ mods = "SHIFT|SUPER", key = "S", action = act.PaneSelect({}) },
+		-- Clipboarda
+		-- { mods = "SHIFT|SUPER", key = "c", action = act.CopyTo("Clipboard") },
 		{ mods = "CMD", key = "c", action = act.CopyTo("Clipboard") },
-		-- { mods = "SHIFT|CTRL", key = "f", action = act.QuickSelect },
+		{ mods = "SHIFT|CTRL", key = "f", action = act.QuickSelect },
 		{ mods = "SHIFT|CTRL", key = "c", action = act.ActivateCopyMode },
-		{ mods = "SHIFT|CTRL", key = "f", action = act.Search("CurrentSelectionOrEmptyString") },
+		{ mods = "SHIFT|SUPER", key = "f", action = act.Search("CurrentSelectionOrEmptyString") },
 		{ mods = "CMD", key = "v", action = act.PasteFrom("Clipboard") },
 		{
-			mods = "SHIFT|CTRL",
+			mods = "SHIFT|SUPER",
 			key = "u",
 			action = act.CharSelect({ copy_on_select = true, copy_to = "ClipboardAndPrimarySelection" }),
 		},
 		-- { mods = "SHIFT|CTRL", key = "v", action = act.ShowDebugOverlay },
-		{ mods = "SHIFT|CTRL", key = "m", action = act.TogglePaneZoomState },
-		{ mods = "SHIFT|CTRL", key = "p", action = act.ActivateCommandPalette },
-		{ mods = "SHIFT|CTRL", key = "d", action = act.ShowDebugOverlay },
+		{ mods = "SHIFT|SUPER", key = "m", action = act.TogglePaneZoomState },
+		{ mods = "SHIFT|SUPER", key = "p", action = act.ActivateCommandPalette },
+		{ mods = "SHIFT|SUPER", key = "d", action = act.ShowDebugOverlay },
 		M.split_nav("resize", "CTRL", "LeftArrow", "Right"),
 		M.split_nav("resize", "CTRL", "RightArrow", "Left"),
 		M.split_nav("resize", "CTRL", "UpArrow", "Up"),
 		M.split_nav("resize", "CTRL", "DownArrow", "Down"),
-		M.split_nav("move", "ALT", "h", "Left"),
-		M.split_nav("move", "ALT", "j", "Down"),
-		M.split_nav("move", "ALT", "k", "Up"),
-		M.split_nav("move", "ALT", "l", "Right"),
+		M.split_nav("move", "CTRL", "h", "Left"),
+		M.split_nav("move", "CTRL", "j", "Down"),
+		M.split_nav("move", "CTRL", "k", "Up"),
+		M.split_nav("move", "CTRL", "l", "Right"),
 	}
 end
 

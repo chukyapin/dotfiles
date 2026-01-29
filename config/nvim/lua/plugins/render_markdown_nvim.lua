@@ -4,9 +4,9 @@ return {
     "nvim-treesitter/nvim-treesitter",
     "nvim-tree/nvim-web-devicons",
   },
-  ft = { "markdown", "markdown.mdx", "codecompanion" },
+  ft = { "markdown", "markdown.mdx" },
   opts = {
-    file_types = { "markdown", "codecompanion" },
+    file_types = { "markdown" },
     heading = {
       position = "inline",
       sign = false,
@@ -39,7 +39,6 @@ return {
         category = "custom",
       },
     },
-    fat_tables = false,
     dash = {
       icon = " ",
     },
@@ -95,21 +94,24 @@ return {
       },
     },
   },
-  -- init = function()
-  --   vim.api.nvim_create_autocmd("ColorScheme", {
-  --     callback = function()
-  --       vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = "#070707" })
-  --       vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#454545" })
-  --       vim.api.nvim_set_hl(0, "RenderMarkdownDash", { fg = "lightgray" })
-  --       -- vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { fg = "#efef33", bg = "#3d59a1" })
-  --       vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { fg = "#efef33", bg = "#000080" })
-  --       vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { fg = "#FFC777", bg = nil })
-  --       vim.api.nvim_set_hl(0, "RenderMarkdownImageLinkIcon", { fg = "#efef33" })
-  --       vim.api.nvim_set_hl(0, "RenderMarkdownAtlassianLinkIcon", { fg = "#00b8d9" })
-  --       vim.api.nvim_set_hl(0, "RenderMarkdownSlackLinkIcon", { fg = "#e01e5a" })
-  --       vim.api.nvim_set_hl(0, "RenderMarkdownCodeInline", { fg = "#22c55e", bg = "#224422" })
-  --       vim.api.nvim_set_hl(0, "RenderMarkdownFixme", { bg = "goldenrod", fg = "white", bold = true })
-  --     end,
-  -- })
-  -- end,
+  init = function()
+    vim.api.nvim_create_autocmd("ColorScheme", {
+      callback = function()
+        vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = "#070707" })
+        vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#454545" })
+        vim.api.nvim_set_hl(0, "RenderMarkdownDash", { fg = "lightgray" })
+        vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { fg = "#efef33", bg = "#3d59a1" })
+        vim.api.nvim_set_hl(0, "RenderMarkdownH2Bg", { fg = "#FF9966", bg = "#665050" })
+        vim.api.nvim_set_hl(0, "RenderMarkdownH3Bg", { fg = "#FFC777", bg = "#58535f" })
+        vim.api.nvim_set_hl(0, "RenderMarkdownH4Bg", { fg = "#FFC777", bg = "#493e4a" })
+        vim.api.nvim_set_hl(0, "RenderMarkdownH5Bg", { fg = "#FFC777", bg = nil })
+        vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { fg = "#FFC777", bg = nil })
+        vim.api.nvim_set_hl(0, "RenderMarkdownImageLinkIcon", { fg = "#efef33" })
+        vim.api.nvim_set_hl(0, "RenderMarkdownAtlassianLinkIcon", { fg = "#00b8d9" })
+        vim.api.nvim_set_hl(0, "RenderMarkdownSlackLinkIcon", { fg = "#e01e5a" })
+        vim.api.nvim_set_hl(0, "RenderMarkdownCodeInline", { fg = "#22c55e", bg = "#224422" })
+        vim.api.nvim_set_hl(0, "RenderMarkdownFixme", { bg = "goldenrod", fg = "white", bold = true })
+      end,
+    })
+  end,
 }

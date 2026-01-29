@@ -13,9 +13,9 @@ return {
   ---@type YaziConfig | {}
   opts = {
     keymaps = {
-      open_file_in_vertical_split = "<C-CR>",
+      open_file_in_vertical_split = "|",
 
-      open_file_in_horizontal_split = "<C-s>",
+      -- open_file_in_horizontal_split = "<C-s>",
       send_to_quickfix_list = "<c-s-o>",
       cycle_open_buffers = "<M-6>", -- ignore
     },

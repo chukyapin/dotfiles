@@ -3,7 +3,7 @@ return {
   cmd = "Trouble",
   keys = {
     {
-      "<C-j>h",
+      "<C-y>h",
       "<cmd>Trouble lsp_references<cr>",
     },
   },

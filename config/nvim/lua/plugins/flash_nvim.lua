@@ -7,9 +7,7 @@ return {
       distance = false,
     },
     modes = {
-      search = {
-        enabled = false,
-      },
+      search = { enabled = false },
       char = {
         enabled = false,
       },

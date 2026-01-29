@@ -1,17 +1,46 @@
+-- dashboard で picker を開いて移動する際に発生するチラツキを防止するlocal preventFlicker = function(handler)
+local function restoreUi()
+  local function restoreUi()
+    if vim.api.nvim_tabpage_is_valid(vim.api.nvim_get_current_tabpage()) then
+      vim.cmd([[:NoNeckPain]])
+    end
+    vim.cmd([[:BarbarEnable]])
+  end
+
+  local function waitForPickerClose()
+    vim.defer_fn(function()
+      local ok, pickers = pcall(Snacks.picker.get, { tab = true })
+      if ok and pickers and #pickers > 0 then
+        waitForPickerClose()
+        return
+      end
+      restoreUi()
+    end, 50)
+  end
+
+  vim.schedule(function()
+    Snacks.bufdelete()
+    vim.schedule(function()
+      handler()
+      waitForPickerClose()
+    end)
+  end)
+end
+
 local grepCurrentVueTag = function()
   if vim.fn.expand("%:e") ~= "vue" then
-    vim.notify("vueファイルでのみ実行できます", vim.log.levels.warn)
+    vim.notify("Vueファイルでのみ実行できます", vim.log.levels.WARN)
     return
   end
 
   local name = vim.fn.expand("%:t:r")
   if name == "" then
-    vim.notify("ファイル名を取得できません", vim.log.levels.warn)
+    vim.notify("ファイル名を取得できません", vim.log.levels.WARN)
     return
   end
 
   local pattern = string.format("</?%s(\\s|/|>|$)", name)
-  snacks.picker.grep({
+  Snacks.picker.grep({
     search = pattern,
     live = false,
     need_search = false,
@@ -21,50 +50,53 @@ end
 
 local git_recent = require("snacks.git_recent")
 
---     {
---       "<c-j><space>f",
---       mode = { "n", "i" },
---       function()
---         local curdir = vim.bo.filetype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%:p:h")
---         snacks.picker.files({ dirs = { curdir } })
---       end,
---       silent = true
---     },
---     { "<c-j>e", mode = { "n", "i" }, function()
---       git_recent.picker({max_commit_count = 30})
---     end, silent = true },
---     { "<c-j>r", mode = { "n", "i" }, function() snacks.picker.recent() end, silent = true },
---     {
---       "<c-j><space>g",
---       mode = { "n", "i" },
---       function()
---         local curdir = vim.bo.filetype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%:p:h")
---         snacks.picker.grep({ dirs = { curdir } })
---       end,
---       silent = true
---     },
---     {
---       "<c-j>v",
---       mode = { "n", "i" },
---       grepcurrentvuetag,
---       silent = true,
---     },
-
 return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
-	-- stylua: ignore start
+  -- stylua: ignore start
 	keys = {
-		{ "<c-j>k", function() Snacks.picker.pickers() end, silent = true },
-		{ "<c-j>e", function() Snacks.picker.explorer({ layout = "sidebar" }) end, silent = true },
---     { "<c-j>t", mode = { "n", "i" }, function() snacks.picker.explorer() end, silent = true },
-		{ "<c-j>s", function() Snacks.picker.smart() end, silent = true },
-		{ "<c-j>f", function() Snacks.picker.files() end, silent = true, desc = "find files" },
-		{ "<c-j>g", function() Snacks.picker.grep() end, desc = "grep", "silen = ture" },
-		{ "<c-j>l", function() Snacks.picker.lines() end, desc = "lines", silent = true },
+		{ "<space>q", function() Snacks.bufdelete() end, silent = true },
+		{ "<C-y>k", function() Snacks.picker.pickers() end, silent = true },
+		{ "<C-y>e", function() Snacks.picker.explorer({ layout = "sidebar" }) end, silent = true },
+		{ "<C-y>s", function() Snacks.picker.smart() end, silent = true },
+		{ "<C-y>f", function() Snacks.picker.files() end, silent = true, desc = "find files" },
+		{ "<C-y>g", function() Snacks.picker.grep() end, desc = "grep", silen = true },
+		{ "<C-y>l", function() Snacks.picker.lines() end, desc = "lines", silent = true },
+
+    {
+      "<C-y><Space>f",
+      mode = { "n", "i" },
+      function()
+        local curdir = vim.bo.filetype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%:p:h")
+        Snacks.picker.files({ dirs = { curdir } })
+      end,
+      silent = true
+    },
+
+    -- { "<C-y>e", mode = { "n", "i" }, function()
+    --   git_recent.picker({max_commit_count = 30})
+    -- end, silent = true },
+    { "<C-y>r", mode = { "n", "i" }, function() Snacks.picker.recent() end, silent = true },
+    { "<C-y>t", mode = { "n", "i" }, function() Snacks.picker.explorer() end, silent = true },
+    { "<C-y>g", mode = { "n", "i" }, function() Snacks.picker.grep() end, silent = true },
+    {
+      "<C-y><Space>g",
+      mode = { "n", "i" },
+      function()
+        local curdir = vim.bo.filetype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%:p:h")
+        Snacks.picker.grep({ dirs = { curdir } })
+      end,
+      silent = true
+    },
+    {
+      "<C-y>v",
+      mode = { "n", "i" },
+      grepCurrentVueTag,
+      silent = true,
+    },
 		{
-			"<C-j>b",
+			"<C-y>b",
 			function()
 				Snacks.picker.buffers({
 					-- I always want my buffers picker to start in normal mode
@@ -83,7 +115,7 @@ return {
 								["d"] = "bufdelete",
 							},
 						},
-						list = { keys = { ["d"] = "bufdelete" } },
+						list = { keys = { ["d"] = "bufdelete", silent = true } },
 					},
 					-- In case you want to override the layout for this keymap
 					layout = "default",
@@ -92,7 +124,7 @@ return {
 			desc = "[P]Snacks picker buffers",
 		},
 		{
-			"<C-j>G",
+			"<C-y>G",
 			mode = { "n", "i" },
 			function()
 				local curdir = vim.bo.filetpickersype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%::h")
@@ -107,16 +139,14 @@ return {
 		{ "'l", function() Snacks.picker.git_log_line() end,                            silent = true },
     { "'d", function() Snacks.picker.git_diff() end, silent = true },
     { "'f", function() Snacks.picker.git_log_file() end, silent = true },
-
-    -- { "<C-j>o", mode = { "n", "i" }, function() Snacks.picker.lsp_workspace_symbols() end, silent = true },
-    -- { "<C-j>j", mode = { "n", "i" }, function() Snacks.picker.lsp_symbols() end, silent = true },
-
+    { "<C-y>o", mode = { "n", "i" }, function() Snacks.picker.lsp_workspace_symbols() end, silent = true },
+    { "<C-y>j", mode = { "n", "i" }, function() Snacks.picker.lsp_symbols() end, silent = true },
 		-- { "<C-/>", mode = { "n", "i" }, function() Snacks.terminal() end,                                       desc = "Toggle Terminal" },
 		-- { "<C-j>:", mode = { "n", "i" }, function() Snacks.picker.command_history() end, silent = true },
 		-- { "<C-j>p", mode = { "n", "i" }, function() Snacks.picker.projects() end,        silent = true },
 		-- --- @diagnostic disable-next-line: undefined-field todo_commentsはsnacks以外に定義があるため無視
 		-- { "<C-j>m", mode = { "n", "i" }, function() Snacks.picker.todo_comments() end,   silent = true },
-	},
+   },
   -- stylua: ignore end
   ---@type snacks.Config
   opts = {
@@ -127,7 +157,9 @@ return {
       enable = true,
       hidden = true,
     },
-    indent = { enabled = true },
+    indent = {
+      enabled = false,
+    },
     image = {
       force = false,
       enabled = true,
@@ -141,10 +173,10 @@ return {
           pane = 2,
           section = "terminal",
           cmd = "colorscript -e square",
-          height = 5,
+          height = 4,
           padding = 2,
         },
-        { section = "keys", gap = 1, padding = 1 },
+        { section = "keys", gap = 3, padding = 3 },
         {
           pane = 2,
           icon = " ",
@@ -158,17 +190,17 @@ return {
         function()
           local in_git = Snacks.git.get_root() ~= nil
           local cmds = {
-            -- {
-            --   title = "Notifications",
-            -- cmd = "gh notify -s -a -n5",
-            --   action = function()
-            --     vim.ui.open("https://github.com/notifications")
-            --   end,
-            --   key = "n",
-            --   icon = " ",
-            --   height = 5,
-            --   enabled = true,
-            -- },
+            {
+              title = "Notifications",
+              cmd = "gh notify -s -a -n5",
+              action = function()
+                vim.ui.open("https://github.com/notifications")
+              end,
+              key = "n",
+              icon = " ",
+              height = 3,
+              enabled = true,
+            },
             {
               title = "Open Issues",
               cmd = "gh issue list -L 3",
@@ -177,7 +209,7 @@ return {
                 vim.fn.jobstart("gh issue list --web", { detach = true })
               end,
               icon = " ",
-              height = 7,
+              height = 5,
             },
             {
               icon = " ",
@@ -187,13 +219,13 @@ return {
               action = function()
                 vim.fn.jobstart("gh pr list --web", { detach = true })
               end,
-              height = 7,
+              height = 5,
             },
             {
               icon = " ",
               title = "Git Status",
               cmd = "git --no-pager diff --stat -B -M -C",
-              height = 10,
+              height = 7,
             },
           }
           return vim.tbl_map(function(cmd)
@@ -278,7 +310,7 @@ return {
                 --                 ["<c-]>"] = { "toggle_live", mode = { "i", "n" } },
                 ["<C-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
                 ["<C-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
-                ["<C-CR>"] = { "edit_vsplit", mode = { "i", "n" } },
+                ["|"] = { "edit_vsplit", mode = { "i", "n" } },
                 ["<C-w>t"] = { "tab", mode = { "i", "n" } },
                 -- TODO: そのままoil.nvimで対象を開く
                 -- ["<C-o>"] = { mode = { "i", "n" }, },
@@ -297,7 +329,7 @@ return {
             ["<C-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
             ["<C-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
             ["<C-]>"] = { "toggle_live", mode = { "i", "n" } },
-            ["<C-CR>"] = { "edit_vsplit", mode = { "i", "n" } },
+            ["|"] = { "edit_vsplit", mode = { "i", "n" } },
             ["<C-w>t"] = { "tab", mode = { "i", "n" } },
             ["<C-j>"] = { "history_forward", mode = { "i", "n" } },
             ["<C-k>"] = { "history_back", mode = { "i", "n" } },
@@ -344,7 +376,6 @@ return {
       callback = function()
         vim.api.nvim_set_hl(0, "SnacksPickerDir", { link = "LineNr" })
         vim.api.nvim_set_hl(0, "SnacksDashboardHeader", { fg = "#ba55d3" })
-        -- vim.api.nvim_set_hl(0, "SnacksDashboardHeader", { fg = ":#000000" })
         git_recent.setup_highlights()
       end,
     })

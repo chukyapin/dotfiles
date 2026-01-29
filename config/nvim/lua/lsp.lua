@@ -12,29 +12,31 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     local opts = { buffer = ev.buf }
     -- 定義に移動 (Lspsaga goto_definition は期待しない定義に飛んでしまうことがある)
-    vim.keymap.set("n", "<C-'>", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "v<C-'>", function()
+    vim.keymap.set("n", "<C-]>", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "v<C-]>", function()
       vim.cmd([[ vsplit ]])
       vim.lsp.buf.definition()
     end, opts)
-    vim.keymap.set("n", "s<C-'>", function()
+    vim.keymap.set("n", "s<C-]>", function()
       vim.cmd([[ split ]])
       vim.lsp.buf.definition()
     end, opts)
     -- 定義をホバー
+    -- vim.keymap.set("n", "<A-s>", "<cmd>Lspsaga hover_doc<CR>", opts)
     vim.keymap.set("n", "<A-s>", "<cmd>Lspsaga hover_doc<CR>", opts)
     -- 実装へ移動
-    vim.keymap.set("n", "<C-j>i", vim.lsp.buf.implementation, opts)
+    vim.keymap.set("n", "<C-y>i", vim.lsp.buf.implementation, opts)
+    -- vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
     -- 実装をホバー
     vim.keymap.set("n", "<A-d>", "<cmd>Lspsaga peek_definition<CR>", opts)
     -- 型の実装をホバー
     vim.keymap.set("n", "<A-i>", "<cmd>Lspsaga peek_type_definition<CR>", opts)
     -- 呼び出し元の表示
-    vim.keymap.set("n", "<C-j>u", "<cmd>Lspsaga finder ref<CR>", opts)
+    vim.keymap.set("n", "<C-y>u", "<cmd>Lspsaga finder ref<CR>", opts)
     -- リネーム
     vim.keymap.set({ "n", "i" }, "<S-A-r>", "<cmd>Lspsaga rename<CR>", opts)
     -- ファイルリネーム
-    vim.keymap.set("n", "<A-j>2", vim.lsp.buf.rename, opts)
+    vim.keymap.set("n", "<C-S>r", vim.lsp.buf.rename, opts)
     -- Code action
     vim.keymap.set({ "n", "i" }, "<space><tab>", "<cmd>Lspsaga code_action<CR>", opts)
 
@@ -49,8 +51,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<A-f>", function()
       vim.diagnostic.open_float({
         scope = "cursor",
-        focusable = true,
-        border = "rounded",
       })
     end, opts)
 
@@ -61,29 +61,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     if client == nil then
       return
     end
-
-    -- 保存時に自動フォーマット
-    -- local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-    -- if client.supports_method("textDocument/formatting") then
-    --   local set_auto_format = function(lsp_name, pattern)
-    --     if client.name == lsp_name then
-    --       print(string.format("[%s] Enable auto-format on save", lsp_name))
-    --       vim.api.nvim_clear_autocmds({ group = augroup })
-    --       vim.api.nvim_create_autocmd("BufWritePre", {
-    --         group = augroup,
-    --         pattern = pattern,
-    --         callback = function()
-    --           print("[LSP] " .. client.name .. " format")
-    --           vim.lsp.buf.format({ buffer = ev.buf, async = false })
-    --         end,
-    --       })
-    --     end
-    --   end
-    --
-    --   set_auto_format("rust_analyzer", { "*.rs" })
-    --   set_auto_format("denols", { "*.ts", "*.js" })
-    --   set_auto_format("gopls", { "*.go" })
-    -- end
 
     -- inlay hint
     if client.supports_method("textDocument/inlayHint") then
@@ -106,7 +83,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
   end,
 })
-
 if not vim.g.vscode then
   vim.lsp.enable({
     "bashls",
@@ -116,16 +92,17 @@ if not vim.g.vscode then
     "denols",
     "efm",
     "emmet_language_server",
-    "esint",
+    "eslint",
     "golangci_lint_ls",
     "gopls",
     "html",
     "jsonls",
     "lua_ls",
+    "oxfmt",
     "pyright",
     -- "basedpyright",
-    -- "ruff",
-    "rust_analyzer",
+    "ruff",
+    "rust-analyzer",
     "sqls",
     "svelte",
     "tailwindcss",

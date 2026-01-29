@@ -25,6 +25,7 @@ require("lazy").setup({
     { import = "plugins" },
   },
   diff = { cmd = "terminal_git" },
+  rocks = { enable = false, hererocks = false },
   change_detection = {
     notify = false,
   },
