@@ -87,7 +87,7 @@ if not vim.g.vscode then
   vim.lsp.enable({
     "bashls",
     "biome",
-    "copilot_language_server",
+    "copilot-language-server",
     "cssls",
     "denols",
     "efm",
@@ -102,7 +102,6 @@ if not vim.g.vscode then
     "pyright",
     -- "basedpyright",
     "ruff",
-    "rust-analyzer",
     "sqls",
     "svelte",
     "tailwindcss",
