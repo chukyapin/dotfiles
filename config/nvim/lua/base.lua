@@ -20,8 +20,6 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 0
 -- タブの代わりにスペースを挿入する
 vim.opt.expandtab = true
--- 行末の1文字先までカーソルを移動できるように
-vim.opt.virtualedit = "onemore"
 -- 検索文字列が小文字の場合は大文字小文字を区別なく検索する
 vim.opt.ignorecase = true
 -- 検索時に大文字を含んでいたら大/小を区別

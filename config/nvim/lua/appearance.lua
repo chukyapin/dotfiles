@@ -2,8 +2,8 @@ vim.cmd("colorscheme solarized-osaka")
 
 vim.opt.encoding = "utf-8"
 
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.number = true -- Show absolute line numbers
+vim.opt.relativenumber = true -- Show relative line numbers
 vim.opt.cursorline = true
 vim.opt.pumheight = 10
 vim.opt.pumblend = 10

@@ -9,7 +9,7 @@ require("keys").setup(config)
 
 config.automatically_reload_config = true
 config.window_close_confirmation = "NeverPrompt" -- AlwaysPrompt or NeverPrompt
-config.window_background_opacity = 0.50
+config.window_background_opacity = 0.80
 config.macos_window_background_blur = 90
 config.audible_bell = "Disabled"
 
@@ -29,6 +29,7 @@ config.term = "xterm-256color"
 -- Fonts
 config.font_size = 15
 config.font = wezterm.font({ family = "Fira Code" })
+-- config.font = wezterm.font({ family = "CaskaydiaCove Nerd Font" })
 config.bold_brightens_ansi_colors = true
 config.font_rules = {
 	{

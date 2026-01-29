@@ -62,8 +62,11 @@ return {
 		{ "<C-y>s", function() Snacks.picker.smart() end, silent = true },
 		{ "<C-y>f", function() Snacks.picker.files() end, silent = true, desc = "find files" },
 		{ "<C-y>g", function() Snacks.picker.grep() end, desc = "grep", silen = true },
+    { "<C-y>w", function() Snacks.picker.grep_word() end, desc = "Word", mode = { "n", "x" } },
 		{ "<C-y>l", function() Snacks.picker.lines() end, desc = "lines", silent = true },
-
+    { "<C-y>o", function() Snacks.picker.lsp_workspace_symbols() end, desc = "workspace_symbbols" },
+    -- { "<C-y>o", function() Snacks.picker.lsp_workspace_symbols() end },
+    { "<C-y>j", function() Snacks.picker.lsp_symbols() end, desc = "document_symbols" },
     {
       "<C-y><Space>f",
       mode = { "n", "i" },
@@ -78,7 +81,7 @@ return {
     --   git_recent.picker({max_commit_count = 30})
     -- end, silent = true },
     { "<C-y>r", mode = { "n", "i" }, function() Snacks.picker.recent() end, silent = true },
-    { "<C-y>t", mode = { "n", "i" }, function() Snacks.picker.explorer() end, silent = true },
+    -- { "<C-y>t", mode = { "n", "i" }, function() Snacks.picker.explorer() end, silent = true },
     { "<C-y>g", mode = { "n", "i" }, function() Snacks.picker.grep() end, silent = true },
     {
       "<C-y><Space>g",
@@ -95,43 +98,49 @@ return {
       grepCurrentVueTag,
       silent = true,
     },
-		{
-			"<C-y>b",
-			function()
-				Snacks.picker.buffers({
-					-- I always want my buffers picker to start in normal mode
-					on_show = function()
-						vim.cmd.stopinsert()
-          end,
-					finder = "buffers",
-					format = "buffer",
-					open = false,
-					unloaded = true,
-					current = true,
-					sort_lastused = true,
-					win = {
-						input = {
-							keys = {
-								["d"] = "bufdelete",
-							},
-						},
-						list = { keys = { ["d"] = "bufdelete", silent = true } },
-					},
+		-- {
+		-- 	"<C-y>b",
+		-- 	function()
+		-- 		Snacks.picker.buffers()
+				-- Snacks.picker.buffers({
+		-- 			-- I always want my buffers picker to start in normal mode
+		-- 			on_show = function()
+		-- 				vim.cmd.stopinsert()
+		--         end,
+		-- 			finder = "buffers",
+		-- 			format = "buffer",
+		-- 			open = false,
+		-- 			unloaded = true,
+		-- 			current = true,
+		-- 			sort_lastused = true,
+					-- win = {
+					-- 	input = {
+					-- 		keys = {
+					-- 			["d"] = "bufdelete",
+					-- 		},
+					-- 	},
+					-- 	list = { keys = { ["d"] = "bufdelete", silent = true } },
+					-- },
 					-- In case you want to override the layout for this keymap
-					layout = "default",
-				})
-			end,
-			desc = "[P]Snacks picker buffers",
-		},
-		{
-			"<C-y>G",
-			mode = { "n", "i" },
-			function()
-				local curdir = vim.bo.filetpickersype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%::h")
-				Snacks.picker.grep({ dirs = { curdir } })
-			end,
-			silent = true
-		},
+				-- 	layout = "default",
+			-- 	})
+			-- end,
+			-- desc = "[P]Snacks picker buffers",
+		-- },
+
+ {
+      "<C-y>b",
+      function()
+        Snacks.picker.buffers({
+          win = {
+            input = { keys = { ["d"] = "bufdelete", ["<C-d>"] = { "bufdelete", mode = { "n", "i" } } } },
+            list = { keys = { ["d"] = "bufdelete" } },
+          },
+        })
+      end,
+      desc = "Switch Buffer",
+    },
+
 		{ "'g", function() Snacks.lazygit() end, desc = "Lazygit" },
 		{ ",,", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
 		{ "'b", function() Snacks.picker.git_branches({ layout = "select" }) end,       desc = "Branches" },
@@ -139,13 +148,14 @@ return {
 		{ "'l", function() Snacks.picker.git_log_line() end,                            silent = true },
     { "'d", function() Snacks.picker.git_diff() end, silent = true },
     { "'f", function() Snacks.picker.git_log_file() end, silent = true },
-    { "<C-y>o", mode = { "n", "i" }, function() Snacks.picker.lsp_workspace_symbols() end, silent = true },
-    { "<C-y>j", mode = { "n", "i" }, function() Snacks.picker.lsp_symbols() end, silent = true },
 		-- { "<C-/>", mode = { "n", "i" }, function() Snacks.terminal() end,                                       desc = "Toggle Terminal" },
 		-- { "<C-j>:", mode = { "n", "i" }, function() Snacks.picker.command_history() end, silent = true },
 		-- { "<C-j>p", mode = { "n", "i" }, function() Snacks.picker.projects() end,        silent = true },
 		-- --- @diagnostic disable-next-line: undefined-field todo_commentsはsnacks以外に定義があるため無視
-		-- { "<C-j>m", mode = { "n", "i" }, function() Snacks.picker.todo_comments() end,   silent = true },
+		-- { "<C-j>m", mode = { "n", "i" }, () Snacks.picker.todo_comments() end,   silent = true },
+    { "wm", function() Snacks.zen.zoom() end, desc = "Maximize" },
+    { "<space>n", function() Snacks.notifier.show_history() end, desc = "Notification History" },
+    { "<space>nd", function() Snacks.notifier.hide() end, desc = "Dismiss All" },
    },
   -- stylua: ignore end
   ---@type snacks.Config

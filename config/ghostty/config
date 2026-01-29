@@ -36,7 +36,7 @@ keybind = super+minus=unbind
 
 # aの左キーからのショートカット
 keybind = ctrl+t=new_tab
-keybind = ctrl+n=new_window
+# keybind = ctrl+n=new_window
 keybind = f2=prompt_surface_title
 
 # ctrl+shift+w (;q leader)

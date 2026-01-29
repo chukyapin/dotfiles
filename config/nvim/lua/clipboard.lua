@@ -1,1 +1,1 @@
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = "unnamedplus" -- Use system clipboard for all yank/paste opreations

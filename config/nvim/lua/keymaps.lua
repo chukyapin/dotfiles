@@ -45,8 +45,8 @@ map("x", "k", function()
 end, { expr = true })
 
 -- Increment / Decrement
-map("n", "+", "<C-a>", opts)
-map("n", "-", "<C-x>", opts)
+-- map("n", "+", "<C-a>", opts)
+-- map("n", "-", "<C-x>", opts)
 
 -- Inner words
 map("o", "<space>", "iw")
@@ -60,7 +60,7 @@ map("v", "v", "<C-v>")
 
 --  Split
 map("n", "|", ":vsplit<CR>", opts)
--- map("n", "_", ":split<CR>", opts)
+map("n", "_", ":split<CR>", opts)
 map("n", "<C-w>j", "<C-w>J")
 map("n", "<C-w>l", "<C-w>L")
 

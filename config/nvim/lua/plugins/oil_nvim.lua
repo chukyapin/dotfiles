@@ -8,7 +8,7 @@ return {
     skip_confirm_for_simple_edits = true,
     use_default_keymaps = false,
     keymaps = {
-      ["l"] = "actions.select",
+      ["<CR>"] = "actions.select",
       ["<ESC>"] = { "actions.close", mode = "n" },
       -- ["<S-l>"] = "actions.select",
       ["|"] = { "actions.select", opts = { vertical = true } },
@@ -16,7 +16,7 @@ return {
       ["<C-t>"] = { "actions.select", opts = { tab = true } },
       ["<C-p>"] = "actions.preview",
       ["<C-l>"] = "actions.refresh",
-      ["h"] = { "actions.parent", mode = "n" },
+      ["<TAB>"] = { "actions.parent", mode = "n" },
       ["gh"] = { "actions.open_cwd", mode = "n" },
       ["g?"] = { "actions.show_help", mode = "n" },
       ["gs"] = { "actions.change_sort", mode = "n" },
