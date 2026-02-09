@@ -1,5 +1,5 @@
 return {
-  "L3MON4D3/LuaSnip",
+  "https://github.com/L3MON4D3/LuaSnip",
   lazy = true,
   run = "make install_jsregexp",
   config = function()

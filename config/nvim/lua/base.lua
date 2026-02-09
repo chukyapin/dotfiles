@@ -27,7 +27,7 @@ vim.opt.smartcase = true
 -- 置換時のインクリメンタルプレビューを分割ウィンドウに表示
 vim.opt.inccommand = "split"
 -- スクロールした時 常に下に表示するバッファ行の数
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 100
 -- Split Behavior
 vim.opt.splitright = true -- holizontal splits open berow
 vim.opt.splitbelow = true -- vertical splits open to the right

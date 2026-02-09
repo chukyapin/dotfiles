@@ -1,5 +1,5 @@
 return {
-  "saghen/blink.cmp",
+  "https://github.com/saghen/blink.cmp",
   dependencies = {
     "L3MON4D3/LuaSnip",
     { "saghen/blink.compat", lazy = true, version = "*" },
@@ -84,10 +84,15 @@ return {
   init = function()
     vim.api.nvim_create_autocmd("ColorScheme", {
       callback = function()
-        vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { fg = "#565656" })
-        vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { fg = "#565656" })
-        vim.api.nvim_set_hl(0, "BlinkCmpSignatureBorder", { fg = "#565656" })
-        vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#565656" })
+        vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { fg = "#565656", bg = "NONE" })
+        vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { fg = "#565656", bg = "NONE" })
+        vim.api.nvim_set_hl(0, "BlinkCmpSignatureBorder", { fg = "#565656", bg = "NONE" })
+        vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#565656", bg = "NONE" })
+
+        vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "BlinkCmpDoc", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "BlinkCmpSignature", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "Pmenu", { bg = "NONE" }) -- テーマによって効く場合あり
       end,
     })
   end,

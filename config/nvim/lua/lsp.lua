@@ -23,12 +23,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end, opts)
     -- 定義をホバー
     -- vim.keymap.set("n", "<A-s>", "<cmd>Lspsaga hover_doc<CR>", opts)
-    vim.keymap.set("n", "<A-s>", "<cmd>Lspsaga hover_doc<CR>", opts)
+    vim.keymap.set("n", "<C-S-s>", "<cmd>Lspsaga hover_doc<CR>", opts)
     -- 実装へ移動
     vim.keymap.set("n", "<C-y>i", vim.lsp.buf.implementation, opts)
     -- vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
     -- 実装をホバー
-    vim.keymap.set("n", "<A-d>", "<cmd>Lspsaga peek_definition<CR>", opts)
+    vim.keymap.set("n", "<C-S-d>", "<cmd>Lspsaga peek_definition<CR>", opts)
     -- 型の実装をホバー
     vim.keymap.set("n", "<A-i>", "<cmd>Lspsaga peek_type_definition<CR>", opts)
     -- 呼び出し元の表示
@@ -99,14 +99,14 @@ if not vim.g.vscode then
     "jsonls",
     "lua_ls",
     "oxfmt",
-    "pyright",
-    -- "basedpyright",
+    -- "pyright",
+    "basedpyright",
     "ruff",
     "sqls",
     "svelte",
     "tailwindcss",
     "ty",
-    -- "typst",
+    "typst",
     "tinymist",
     "vtsls",
     "vue_ls",

@@ -1,26 +1,27 @@
 return {
-  "stevearc/oil.nvim",
+  "https://github.com/stevearc/oil.nvim",
   keys = {
-    { "<Space>o", ":Oil --float<CR>", silent = true },
+    -- { "<Space>o", ":Oil --float<CR>", silent = true },
+    { "<Space>o", ":Oil<CR>", silent = true },
   },
   cmd = "Oil",
   opts = {
     skip_confirm_for_simple_edits = true,
     use_default_keymaps = false,
     keymaps = {
-      ["<CR>"] = "actions.select",
-      ["<ESC>"] = { "actions.close", mode = "n" },
+      ["<CR>"] = { "actions.select" }, -- Ctrl + m
+      ["<ESC>"] = { "actions.close" },
       -- ["<S-l>"] = "actions.select",
       ["|"] = { "actions.select", opts = { vertical = true } },
-      -- ["<C-s>"] = { "actions.select", opts = { horizontal = true } },
+      ["_"] = { "actions.select", opts = { horizontal = true } },
       ["<C-t>"] = { "actions.select", opts = { tab = true } },
       ["<C-p>"] = "actions.preview",
       ["<C-l>"] = "actions.refresh",
-      ["<TAB>"] = { "actions.parent", mode = "n" },
+      ["<TAB>"] = { "actions.parent", mode = "n" }, -- Ctrl + i
       ["gh"] = { "actions.open_cwd", mode = "n" },
       ["g?"] = { "actions.show_help", mode = "n" },
       ["gs"] = { "actions.change_sort", mode = "n" },
-      ["gx"] = "actions.open_external",
+      -- ["gx"] = "actions.open_external",
       ["g."] = { "actions.toggle_hidden", mode = "n" },
       ["gy"] = "actions.yank_entry",
       ["<Space>y"] = {

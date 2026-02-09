@@ -15,6 +15,7 @@ end)
 function M.setup(config)
 	config.disable_default_key_bindings = true
 	config.keys = {
+
 		-- Scrollback
 		{ mods = "SHIFT|SUPER", key = "k", action = act.ScrollByPage(-0.5) },
 		{ mods = "SHIFT|SUPER", key = "j", action = act.ScrollByPage(0.5) },
@@ -23,15 +24,19 @@ function M.setup(config)
 
 		-- New Tab
 		{ mods = "SHIFT|CTRL", key = "t", action = act.SpawnTab("CurrentPaneDomain") },
+
 		-- Splits
 		{ mods = "SHIFT|SUPER", key = "Enter", action = M.smart_split },
 		{ mods = "SHIFT|SUPER", key = "'", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 		{ mods = "SHIFT|SUPER", key = ";", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 		{ mods = "SHIFT|SUPER", key = "(", action = act.DecreaseFontSize },
+		{ mods = "SHIFT|SUPER", key = ")", action = act.IncreaseFontSize },
+
 		-- Acivate Tabs
 		{ mods = "SHIFT|SUPER", key = ">", action = act({ ActivateTabRelative = 1 }) },
 		{ mods = "SHIFT|SUPER", key = "<", action = act({ ActivateTabRelative = -1 }) },
 		{ mods = "SHIFT|SUPER", key = "R", action = act.RotatePanes("Clockwise") },
+
 		-- show the pane selection mode, but have it swap the active and selected panes
 		{ mods = "SHIFT|SUPER", key = "S", action = act.PaneSelect({}) },
 		-- Clipboarda
@@ -47,8 +52,13 @@ function M.setup(config)
 			action = act.CharSelect({ copy_on_select = true, copy_to = "ClipboardAndPrimarySelection" }),
 		},
 		-- { mods = "SHIFT|CTRL", key = "v", action = act.ShowDebugOverlay },
+
+		-- Zoom
 		{ mods = "SHIFT|SUPER", key = "m", action = act.TogglePaneZoomState },
+
+		-- Commandpalette
 		{ mods = "SHIFT|SUPER", key = "p", action = act.ActivateCommandPalette },
+
 		{ mods = "SHIFT|SUPER", key = "d", action = act.ShowDebugOverlay },
 		M.split_nav("resize", "CTRL", "LeftArrow", "Right"),
 		M.split_nav("resize", "CTRL", "RightArrow", "Left"),

@@ -11,6 +11,7 @@ return {
     "lua",
     "typescript",
     "javascript",
+    "yaml",
   },
   opts = {
     render = "virtual",

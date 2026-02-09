@@ -1,5 +1,5 @@
 return {
-  "tpope/vim-repeat",
+  "https://github.com/tpope/vim-repeat",
   cond = true,
   event = "VeryLazy",
 }

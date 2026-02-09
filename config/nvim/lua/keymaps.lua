@@ -61,27 +61,23 @@ map("v", "v", "<C-v>")
 --  Split
 map("n", "|", ":vsplit<CR>", opts)
 map("n", "_", ":split<CR>", opts)
-map("n", "<C-w>j", "<C-w>J")
-map("n", "<C-w>l", "<C-w>L")
 
 -- Move
--- map("n", "<C-h>", "<C-w>h")
--- map("n", "<C-j>", "<C-w>j")
--- map("n", "<C->", "<C-w>k")
--- map("n", "<C-l>", "<C-w>l")
-map("n", "sh", "<C-w>h")
-map("n", "sj", "<C-w>j")
-map("n", "sk", "<C-w>k")
-map("n", "sl", "<C-w>l")
+vim.keymap.set("n", "sh", "<C-w>h")
+vim.keymap.set("n", "sj", "<C-w>j")
+vim.keymap.set("n", "sk", "<C-w>k")
+vim.keymap.set("n", "sl", "<C-w>l")
 
--- Indent
+-- Indent in visual mode
 map("v", "<C-t>", ">gv")
 map("v", "<C-d>", "<gv")
 
+-- replace
+vim.keymap.set("n", "S", 'yiw:%s/<C-r><C-r>"//g<Left><Left>')
+
 -- Save & Quit
 map("n", "<space>w", ":write<CR>", opts)
-map("n", "<space>q", ":quit<CR>", opts)
-map("n", "<space>_", ":wq<CR>", opts)
+map("n", "<space>x", ":x<CR>", opts)
 
 map({ "n", "v", "o" }, "m", "%")
 

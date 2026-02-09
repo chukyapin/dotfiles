@@ -31,7 +31,8 @@ fish_add_path ~/.local/share/bob-nvim/nvim-linux64/bin
 fish_add_path /var/lib/flatpak/exports/bin/
 fish_add_path ~/.dotnet/tools
 fish_add_path ~/.local/share/mise/shims
-fish_add_path ~/.local/share/bob/nvim-used/bin
+# fish_add_path ~/.local/share/bob/nvim-used/bin
+fish_add_path ~/.local/share/bob/nvim-bin/nvim
 
 set -gx DENO_INSTALL "~/.deno"
 fish_add_path ~/.deno/bin

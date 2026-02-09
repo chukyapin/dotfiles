@@ -1,5 +1,5 @@
 return {
-  "lewis6991/gitsigns.nvim",
+  "https://github.com/lewis6991/gitsigns.nvim",
   -- event = { "BufNewFile", "BufRead" },
   keys = {
     { "<Space>d", ":Gitsigns preview_hunk<CR>", silent = true },

@@ -1,4 +1,5 @@
+-- アスタリスク検索を便利にするplugin --
 return {
-  "rapan931/lasterisk.nvim",
+  "https://github.com/rapan931/lasterisk.nvim",
   cond = true,
 }

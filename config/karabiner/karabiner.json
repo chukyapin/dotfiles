@@ -2360,6 +2360,22 @@
             "complex_modifications": {
                 "rules": [
                     {
+                        "description": "quote to shift|ctrl",
+                        "manipulators": [
+                            {
+                                "from": { "key_code": "quote" },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "modifiers": ["control"]
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "quote" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "n to option",
                         "enabled": false,
                         "manipulators": [
@@ -2391,22 +2407,6 @@
                                         "modifiers": ["any"]
                                     }
                                 ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "quote to shift|ctrl",
-                        "manipulators": [
-                            {
-                                "from": { "key_code": "quote" },
-                                "to": [
-                                    {
-                                        "key_code": "left_shift",
-                                        "modifiers": ["control"]
-                                    }
-                                ],
-                                "to_if_alone": [{ "key_code": "quote" }],
                                 "type": "basic"
                             }
                         ]

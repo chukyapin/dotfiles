@@ -8,7 +8,7 @@ return {
   },
   opts = {
     options = {
-      mode = "buffers",
+      mode = "tabs", -- "buffers", or "tabs",
       diagnostics = "nvim_lsp",
       show_buffer_close_icons = false,
       show_close_icon = false,

@@ -8,7 +8,7 @@ return {
   },
   keys = {
     { "<Space>a", "<cmd>Yazi<cr>", desc = "Yazi" },
-    { "<Space>+", "<cmd>Yazi toggle<cr>", desc = "Yazi restore" },
+    -- { "<Space>+", "<cmd>Yazi toggle<cr>", desc = "Yazi restore" },
   },
   ---@type YaziConfig | {}
   opts = {

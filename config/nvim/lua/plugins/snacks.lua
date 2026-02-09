@@ -60,19 +60,21 @@ return {
 		{ "<C-y>k", function() Snacks.picker.pickers() end, silent = true },
 		{ "<C-y>e", function() Snacks.picker.explorer({ layout = "sidebar" }) end, silent = true },
 		{ "<C-y>s", function() Snacks.picker.smart() end, silent = true },
-		{ "<C-y>f", function() Snacks.picker.files() end, silent = true, desc = "find files" },
+		{ "<C-y>f", function() Snacks.picker.files() end, desc = "find files", silent = true },
 		{ "<C-y>g", function() Snacks.picker.grep() end, desc = "grep", silen = true },
     { "<C-y>w", function() Snacks.picker.grep_word() end, desc = "Word", mode = { "n", "x" } },
 		{ "<C-y>l", function() Snacks.picker.lines() end, desc = "lines", silent = true },
-    { "<C-y>o", function() Snacks.picker.lsp_workspace_symbols() end, desc = "workspace_symbbols" },
-    -- { "<C-y>o", function() Snacks.picker.lsp_workspace_symbols() end },
-    { "<C-y>j", function() Snacks.picker.lsp_symbols() end, desc = "document_symbols" },
+    { "<C-y>j", function() Snacks.picker.lsp_workspace_symbols() end, desc = "workspace_symbbols", silent = true },
+    { "<C-y>o", function() Snacks.picker.lsp_symbols() end, desc = "document_symbols", silent = true },
     {
       "<C-y><Space>f",
       mode = { "n", "i" },
       function()
         local curdir = vim.bo.filetype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%:p:h")
-        Snacks.picker.files({ dirs = { curdir } })
+        Snacks.picker.files({
+          dirs = { curdir },
+          layout =  "ivy",
+        })
       end,
       silent = true
     },
@@ -88,7 +90,10 @@ return {
       mode = { "n", "i" },
       function()
         local curdir = vim.bo.filetype == "oil" and require("oil").get_current_dir() or vim.fn.expand("%:p:h")
-        Snacks.picker.grep({ dirs = { curdir } })
+        Snacks.picker.grep({
+          dirs = { curdir },
+          layout =  "ivy",
+        })
       end,
       silent = true
     },
@@ -98,36 +103,6 @@ return {
       grepCurrentVueTag,
       silent = true,
     },
-		-- {
-		-- 	"<C-y>b",
-		-- 	function()
-		-- 		Snacks.picker.buffers()
-				-- Snacks.picker.buffers({
-		-- 			-- I always want my buffers picker to start in normal mode
-		-- 			on_show = function()
-		-- 				vim.cmd.stopinsert()
-		--         end,
-		-- 			finder = "buffers",
-		-- 			format = "buffer",
-		-- 			open = false,
-		-- 			unloaded = true,
-		-- 			current = true,
-		-- 			sort_lastused = true,
-					-- win = {
-					-- 	input = {
-					-- 		keys = {
-					-- 			["d"] = "bufdelete",
-					-- 		},
-					-- 	},
-					-- 	list = { keys = { ["d"] = "bufdelete", silent = true } },
-					-- },
-					-- In case you want to override the layout for this keymap
-				-- 	layout = "default",
-			-- 	})
-			-- end,
-			-- desc = "[P]Snacks picker buffers",
-		-- },
-
  {
       "<C-y>b",
       function()
@@ -136,9 +111,11 @@ return {
             input = { keys = { ["d"] = "bufdelete", ["<C-d>"] = { "bufdelete", mode = { "n", "i" } } } },
             list = { keys = { ["d"] = "bufdelete" } },
           },
+            layout = "default",
         })
       end,
-      desc = "Switch Buffer",
+      desc = "Snacks picker buffers",
+      silent = true,
     },
 
 		{ "'g", function() Snacks.lazygit() end, desc = "Lazygit" },
@@ -168,7 +145,7 @@ return {
       hidden = true,
     },
     indent = {
-      enabled = false,
+      enabled = true,
     },
     image = {
       force = false,
