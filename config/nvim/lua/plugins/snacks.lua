@@ -58,7 +58,7 @@ return {
 	keys = {
 		{ "<space>q", function() Snacks.bufdelete() end, silent = true },
 		{ "<C-y>k", function() Snacks.picker.pickers() end, silent = true },
-		{ "<C-y>e", function() Snacks.picker.explorer({ layout = "sidebar" }) end, silent = true },
+    { "<C-y>e", function() Snacks.picker.explorer({ layout = "sidebar" }) end, silent = true },
 		{ "<C-y>s", function() Snacks.picker.smart() end, silent = true },
 		{ "<C-y>f", function() Snacks.picker.files() end, desc = "find files", silent = true },
 		{ "<C-y>g", function() Snacks.picker.grep() end, desc = "grep", silen = true },
@@ -153,6 +153,7 @@ return {
       math = { enabled = true },
       doc = { inline = true, float = true },
     },
+
     dashboard = {
       sections = {
         { section = "header" },
@@ -229,6 +230,7 @@ return {
         { section = "startup" },
       },
     },
+
     picker = {
       main = {
         current = true,
@@ -301,6 +303,7 @@ return {
                 ["<C-w>t"] = { "tab", mode = { "i", "n" } },
                 -- TODO: そのままoil.nvimで対象を開く
                 -- ["<C-o>"] = { mode = { "i", "n" }, },
+                -- TODO kkkk
               },
             },
           },
