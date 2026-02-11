@@ -10,24 +10,32 @@ vim.g.maplocalleader = ","
 
 -- 文字コード自動判別
 vim.opt.fileencodings = "utf-8,sjis"
+
 -- 改行コード自動判別
 vim.opt.fileformats = "unix,dos,mac"
+
 -- swapfileを作成しない
 vim.opt.swapfile = false
 
 -- タブを基本2文字に
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 0
+
 -- タブの代わりにスペースを挿入する
 vim.opt.expandtab = true
+
 -- 検索文字列が小文字の場合は大文字小文字を区別なく検索する
 vim.opt.ignorecase = true
+
 -- 検索時に大文字を含んでいたら大/小を区別
 vim.opt.smartcase = true
+
 -- 置換時のインクリメンタルプレビューを分割ウィンドウに表示
 vim.opt.inccommand = "split"
+
 -- スクロールした時 常に下に表示するバッファ行の数
 vim.opt.scrolloff = 100
+
 -- Split Behavior
 vim.opt.splitright = true -- holizontal splits open berow
 vim.opt.splitbelow = true -- vertical splits open to the right
@@ -53,22 +61,30 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- :quit時に特殊ウィンドウ(quickfix, help等)のみが残っている場合は自動で閉じる
--- ref: https://zenn.dev/vim_jp/articles/ff6cd224fab0c7
-vim.api.nvim_create_autocmd("QuitPre", {
-  callback = function()
-    local current_win = vim.api.nvim_get_current_win()
-    for _, win in ipairs(vim.api.nvim_list_wins()) do
-      if win ~= current_win then
-        local buf = vim.api.nvim_win_get_buf(win)
-        if vim.bo[buf].buftype == "" then
-          return
-        end
-      end
-    end
-    vim.cmd.only({ bang = true })
-  end,
-})
+-- -- :quit時に特殊ウィンドウ(quickfix, help等)のみが残っている場合は自動で閉じる
+-- -- ref: https://zenn.dev/vim_jp/articles/ff6cd224fab0c7
+-- vim.api.nvim_create_autocmd("QuitPre", {
+--   callback = function()
+--     -- 現在のウィンドウ番号を取得
+--     local current_win = vim.api.nvim_get_current_win()
+--     -- すべてのウィンドウをループして調べる
+--     for _, win in ipairs(vim.api.nvim_list_wins()) do
+--       -- カレント以外を調査
+--       if win ~= current_win then
+--         local buf = vim.api.nvim_win_get_buf(win)
+--         -- buftypeが空文字（通常のバッファ）があればループ終了
+--         if vim.bo[buf].buftype == "" then
+--           return
+--         end
+--       end
+--     end
+--     -- ここまで来たらカレント以外がすべて特殊ウィンドウということなので
+--     -- カレント以外をすべて閉じる
+--     vim.cmd.only({ bang = true })
+--     -- この後、ウィンドウ1つの状態でquitが実行されるので、Vimが終了する
+--   end,
+--   desc = "Close all special buffers and quit Neovim",
+-- })
 
 -- show cursor line only in active window
 vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
