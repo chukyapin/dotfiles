@@ -2,7 +2,6 @@ local map = vim.keymap.set
 
 local opts = { noremap = true, silent = true }
 
--- map("n", "<space>P", '"0P')
 -- map("v", "<space>p", '"0p')
 -- map("n", "<space>c", '"_c')
 -- map("n", "<space>C", '"_C')
@@ -63,17 +62,22 @@ map("n", "|", ":vsplit<CR>", opts)
 map("n", "_", ":split<CR>", opts)
 
 -- Move
-vim.keymap.set("n", "sh", "<C-w>h")
-vim.keymap.set("n", "sj", "<C-w>j")
-vim.keymap.set("n", "sk", "<C-w>k")
-vim.keymap.set("n", "sl", "<C-w>l")
+map("n", "sh", "<C-w>h")
+map("n", "sj", "<C-w>j")
+map("n", "sk", "<C-w>k")
+map("n", "sl", "<C-w>l")
+
+-- map("n", "<C-h>", "<C-w>h")
+-- map("n", "<C-j>", "<C-w>j")
+-- map("n", "<C-k>", "<C-w>k")
+-- map("n", "<C-l>", "<C-w>l")
 
 -- Indent in visual mode
 map("v", "<C-t>", ">gv")
 map("v", "<C-d>", "<gv")
 
 -- replace
-vim.keymap.set("n", "S", 'yiw:%s/<C-r><C-r>"//g<Left><Left>')
+map("n", "S", 'yiw:%s/<C-r><C-r>"//g<Left><Left>')
 
 -- Save & Quit
 map("n", "<space>w", ":write<CR>", opts)
