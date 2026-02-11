@@ -11,7 +11,6 @@ vim.opt.pumblend = 10
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.helplang = "ja"
-vim.cmd("cabbrev h belowright vertical help")
 vim.opt.backspace = { "start", "eol", "indent" }
 vim.opt.path:append({ "**" })
 vim.opt.wildmenu = true
