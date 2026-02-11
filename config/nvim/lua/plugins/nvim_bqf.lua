@@ -1,5 +1,5 @@
 return {
-  "kevinhwang91/nvim-bqf",
+  "https://github.com/kevinhwang91/nvim-bqf",
   dependencies = { "junegunn/fzf" },
   event = "FileType qf",
   opts = {
