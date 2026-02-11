@@ -2,10 +2,15 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 wezterm.log_info("reloading")
 
-require("tabs").setup(config)
-require("mouse").setup(config)
-require("links").setup(config)
-require("keys").setup(config)
+local tabs = require("tabs")
+local mouse = require("mouse")
+local links = require("links")
+local keys = require("keys")
+
+tabs.setup(config)
+mouse.setup(config)
+links.setup(config)
+keys.setup(config)
 
 config.color_scheme = "solarized (dark)"
 
@@ -26,6 +31,7 @@ config.underline_position = -6
 config.enable_kitty_graphics = true
 
 config.window_decorations = "RESIZE"
+config.adjust_window_size_when_changing_font_size = false
 config.term = "xterm-256color"
 
 -- Fonts
@@ -60,6 +66,7 @@ config.scrollback_lines = 10000
 -- Command Palette
 config.command_palette_font_size = 18
 config.command_palette_bg_color = "#394b70"
-config.command_palette_fg_color = "#826bb8"
+-- config.command_palette_fg_color = "#826bb8"
+config.command_palette_fg_color = "#000001"
 
 return config
