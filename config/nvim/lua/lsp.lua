@@ -12,31 +12,37 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     local opts = { buffer = ev.buf }
     -- 定義に移動 (Lspsaga goto_definition は期待しない定義に飛んでしまうことがある)
-    vim.keymap.set("n", "<C-]>", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "v<C-]>", function()
+    vim.keymap.set("n", "<C-'>", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "v<C-'>", function()
       vim.cmd([[ vsplit ]])
       vim.lsp.buf.definition()
     end, opts)
-    vim.keymap.set("n", "s<C-]>", function()
+    vim.keymap.set("n", "s<C-'>", function()
       vim.cmd([[ split ]])
       vim.lsp.buf.definition()
     end, opts)
+
     -- 定義をホバー
-    -- vim.keymap.set("n", "<A-s>", "<cmd>Lspsaga hover_doc<CR>", opts)
-    vim.keymap.set("n", "<C-S-s>", "<cmd>Lspsaga hover_doc<CR>", opts)
+    vim.keymap.set("n", "<S-C-s>", "<cmd>Lspsaga hover_doc<CR>", opts)
+
     -- 実装へ移動
     vim.keymap.set("n", "<C-y>i", vim.lsp.buf.implementation, opts)
-    -- vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+
     -- 実装をホバー
-    vim.keymap.set("n", "<C-S-d>", "<cmd>Lspsaga peek_definition<CR>", opts)
+    vim.keymap.set("n", "<S-C-d>", "<cmd>Lspsaga peek_definition<CR>", opts)
+
     -- 型の実装をホバー
     vim.keymap.set("n", "<A-i>", "<cmd>Lspsaga peek_type_definition<CR>", opts)
+
     -- 呼び出し元の表示
     vim.keymap.set("n", "<C-y>u", "<cmd>Lspsaga finder ref<CR>", opts)
+
     -- リネーム
     vim.keymap.set({ "n", "i" }, "<S-A-r>", "<cmd>Lspsaga rename<CR>", opts)
+
     -- ファイルリネーム
     vim.keymap.set("n", "<C-S>r", vim.lsp.buf.rename, opts)
+
     -- Code action
     vim.keymap.set({ "n", "i" }, "<space><tab>", "<cmd>Lspsaga code_action<CR>", opts)
 
@@ -44,6 +50,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<C-f15>", function()
       vim.diagnostic.jump({ float = false, count = 1 })
     end, opts)
+
     -- 前の診断へ移動
     vim.keymap.set("n", "<C-f16>", function()
       vim.diagnostic.jump({ float = false, count = -1 })
@@ -63,7 +70,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     -- inlay hint
-    if client.supports_method("textDocument/inlayHint") then
+    if client:supports_method("textDocument/inlayHint") then
       vim.lsp.inlay_hint.enable()
     end
 
@@ -90,7 +97,7 @@ if not vim.g.vscode then
     "copilot-language-server",
     "cssls",
     "denols",
-    "efm",
+    -- "efm",
     "emmet_language_server",
     "eslint",
     "golangci_lint_ls",
@@ -104,9 +111,10 @@ if not vim.g.vscode then
     "ruff",
     "sqls",
     "svelte",
+    "sourcekit",
     "tailwindcss",
     "ty",
-    "typst",
+    -- "typst",
     "tinymist",
     "vtsls",
     "vue_ls",

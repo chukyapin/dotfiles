@@ -136,3 +136,37 @@ history_filter = [
 ## Defaults to true. If enabled, upon hitting enter Atuin will immediately execute the command. Press tab to return to the shell and edit.
 # This applies for new installs. Old installs will keep the old behaviour unless configured otherwise.
 enter_accept = true
+
+[keymap]
+mode = "vim"  # emacs / vim の切り替え
+
+[keymap.vim-normal]
+j = "down"
+k = "up"
+gg = "top"
+G = "bottom"
+i = "insert"
+a = "insert-after"
+o = "insert-at-end"
+O = "insert-at-start"
+u = "undo"
+ctrl-r = "redo"
+n = "next-search"
+N = "prev-search"
+slash = "search"          # /
+question = "reverse-search" # ?
+h = "left"
+l = "right"
+x = "delete-char"
+dd = "delete-line"
+yy = "yank-line"
+p = "paste-after"
+P = "paste-before"
+ctrl-c = "exit"
+esc = "exit"
+
+[keymap.vim-insert]
+esc = "normal-mode"
+ctrl-c = "normal-mode"
+ctrl-n = "next"
+ctrl-p = "prev"

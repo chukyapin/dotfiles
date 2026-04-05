@@ -17,10 +17,10 @@ function M.setup(config)
 	config.keys = {
 
 		-- Scrollback
-		{ mods = "SHIFT|SUPER", key = "k", action = act.ScrollByPage(-0.5) },
-		{ mods = "SHIFT|SUPER", key = "j", action = act.ScrollByPage(0.5) },
-		-- { mods = "ALT", key = "k", action = act.ScrollByPage(-0.5) },
-		-- { mods = "ALT", key = "j", action = act.ScrollByPage(0.5) },
+		-- { mods = "SHIFT|SUPER", key = "k", action = act.ScrollByPage(-0.5) },
+		-- { mods = "SHIFT|SUPER", key = "j", action = act.ScrollByPage(0.5) },
+		{ mods = "ALT", key = "k", action = act.ScrollByPage(-0.5) },
+		{ mods = "ALT", key = "j", action = act.ScrollByPage(0.5) },
 
 		-- New Tab
 		{ mods = "SHIFT|CTRL", key = "t", action = act.SpawnTab("CurrentPaneDomain") },

@@ -1,60 +1,3 @@
--- return {
---   "folke/trouble.nvim",
---   cmd = "Trouble",
---   keys = {
---     {
---       "<C-y>h",
---       "<cmd>Trouble lsp_references<cr>",
---     },
---   },
---   opts = {
---     focus = true,
---     auto_refresh = false,
---     keys = {
---       ["<cr>"] = "jump_close",
---       o = "jump",
---       l = "fold_open",
---       h = "fold_close",
---       ["<C-CR>"] = "jump_vsplit",
---       ["<esc>"] = "inspect",
---       -- XXX: sはバインドしたくないが、fallbackの方法が分からず...
---       s = function()
---         require("flash").jump()
---       end,
---     },
---     lsp_references = {
---       params = {
---         -- 呼び出し履歴(lsp_references)では宣言を表示しない
---         include_declaration = false,
---       },
---     },
---     modes = {
---       lsp_base = {
---         params = {
---           -- 現在の項目が消えてしまうので...
---           include_current = true,
---         },
---       },
---       we = {
---         mode = "diagnostics",
---         filter = {
---           ["any"] = {
---             { severity = vim.diagnostic.severity.WARN },
---             { severity = vim.diagnostic.severity.ERROR },
---           },
---         },
---       },
---     },
---     signs = {
---       error = "",
---       warning = "",
---       hint = "󱩎",
---       information = "",
---       other = "",
---     },
---   },
--- }
-
 local function is_trouble_open()
   for _, win in ipairs(vim.api.nvim_list_wins()) do
     local buf = vim.api.nvim_win_get_buf(win)
@@ -97,6 +40,18 @@ local function has_trouble_item_in_direction(view, direction)
   return false
 end
 
+local function cnext_cyclic()
+  if not pcall(vim.cmd, "cnext") then
+    vim.cmd("cfirst")
+  end
+end
+
+local function cprev_cyclic()
+  if not pcall(vim.cmd, "cprev") then
+    vim.cmd("clast")
+  end
+end
+
 return {
   "folke/trouble.nvim",
   cmd = "Trouble",
@@ -121,10 +76,10 @@ return {
               require("trouble").first()
             end
           else
-            vim.cmd("cnext")
+            cnext_cyclic()
           end
         else
-          vim.cmd("cnext")
+          cnext_cyclic()
         end
       end,
     },
@@ -140,10 +95,10 @@ return {
               require("trouble").last()
             end
           else
-            vim.cmd("cprev")
+            cprev_cyclic()
           end
         else
-          vim.cmd("cprev")
+          cprev_cyclic()
         end
       end,
     },
@@ -156,7 +111,7 @@ return {
       o = "jump",
       l = "fold_open",
       h = "fold_close",
-      ["|"] = "jump_vsplit",
+      ["<C-CR>"] = "jump_vsplit",
       ["<esc>"] = "inspect",
       -- XXX: sはバインドしたくないが、fallbackの方法が分からず...
       s = function()

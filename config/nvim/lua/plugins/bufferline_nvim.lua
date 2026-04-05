@@ -1,5 +1,5 @@
 return {
-  "akinsho/bufferline.nvim",
+  "https://github.com/akinsho/bufferline.nvim",
   -- event = "VeryLazy",
   event = { "BufAdd", "TabEnter" },
   keys = {

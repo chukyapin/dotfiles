@@ -1,4 +1,4 @@
-vim.cmd("colorscheme solarized-osaka")
+-- vim.cmd("colorscheme solarized-osaka")
 
 vim.opt.encoding = "utf-8"
 
@@ -15,13 +15,14 @@ vim.opt.backspace = { "start", "eol", "indent" }
 vim.opt.path:append({ "**" })
 vim.opt.wildmenu = true
 vim.opt.shell = "fish"
+vim.opt.termguicolors = true
 vim.opt.cmdheight = 0
 vim.opt.mouse = ""
 
 -- Clear statusline
-vim.opt.laststatus = 0
-vim.opt.statusline = "-"
-vim.opt.fillchars:append({ stl = "-", stlnc = "-" })
+-- vim.opt.laststatus = 0
+-- vim.opt.statusline = "-"
+-- vim.opt.fillchars:append({ stl = "-", stlnc = "-" })
 
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])

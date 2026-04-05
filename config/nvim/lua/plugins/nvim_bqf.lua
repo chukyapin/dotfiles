@@ -6,7 +6,7 @@ return {
     func_map = {
       openc = "<CR>",
       open = "o",
-      split = "<c-s>",
+      split = "_",
       vsplit = "|",
       tabc = "<Space>t",
     },

@@ -1,5 +1,5 @@
 return {
-  "neovim/nvim-lspconfig",
-  -- lazy = false,
+  "https://github.com/neovim/nvim-lspconfig",
+  -- lazy = false
   event = { "BufReadPre", "BufNewFile" },
 }

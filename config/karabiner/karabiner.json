@@ -2645,6 +2645,7 @@
                     },
                     {
                         "description": "right_shift to right_option",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": { "key_code": "right_shift" },

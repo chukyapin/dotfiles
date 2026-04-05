@@ -10,5 +10,6 @@ return {
         floats = transparent and "transparent" or "dark",
       },
     })
+    vim.cmd("colorscheme solarized-osaka")
   end,
 }

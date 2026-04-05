@@ -1,5 +1,5 @@
 return {
-  "stevearc/conform.nvim",
+  "https://github.com/stevearc/conform.nvim",
   event = "VeryLazy",
   opts = function()
     local function is_deno_project()

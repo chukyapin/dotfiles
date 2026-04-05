@@ -31,8 +31,8 @@ fish_add_path ~/.local/share/bob-nvim/nvim-linux64/bin
 fish_add_path /var/lib/flatpak/exports/bin/
 fish_add_path ~/.dotnet/tools
 fish_add_path ~/.local/share/mise/shims
-# fish_add_path ~/.local/share/bob/nvim-used/bin
-fish_add_path ~/.local/share/bob/nvim-bin/nvim
+fish_add_path ~/.local/share/bob/nvim-used/bin
+# fish_add_path ~/.local/share/bob/nvim-bin/nvim
 
 set -gx DENO_INSTALL "~/.deno"
 fish_add_path ~/.deno/bin
@@ -44,6 +44,31 @@ set -gx EDITOR (which nvim)
 set -gx VISUAL $EDITOR
 set -gx SUDO_EDITOR $EDITOR
 
+
+# Fish
+set fish_emoji_width 2
+alias ssh "TERM=xterm-256color command ssh"
+alias mosh "TERM=xterm-256color command mosh"
+
+# Emacs
+# set -l emacs_path /Applications/Emacs.app/Contents/MacOS
+# set -Ux EMACS $emacs_path/Emacs
+fish_add_path ~/.emacs.d/bin
+# alias emacs $EMACS
+
 # Go
 set -x GOPATH ~/go
 fish_add_path $GOPATH $GOPATH/bin
+
+ # Exports
+# set -x LESS -rF
+# set -x COMPOSE_DOCKER_CLI_BUILD 1
+# set -x HOMEBREW_NO_AUTO_UPDATE 1
+# set -x DOTDROP_AUTOUPDATE no
+# set -x MANPAGER "nvim +Man!"
+# set -x MANROFFOPT -c
+# set -x OPENCV_LOG_LEVEL ERROR
+#set -x MANPAGER "sh -c 'col -bx | bat -l man -p'" # use bat to format man pages
+#set -x MANPAGER "most" # use bat to format man pages
+#
+abbr -a --position anywhere --set-cursor -- -h "-h 2>&1 | bat --plain --language=help"

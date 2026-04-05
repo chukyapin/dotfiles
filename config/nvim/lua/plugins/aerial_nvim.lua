@@ -26,7 +26,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
   },
   keys = {
-    { "<A-o>", ":AerialToggle<cr>", silent = true },
+    { "<A-o>", ":AerialToggle<cr>", silent = true }, -- Fn + o
   },
   init = function()
     vim.api.nvim_create_autocmd("colorscheme", {

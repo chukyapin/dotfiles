@@ -12,12 +12,10 @@ mouse.setup(config)
 links.setup(config)
 keys.setup(config)
 
-config.color_scheme = "solarized (dark)"
-
 config.automatically_reload_config = true
 config.window_close_confirmation = "NeverPrompt" -- AlwaysPrompt or NeverPrompt
 config.window_background_opacity = 0.80
-config.macos_window_background_blur = 10
+config.macos_window_background_blur = 20
 config.audible_bell = "Disabled"
 
 config.hide_mouse_cursor_when_typing = true
@@ -30,15 +28,20 @@ config.cursor_thickness = 4
 config.underline_position = -6
 config.enable_kitty_graphics = true
 
+config.max_fps = 120
 config.window_decorations = "RESIZE"
 config.adjust_window_size_when_changing_font_size = false
-config.term = "xterm-256color"
 
 -- Fonts
 config.font_size = 15
-config.font = wezterm.font({ family = "Fira Code" })
--- config.font = wezterm.font({ family = "CaskaydiaCove Nerd Font" })
 config.bold_brightens_ansi_colors = true
+
+-- 英数字: Fira Code / 日本語: PlemolJP Console NF
+config.font = wezterm.font_with_fallback({
+	"Fira Code",
+	"PlemolJP Console NF",
+})
+
 config.font_rules = {
 	{
 		intensity = "Bold",
@@ -60,13 +63,11 @@ config.font_rules = {
 -- Cursor
 config.default_cursor_style = "BlinkingBar"
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
--- cell_width = 0.9,
 config.scrollback_lines = 10000
 
 -- Command Palette
 config.command_palette_font_size = 18
 config.command_palette_bg_color = "#394b70"
--- config.command_palette_fg_color = "#826bb8"
 config.command_palette_fg_color = "#000001"
 
 return config
