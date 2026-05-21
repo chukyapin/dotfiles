@@ -3,6 +3,8 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local M = {}
 
+M.mod = wezterm.target_triple:find("windows") and "SHIFT|CTRL" or "SHIFT|SUPER"
+
 M.smart_split = wezterm.action_callback(function(window, pane)
 	local dim = pane:get_dimensions()
 	if dim.pixel_height > dim.pixel_width then
@@ -17,35 +19,33 @@ function M.setup(config)
 	config.keys = {
 
 		-- Scrollback
-		-- { mods = "SHIFT|SUPER", key = "k", action = act.ScrollByPage(-0.5) },
-		-- { mods = "SHIFT|SUPER", key = "j", action = act.ScrollByPage(0.5) },
-		{ mods = "ALT", key = "k", action = act.ScrollByPage(-0.5) },
-		{ mods = "ALT", key = "j", action = act.ScrollByPage(0.5) },
+		{ mods = M.mod, key = "k", action = act.ScrollByPage(-0.5) },
+		{ mods = M.mod, key = "j", action = act.ScrollByPage(0.5) },
 
 		-- New Tab
-		{ mods = "SHIFT|CTRL", key = "t", action = act.SpawnTab("CurrentPaneDomain") },
+		{ mods = M.mod, key = "t", action = act.SpawnTab("CurrentPaneDomain") },
 
 		-- Splits
-		{ mods = "SHIFT|SUPER", key = "Enter", action = M.smart_split },
-		{ mods = "SHIFT|SUPER", key = "'", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-		{ mods = "SHIFT|SUPER", key = ";", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-		{ mods = "SHIFT|SUPER", key = "(", action = act.DecreaseFontSize },
-		{ mods = "SHIFT|SUPER", key = ")", action = act.IncreaseFontSize },
+		{ mods = M.mod, key = "Enter", action = M.smart_split },
+		{ mods = M.mod, key = "'", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+		{ mods = M.mod, key = ";", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+		{ mods = M.mod, key = "(", action = act.DecreaseFontSize },
+		{ mods = M.mod, key = ")", action = act.IncreaseFontSize },
 
 		-- Acivate Tabs
-		{ mods = "SHIFT|SUPER", key = ">", action = act({ ActivateTabRelative = 1 }) },
-		{ mods = "SHIFT|SUPER", key = "<", action = act({ ActivateTabRelative = -1 }) },
-		{ mods = "SHIFT|SUPER", key = "R", action = act.RotatePanes("Clockwise") },
+		{ mods = M.mod, key = ">", action = act({ ActivateTabRelative = 1 }) },
+		{ mods = M.mod, key = "<", action = act({ ActivateTabRelative = -1 }) },
+		{ mods = M.mod, key = "R", action = act.RotatePanes("Clockwise") },
 
 		-- show the pane selection mode, but have it swap the active and selected panes
-		{ mods = "SHIFT|SUPER", key = "S", action = act.PaneSelect({}) },
+		{ mods = M.mod, key = "S", action = act.PaneSelect({}) },
 		-- Clipboarda
 		-- { mods = "SHIFT|SUPER", key = "c", action = act.CopyTo("Clipboard") },
 		{ mods = "CMD", key = "c", action = act.CopyTo("Clipboard") },
-		{ mods = "SHIFT|CTRL", key = "f", action = act.QuickSelect },
-		{ mods = "SHIFT|CTRL", key = "c", action = act.ActivateCopyMode },
-		{ mods = "SHIFT|SUPER", key = "f", action = act.Search("CurrentSelectionOrEmptyString") },
 		{ mods = "CMD", key = "v", action = act.PasteFrom("Clipboard") },
+		{ mods = "SHIFT|SUPER", key = "f", action = act.QuickSelect },
+		{ mods = "SHIFT|CTRL", key = "c", action = act.ActivateCopyMode },
+		{ mods = "SHIFT|CTRL", key = "f", action = act.Search("CurrentSelectionOrEmptyString") },
 		{
 			mods = "SHIFT|SUPER",
 			key = "u",
@@ -57,7 +57,8 @@ function M.setup(config)
 		{ mods = "SHIFT|SUPER", key = "m", action = act.TogglePaneZoomState },
 
 		-- Commandpalette
-		{ mods = "SHIFT|SUPER", key = "p", action = act.ActivateCommandPalette },
+		-- { mods = "SHIFT|SUPER", key = "p", action = act.ActivateCommandPalette },
+		{ mods = M.mod, key = "p", action = act.ActivateCommandPalette },
 
 		{ mods = "SHIFT|SUPER", key = "d", action = act.ShowDebugOverlay },
 		M.split_nav("resize", "CTRL", "LeftArrow", "Right"),

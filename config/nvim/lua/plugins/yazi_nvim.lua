@@ -14,9 +14,8 @@ return {
   opts = {
     keymaps = {
       open_file_in_vertical_split = "|",
-
-      -- open_file_in_horizontal_split = "<C-s>",
-      send_to_quickfix_list = "<c-s-o>",
+      open_file_in_horizontal_split = "_",
+      send_to_quickfix_list = "<A-o>",
       cycle_open_buffers = "<M-6>", -- ignore
     },
   },

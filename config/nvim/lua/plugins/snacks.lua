@@ -1,5 +1,5 @@
--- dashboard で picker を開いて移動する際に発生するチラツキを防止するlocal preventFlicker = function(handler)
-local function restoreUi()
+-- dashboard で picker を開いて移動する際に発生するチラツキを防止する
+local preventFlicker = function(handler)
   local function restoreUi()
     if vim.api.nvim_tabpage_is_valid(vim.api.nvim_get_current_tabpage()) then
       vim.cmd([[:NoNeckPain]])
@@ -25,7 +25,7 @@ local function restoreUi()
       waitForPickerClose()
     end)
   end)
-end
+end -- dashboard で picker を開いて移動する際に発生するチラツキを防止するlocal preventFlicker = function(handler)
 
 local grepCurrentVueTag = function()
   if vim.fn.expand("%:e") ~= "vue" then
@@ -315,7 +315,7 @@ return {
         input = {
           keys = {
             ["<esc>"] = { "close", mode = { "i", "n" } },
-            ["<C-o>"] = { "qflist", mode = { "i", "n" } },
+            ["<A-o>"] = { "qflist", mode = { "i", "n" } },
             ["<C-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
             ["<C-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
             ["<C-]>"] = { "toggle_live", mode = { "i", "n" } },

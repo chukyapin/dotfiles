@@ -62,15 +62,10 @@ map("n", "|", ":vsplit<CR>", opts)
 map("n", "_", ":split<CR>", opts)
 
 -- Move
--- map("n", "sh", "<C-w>h")
--- map("n", "sj", "<C-w>j")
--- map("n", "sk", "<C-w>k")
--- map("n", "sl", "<C-w>l")
-
-map("n", "<C-h>", "<C-w>h")
-map("n", "<C-j>", "<C-w>j")
-map("n", "<C-k>", "<C-w>k")
-map("n", "<C-l>", "<C-w>l")
+map("n", "<Left>", "<C-w>h")
+map("n", "<down>", "<C-w>j")
+map("n", "<up>", "<C-w>k")
+map("n", "<right>", "<C-w>l")
 
 -- Indent in visual mode
 map("v", "<C-t>", ">gv")

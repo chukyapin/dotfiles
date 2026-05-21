@@ -2,15 +2,10 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 wezterm.log_info("reloading")
 
-local tabs = require("tabs")
-local mouse = require("mouse")
-local links = require("links")
-local keys = require("keys")
-
-tabs.setup(config)
-mouse.setup(config)
-links.setup(config)
-keys.setup(config)
+require("tabs").setup(config)
+require("mouse").setup(config)
+require("links").setup(config)
+require("keys").setup(config)
 
 config.automatically_reload_config = true
 config.window_close_confirmation = "NeverPrompt" -- AlwaysPrompt or NeverPrompt
