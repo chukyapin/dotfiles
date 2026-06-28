@@ -11,10 +11,13 @@ return {
   opts = {
     keymap = {
       preset = "enter",
-      -- ["<F5>"] = { "show", "show_documentation", "hide_documentation" },
+      ["<F5>"] = { "show", "show_documentation", "hide_documentation" },
     },
     completion = {
       documentation = { auto_show = true, window = { border = "rounded" } },
+      keyword = {
+        range = "full",
+      },
       list = {
         selection = {
           auto_insert = false,

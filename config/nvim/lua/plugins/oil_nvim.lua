@@ -1,8 +1,8 @@
 return {
   "https://github.com/stevearc/oil.nvim",
   keys = {
-    -- { "<Space>o", ":Oil --float<CR>", silent = true },
-    { "<Space>o", ":Oil<CR>", silent = true },
+    { "<Space>o", ":Oil --float<CR>", silent = true },
+    -- { "<Space>o", ":Oil<CR>", silent = true },
   },
   cmd = "Oil",
   opts = {

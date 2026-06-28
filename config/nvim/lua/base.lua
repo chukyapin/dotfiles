@@ -1,9 +1,6 @@
 -- 挨拶メッセージを非表示
 vim.opt.shortmess:append("I")
 
-vim.g.mapleader = ""
-vim.g.maplocalleader = ","
-
 -- ╭─────────────────────────────────────────────────────────╮
 -- │                          挙動                           │
 -- ╰─────────────────────────────────────────────────────────╯
@@ -21,24 +18,26 @@ vim.opt.swapfile = false
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 0
 
--- タブの代わりにスペースを挿入する
+-- タブの代わりにスペースを挿入する(default: false)
 vim.opt.expandtab = true
 
--- 検索文字列が小文字の場合は大文字小文字を区別なく検索する
+-- 検索文字列が小文字の場合は大文字小文字を区別なく検索する(default: false)
 vim.opt.ignorecase = true
 
 -- 検索時に大文字を含んでいたら大/小を区別
 vim.opt.smartcase = true
 
--- 置換時のインクリメンタルプレビューを分割ウィンドウに表示
+-- 置換時のインクリメンタルプレビューを分割ウィンドウに表示(default: nosplit)
 vim.opt.inccommand = "split"
 
 -- スクロールした時 常に下に表示するバッファ行の数
 vim.opt.scrolloff = 100
 
--- Split Behavior
-vim.opt.splitright = true -- holizontal splits open berow
-vim.opt.splitbelow = true -- vertical splits open to the right
+-- 垂直分割は必ず右側(default: false)
+vim.opt.splitright = true -- vertical splits open to the right
+
+-- 水平分割は必ず下側(default: false)
+vim.opt.splitbelow = true -- holizontal splits open berow
 
 -- 最後に開いていた行を開く
 vim.cmd([[

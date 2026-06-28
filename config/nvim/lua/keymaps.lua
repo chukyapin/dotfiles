@@ -58,8 +58,8 @@ map("n", "<space>cl", ":CloseBuffers<CR>", opts)
 map("v", "v", "<C-v>")
 
 --  Split
-map("n", "|", ":vsplit<CR>", opts)
-map("n", "_", ":split<CR>", opts)
+map("n", "_", ":split<CR>", { desc = "Split window horizontally" })
+map("n", "|", ":vsplit<CR>", { desc = "Split window vertically" })
 
 -- Move
 map("n", "<Left>", "<C-w>h")
@@ -78,7 +78,7 @@ map("n", "S", 'yiw:%s/<C-r><C-r>"//g<Left><Left>')
 map("n", "<space>w", ":write<CR>", opts)
 map("n", "<space>x", ":x<CR>", opts)
 
-map({ "n", "v", "o" }, "m", "%")
+-- map({ "n", "v", "o" }, "m", "%")
 
 map("n", "<space><space>y", ":%+y<CR>", opts)
 map("n", "<space><space>d", ":%+d<CR>", opts)

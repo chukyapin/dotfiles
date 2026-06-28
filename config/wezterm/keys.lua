@@ -23,7 +23,7 @@ function M.setup(config)
 		{ mods = M.mod, key = "j", action = act.ScrollByPage(0.5) },
 
 		-- New Tab
-		{ mods = M.mod, key = "t", action = act.SpawnTab("CurrentPaneDomain") },
+		{ mods = "SHIFT|CTRL", key = "t", action = act.SpawnTab("CurrentPaneDomain") },
 
 		-- Splits
 		{ mods = M.mod, key = "Enter", action = M.smart_split },

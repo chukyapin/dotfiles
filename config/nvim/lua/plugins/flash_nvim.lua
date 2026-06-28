@@ -15,8 +15,8 @@ return {
   },
   keys = {
     {
-      "s",
-      mode = { "n", "x", "o" },
+      "<CR>",
+      mode = { "n", "x", "o", "v" },
       function()
         require("flash").jump()
       end,
@@ -31,7 +31,7 @@ return {
       desc = "Flash Treesitter",
     },
     {
-      "r",
+      "<TAB>",
       mode = "o",
       function()
         require("flash").remote()

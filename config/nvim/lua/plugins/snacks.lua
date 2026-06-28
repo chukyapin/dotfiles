@@ -297,9 +297,10 @@ return {
             list = {
               keys = {
                 --                 ["<c-]>"] = { "toggle_live", mode = { "i", "n" } },
-                ["<C-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
-                ["<C-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+                ["<C-j>"] = { "preview_scroll_down", mode = { "i", "n" } },
+                ["<C-k>"] = { "preview_scroll_up", mode = { "i", "n" } },
                 ["|"] = { "edit_vsplit", mode = { "i", "n" } },
+                ["_"] = { "edit_split", mode = { "i", "n" } },
                 ["<C-w>t"] = { "tab", mode = { "i", "n" } },
                 -- TODO: そのままoil.nvimで対象を開く
                 -- ["<C-o>"] = { mode = { "i", "n" }, },

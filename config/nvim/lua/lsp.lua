@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<S-C-d>", "<cmd>Lspsaga peek_definition<CR>", opts)
 
     -- 型の実装をホバー
-    vim.keymap.set("n", "<A-i>", "<cmd>Lspsaga peek_type_definition<CR>", opts)
+    vim.keymap.set("n", "<S-c-i>", "<cmd>Lspsaga peek_type_definition<CR>", opts)
 
     -- 呼び出し元の表示
     vim.keymap.set("n", "<C-y>u", "<cmd>Lspsaga finder ref<CR>", opts)
@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set({ "n", "i" }, "<S-A-r>", "<cmd>Lspsaga rename<CR>", opts)
 
     -- ファイルリネーム
-    vim.keymap.set("n", "<C-S>r", vim.lsp.buf.rename, opts)
+    vim.keymap.set("n", "<S-C-r>", vim.lsp.buf.rename, opts)
 
     -- Code action
     vim.keymap.set({ "n", "i" }, "<space><tab>", "<cmd>Lspsaga code_action<CR>", opts)
@@ -97,7 +97,6 @@ if not vim.g.vscode then
     "copilot-language-server",
     "cssls",
     "denols",
-    -- "efm",
     "emmet_language_server",
     "eslint",
     "golangci_lint_ls",
@@ -113,8 +112,7 @@ if not vim.g.vscode then
     "svelte",
     "sourcekit",
     "tailwindcss",
-    "ty",
-    -- "typst",
+    -- "ty",
     "tinymist",
     "vtsls",
     "vue_ls",

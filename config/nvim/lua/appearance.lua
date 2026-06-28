@@ -1,10 +1,14 @@
--- vim.cmd("colorscheme solarized-osaka")
-
 vim.opt.encoding = "utf-8"
 
+-- 行番号の表示(default: false)
 vim.opt.number = true -- Show absolute line numbers
+
+-- 相対番号の表示(default: false)
 vim.opt.relativenumber = true -- Show relative line numbers
+
+-- カーソル行強調(default: false)
 vim.opt.cursorline = true
+
 vim.opt.pumheight = 10
 vim.opt.pumblend = 10
 
