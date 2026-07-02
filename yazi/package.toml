@@ -1,0 +1,24 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-enter"
+rev = "de33976"
+hash = "56fdabc96fc1f4d53c96eb884b02a5be"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "de33976"
+hash = "3996fc74044bc44144b323686f887e1"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:toggle-pane"
+rev = "de33976"
+hash = "8a7c58225816a163a6e8730c0adafbc8"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "de33976"
+hash = "36a484acf6a0a0219c543ccb4cee218f"
+
+[[flavor.deps]]
+use = "Miuzarte/synthwave84"
+rev = "865bef9"
+hash = "598126216cc2ab55f98955788f0eb3f3"

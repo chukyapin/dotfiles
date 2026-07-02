@@ -1,0 +1,8 @@
+ui:
+  language: ja
+  theme:
+    activeBorderColor:
+      - "#ff0000"
+      - bold
+  showRandomTip: false
+  showCommandLog: false
