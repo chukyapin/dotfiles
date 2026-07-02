@@ -51,7 +51,7 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-    ".gitconfig".source = ./git/.gitconfig
+    ".gitconfig".source = ./nix/git/.gitconfig;
   };
 
   # Home Manager can also manage your environment variables through
