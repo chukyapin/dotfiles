@@ -37,7 +37,7 @@
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
       };
-      darwinConfiguration."MacBook" = nix-darwin.lib.darwinSystem {
+      darwinConfiguration."katayamanoMacBook-Pro" = nix-darwin.lib.darwinSystem {
         module = [ ./nix/nix-darwin/configuration.nix ];
       };
     };
