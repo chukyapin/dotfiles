@@ -8,10 +8,20 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+   nix-darwin = {
+     url = "github:nix-darwin/nix-darwin";
+     inputs.nixpkgs.follows = "nixpkgs";
+   };
   };
 
   outputs =
     { nixpkgs, home-manager, ... }:
+    {
+      nixpkgs,
+      home-manage,
+      nix-darwin.
+      ...
+    }:
     let
       system = "aarch64-darwin";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -26,6 +36,9 @@
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
+      };
+      darwinConfiguration."MacBook" = nix-darwin.lib.darwinSystem {
+        module = [ ./nix/nix-darwin/configuration.nix ];
       };
     };
 }
