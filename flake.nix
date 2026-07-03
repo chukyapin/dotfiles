@@ -31,7 +31,6 @@
 
       darwinConfigurations."katayamanoMacBook-Pro" =
         nix-darwin.lib.darwinSystem {
-          system = system;
           modules = [
             ./nix-darwin/configuration.nix
           ];
