@@ -8,10 +8,19 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }:
+     {
+       nixpkgs,
+       home-manager,
+       nix-darwin,
+       ...
+     }:
     let
       system = "aarch64-darwin";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -23,6 +32,12 @@
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
         modules = [ ./home.nix ];
+
+
+
+darwinConfigurations."katayamanoMacBook-Pro" = nix-darwin.lib.darwinSystem {
+         modules = [ ./modules/darwin/configuration.nix ];
+       };
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
