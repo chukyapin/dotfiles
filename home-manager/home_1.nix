@@ -12,7 +12,6 @@
 
   home.file = {
     
-    ".gitconfig".source = ./nix/git/.gitconfig;
   };
 
   home.sessionVariables = {
