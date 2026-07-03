@@ -1,46 +1,40 @@
 {
-  description = "Home Manager configuration of chukyapin";
+  description = "My dotfiles";
 
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nix-darwin = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs =
-     {
-       nixpkgs,
-       home-manager,
-       nix-darwin,
-       ...
-     }:
+  outputs = { nixpkgs, home-manager, nix-darwin, ... }:
     let
-      system = "aarch64-darwin";
+      system = "aarch64-darwin"; # Intel Mac なら "x86_64-darwin"
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      homeConfigurations."chukyapin" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+      homeConfigurations."chukyapin" =
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            ./home-manager/home.nix
+          ];
+        };
 
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [ ./home.nix ];
-
-
-
-darwinConfigurations."katayamanoMacBook-Pro" = nix-darwin.lib.darwinSystem {
-         modules = [ ./modules/darwin/configuration.nix ];
-       };
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
-      };
+      darwinConfigurations."katayamanoMacBook-Pro" =
+        nix-darwin.lib.darwinSystem {
+          system = system;
+          modules = [
+            ./nix-darwin/configuration.nix
+          ];
+        };
     };
 }
