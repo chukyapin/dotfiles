@@ -15,7 +15,13 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, nix-darwin, ... }:
+  outputs = 
+  {
+    self,
+    nixpkgs,
+    home-manager,
+    nix-darwin,
+    }:
     let
       system = "aarch64-darwin"; # Intel Mac なら "x86_64-darwin"
       pkgs = nixpkgs.legacyPackages.${system};
@@ -25,14 +31,15 @@
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
-            ./home-manager/home.nix
+            ./nix/home/home-manager.nix
           ];
         };
 
       darwinConfigurations."katayamanoMacBook-Pro" =
         nix-darwin.lib.darwinSystem {
+    specialArgs = { inherit self; };
           modules = [
-            ./nix-darwin/configuration.nix
+            ./nix/darwin/configuration.nix
           ];
         };
     };
