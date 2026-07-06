@@ -21,6 +21,9 @@
     casks = [
       # brew install --cask microsoft-office
       "fantastical"
+      "obsidian"
+      "spotify"
+      "omnifocus"
     ];
   };
 }
