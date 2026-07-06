@@ -1,11 +1,17 @@
 # /Users/chukyapin/ghq/github.com/chukyapin/dotfiles/config/nix/darwin/configuration.nix
 
-{ self, nix-homebrew, ... }:
+{ 
+  self,
+  nix-homebrew,
+  ...
+  }:
 {
   # 他の nix-darwin モジュールをまとめて読み込む
   imports = [
     ./home-manager.nix
     ./homebrew.nix
+    ./nixpkgs.nix
+    ./system.nix
   ];
 
   # この Mac のプラットフォーム
@@ -22,4 +28,7 @@
 
   # Home Manager モジュールが要求するユーザー home
   users.users."chukyapin".home = "/Users/chukyapin";
+
+# 利用するshellを指定する
+programs.fish.enable = true;
 }

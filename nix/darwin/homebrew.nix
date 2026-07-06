@@ -1,4 +1,8 @@
-}
+{
+  nix-homebrew,
+  ...
+}:
+{
   homebrew = {
     enable = true;
     user = "chukyapin";
@@ -16,6 +20,7 @@
     ];
     casks = [
       # brew install --cask microsoft-office
-      "fantaseical"
+      "fantastical"
     ];
   };
+}
