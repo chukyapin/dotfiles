@@ -7,7 +7,8 @@
 }:
 {
   # Set primary user for homebrew
-  system.primaryUser = "chukyapin";
+  # system.primaryUser = "chukyapin";
+  system.primaryUser = username;
   system.defaults = {
     NSGlobalDomain = {
  # マウス/トラックパッド
