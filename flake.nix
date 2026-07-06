@@ -14,6 +14,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
 
@@ -24,9 +29,12 @@
       home-manager,
       nix-darwin,
       nix-homebrew,
+      treefmt-nix,
       ...
     }:
     let
+      username = "chukyapin";
+      darwinHomedir = "/Users/${username}";
       system = "aarch64-darwin"; # Intel なら "x86_64-darwin"
     in
     {
@@ -35,11 +43,11 @@
           inherit system;
 
           specialArgs = {
-            inherit self nix-homebrew;
+            inherit self nix-homebrew usename darwinHomedir;
           };
 
           modules = [
-            ./nix/darwin/configuration.nix
+            ./nix/modules/darwin/configuration.nix
             home-manager.darwinModules.home-manager
             nix-homebrew.darwinModules.nix-homebrew
           ];
