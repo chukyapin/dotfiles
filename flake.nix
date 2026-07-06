@@ -18,25 +18,31 @@
   };
 
   outputs =
-    { self, nixpkgs, home-manager, nix-darwin, nix-homebrew, ... }:
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      nix-darwin,
+      nix-homebrew,
+      ...
+    }:
     let
       system = "aarch64-darwin"; # Intel なら "x86_64-darwin"
     in
     {
       darwinConfigurations."katayamanoMacBook-Pro" =
         nix-darwin.lib.darwinSystem {
-          system = system;
+          inherit system;
 
           specialArgs = {
             inherit self nix-homebrew;
           };
 
           modules = [
-            nix/darwin/configuration.nix
+            ./nix/darwin/configuration.nix
             home-manager.darwinModules.home-manager
             nix-homebrew.darwinModules.nix-homebrew
           ];
         };
     };
 }
-
