@@ -13,34 +13,30 @@
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
 
-  outputs = 
-  {
-    self,
-    nixpkgs,
-    home-manager,
-    nix-darwin,
-    }:
+  outputs =
+    { self, nixpkgs, home-manager, nix-darwin, nix-homebrew, ... }:
     let
-      system = "aarch64-darwin"; # Intel Mac なら "x86_64-darwin"
-      pkgs = nixpkgs.legacyPackages.${system};
+      system = "aarch64-darwin"; # Intel なら "x86_64-darwin"
     in
     {
-      homeConfigurations."chukyapin" =
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            ./nix/home/home-manager.nix
-          ];
-        };
-
       darwinConfigurations."katayamanoMacBook-Pro" =
         nix-darwin.lib.darwinSystem {
-    specialArgs = { inherit self; };
+          system = system;
+
+          specialArgs = {
+            inherit self nix-homebrew;
+          };
+
           modules = [
-            ./nix/darwin/configuration.nix
+            nix/darwin/configuration.nix
+            home-manager.darwinModules.home-manager
+            nix-homebrew.darwinModules.nix-homebrew
           ];
         };
     };
 }
+
