@@ -1,0 +1,8 @@
+[tools]
+bob = "latest"
+node = "22"
+"npm:basedpyright" = "latest"
+"npm:pyright" = "latest"
+"npm:typescript-language-server" = "latest"
+oxlint = "latest"
+tinymist = "latest"
