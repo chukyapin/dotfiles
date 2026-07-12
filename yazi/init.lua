@@ -12,6 +12,7 @@ require("bunny"):setup({
 	hops = {
 		{ key = "h", path = "~" },
 		{ key = "t", path = "/tmp" },
+		{ key = "n", path = "~/develop/github.com/chukyapin/zettelkasten/Literature_Note/農業日誌/" },
 		{ key = "D", path = "~/Desktop", desc = "Desktop" },
 		{ key = "d", path = "~/Documents", desc = "Documents" },
 		{ key = "c", path = "~/.config", desc = "Config files" },

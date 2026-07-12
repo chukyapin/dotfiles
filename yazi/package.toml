@@ -18,7 +18,7 @@ use = "yazi-rs/plugins:git"
 rev = "de33976"
 hash = "36a484acf6a0a0219c543ccb4cee218f"
 
-[[flavor.deps]]
-use = "Miuzarte/synthwave84"
-rev = "865bef9"
-hash = "598126216cc2ab55f98955788f0eb3f3"
+[[plugin.deps]]
+use = "stelcodes/bunny"
+rev = "71b14a3"
+hash = "18a2829738214fe9bca99a2fef19113d"
