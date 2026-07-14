@@ -12,6 +12,10 @@
        url = "github:nix-darwin/nix-darwin";
        inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-homebrew = {
+          url = "github:zhaofengli-wip/nix-homebrew";
+          inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -20,6 +24,7 @@
       nixpkgs,
       home-manager,
       nix-darwin,
+      nix-homebrew,
       ...
       }:
     let
@@ -32,7 +37,7 @@
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ ./nix/home-manager/home.nix ];
+        modules = [ ./nix/home-manager/default.nix ];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
@@ -44,6 +49,7 @@
          modules = [
          ./nix/nix-darwin/default.nix
           home-manager.darwinModules.home-manager
+          nix-homebrew.darwinModules.nix-homebrew 
          ];
        };
     };
