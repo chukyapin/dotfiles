@@ -1,7 +1,7 @@
 # home-manager/home.nix
 { 
-  config,
   pkgs,
+  config,
   ...
   }:
   let
