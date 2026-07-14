@@ -16,7 +16,7 @@
         AppleShowAllExtensions = true;
         KeyRepeat = 1; # リピート速度: 最速
         InitialKeyRepeat = 12; # リピート開始速度: 最速
-        "com.apple.trackpad.scaling" = 1.0 # 軌跡の速さ(0~3)
+        "com.apple.trackpad.scaling" = 1.0; # 軌跡の速さ(0~3)
       };
 
       finder = {
