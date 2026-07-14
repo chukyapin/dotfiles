@@ -42,7 +42,7 @@
 
         specialArgs = { inherit self; };
          modules = [
-         ./nix-darwin/configuration.nix
+         ./nix/nix-darwin/configuration.nix
           home-manager.darwinModules.home-manager
          ];
        };
