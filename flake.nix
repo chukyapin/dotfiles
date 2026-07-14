@@ -4,29 +4,45 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    
     nix-darwin = {
        url = "github:nix-darwin/nix-darwin";
        inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-homebrew = {
-          url = "github:zhaofengli-wip/nix-homebrew";
-          inputs.nixpkgs.follows = "nixpkgs";
+
+
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs =
     {
       self,
+      flake-parts,
       nixpkgs,
-      home-manager,
       nix-darwin,
       nix-homebrew,
+      home-manager,
+      treefmt-nix,
+      git-hooks,
       ...
-      }:
+      }@inputs:
     let
       system = "aarch64-darwin";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -37,7 +53,7 @@
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ ./nix/home-manager/default.nix ];
+        modules = [ ./nix/modules/home/default.nix ];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
@@ -47,7 +63,7 @@
 
         specialArgs = { inherit self; };
          modules = [
-         ./nix/nix-darwin/default.nix
+         ./nix/modules/darwin/default.nix
           home-manager.darwinModules.home-manager
           nix-homebrew.darwinModules.nix-homebrew 
          ];
