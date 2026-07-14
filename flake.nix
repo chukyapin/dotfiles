@@ -29,8 +29,21 @@
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    brew-nix = {
+      url = "github:BatteredBunny/brew-nix";
+      inputs = {
+        brew-api.follows = "brew-api";
+        nix-darwin.follows = "nix-darwin";
+        nixpkgs.follows = "nixpkgs";
+    };
   };
 
+      brew-api = {
+      url = "github:BatteredBunny/brew-api";
+      flake = false;
+    };
+  };
   outputs =
     {
       self,
@@ -41,6 +54,7 @@
       home-manager,
       treefmt-nix,
       git-hooks,
+      brew-nix,
       ...
       }@inputs:
     let
@@ -53,7 +67,10 @@
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ ./nix/modules/home/default.nix ];
+        modules = [
+        ./nix/modules/home/default.nix
+        ./nix/modules/darwin/system.nix
+        ];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix

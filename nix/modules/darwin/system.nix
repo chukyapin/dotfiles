@@ -157,9 +157,9 @@
         NSAutomaticQuoteSubstitutionEnabled = false;
         NSAutomaticSpellingCorrectionEnabled = false;
 
-  #       # Menu bar spacing (replaces Menu Bar Spacing app)
-  #       NSStatusItemSpacing = 2; # Space between menu bar items
-  #       NSStatusItemSelectionPadding = 2; # Padding for selected items
+        # Menu bar spacing (replaces Menu Bar Spacing app)
+        NSStatusItemSpacing = 2; # Space between menu bar items
+        NSStatusItemSelectionPadding = 2; # Padding for selected items
       };
   #
   #     # Screenshot settings

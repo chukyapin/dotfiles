@@ -44,11 +44,11 @@
         FXPreferredViewStyle = "Nlsv";
       };
 
-      dock = {
-        autohide = true;
-        show-recents = false;
-        orientation = "left";
-      };
+      # dock = {
+      #   autohide = true;
+      #   show-recents = false;
+      #   orientation = "left";
+      # };
     };
   };
 
