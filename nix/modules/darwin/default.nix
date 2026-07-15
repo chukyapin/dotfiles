@@ -1,33 +1,20 @@
-{ self, pkgs, ... }:
+{ 
+  # self,
+  pkgs,
+  config,
+  lib,
+  homedir,
+  helpers,
+  ...
+  }:
 {
   nix = {
     enable = false;  # ★ ここを false に
-
-    # ★ 以下は全部コメントアウト or 削除
-    # gc = {
-    #   automatic = true;
-    #   interval = {
-    #     Hour = 9;
-    #     Minute = 0;
-    #   };
-    #   options = "--delete-older-than 7d";
-    # };
-    #
-    # optimise.automatic = true;
-    #
-    # settings = {
-    #   experimental-features = "nix-command flakes";
-    #   download-buffer-size = 134217728;
-    #   trusted-users = [
-    #     "root"
-    #     "chukyapin"
-    #   ];
-    # };
   };
 
   system = {
     stateVersion = 6;
-    configurationRevision = self.rev or self.dirtyRev or null;
+    # configurationRevision = self.rev or self.dirtyRev or null;
     primaryUser = "chukyapin";
 
     defaults = {
@@ -44,11 +31,11 @@
         FXPreferredViewStyle = "Nlsv";
       };
 
-      # dock = {
-      #   autohide = true;
-      #   show-recents = false;
-      #   orientation = "left";
-      # };
+      dock = {
+        autohide = true;
+        show-recents = false;
+        orientation = "left";
+      };
     };
   };
 

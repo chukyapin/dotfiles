@@ -43,9 +43,17 @@
       url = "github:BatteredBunny/brew-api";
       flake = false;
     };
+
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-filter.url = "github:numtide/nix-filter";
   };
+
   outputs =
-    {
+    inputs@{
       self,
       flake-parts,
       nixpkgs,
@@ -55,9 +63,14 @@
       treefmt-nix,
       git-hooks,
       brew-nix,
+      nix-index-database,
+      nix-filter,
       ...
-      }@inputs:
+      }:
     let
+      username = "chukyapin";
+      darwinHomedir = "/Users/${username}";
+      linuxHomedir = "/home/${username}";
       system = "aarch64-darwin";
       pkgs = nixpkgs.legacyPackages.${system};
     in

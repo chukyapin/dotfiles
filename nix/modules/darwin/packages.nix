@@ -12,7 +12,7 @@ let
   };
 in
 {
-  # macOS-specific Nix packages (home-manager)
+  macOS-specific Nix packages (home-manager)
   home.packages =
     with pkgs;
     [
@@ -26,6 +26,7 @@ in
       keycastr
       obsidian
     ]
+
     # brew-nix packages (Homebrew casks managed via Nix)
     ++ (with pkgs.brewCasks; [
       # alt-tab
