@@ -2,6 +2,9 @@
 { config, pkgs, lib, ... }:
 
 {
+
+nix.enable = false;
+
   # 先に hostSpec オプションを定義するモジュールを読み込む
   imports = [
     ../hostspec.nix
