@@ -23,21 +23,21 @@
       nix-darwin,
       ...
     }:
-    let
-      system = "aarch64-darwin";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in
+    # let
+    #   system = "aarch64-darwin";
+    #   pkgs = nixpkgs.legacyPackages.${system};
+    # in
     {
-      # Home Manager（ユーザー環境）
-      homeConfigurations."chukyapin" =
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-
-          # ここには hostSpec を入れない
-          modules = [
-            ./nix/modules/home/default.nix
-          ];
-        };
+      # # Home Manager（ユーザー環境）
+      # homeConfigurations."chukyapin" =
+      #   home-manager.lib.homeManagerConfiguration {
+      #     inherit pkgs;
+      #
+      #     # ここには hostSpec を入れない
+      #     modules = [
+      #       ./nix/modules/home/default.nix
+      #     ];
+      #   };
 
       # nix-darwin（macOS システム設定）
       darwinConfigurations."katayamanoMacBook-Pro" =
@@ -45,6 +45,7 @@
           system = "aarch64-darwin";
           modules = [
             ./nix/modules/darwin/default.nix
+            home-manager.darwinModules.home-manager
           ];
         };
     };

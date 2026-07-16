@@ -5,10 +5,16 @@
 
 nix.enable = false;
 
+  home.packages = with pkgs; [
+  nixfmt
+  git
+  ];
+
   # 先に hostSpec オプションを定義するモジュールを読み込む
   imports = [
     ../hostspec.nix
     ./system.nix
+    ./home-manager.nix
   ];
 
   # ここで hostSpec に「値」を入れる
