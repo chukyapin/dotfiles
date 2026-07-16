@@ -16,6 +16,7 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       home-manager,
       nix-darwin,
@@ -33,6 +34,9 @@
           modules = [
             ./nix/modules/home/default.nix
           ];
+         hostSpec = {
+            username = "chukyapin";
+         };
         };
 
       # nix-darwin (macOS システム設定)

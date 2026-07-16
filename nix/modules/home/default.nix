@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./packages.nix
+  ];
+
   home.username = "chukyapin";
   home.homeDirectory = "/Users/chukyapin";
 
