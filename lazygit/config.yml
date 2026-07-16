@@ -1,8 +1,62 @@
-ui:
-  language: ja
+promptToReturnFromSubprocess: false
+
+gui:
+  nerdFontsVersion: "3"
+  timeFormat: 06/01/02 15:04
+  shortTimeFormat: 15:04
+  sidePanelWidth: 0.25
   theme:
-    activeBorderColor:
-      - "#ff0000"
-      - bold
-  showRandomTip: false
-  showCommandLog: false
+    inactiveBorderColor:
+      - "#777777"
+
+keybinding:
+  files:
+    commitChanges: "C" # 基本的に使わない
+    commitChangesWithEditor: "c"
+    forceFetch: "" # Force push safelyのキーバインドで上書き
+
+git:
+  branchLogCmd: git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(#a0a0a0 reverse)%h%Creset %C(cyan)%ad%Creset %C(#dd4814)%ae%Creset %C(yellow reverse)%d%Creset %n%C(white bold)%s%Creset%n' {{branchName}} --
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never --side-by-side --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+  log:
+    showWholeGraph: true
+  disableForcePushing: true
+  allBranchesLogCmds:
+    - git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(#a0a0a0 reverse)%h%Creset %C(cyan)%ad%Creset %C(#dd4814)%ae%Creset %C(yellow reverse)%d%Creset %n%C(white bold)%s%Creset%n' --
+
+customCommands:
+  - key: "<c-e>"
+    context: commitFiles
+    description: Open the previous version of the file in Neovim
+    command: "git show {{.SelectedLocalCommit.Sha}}^1:{{.SelectedCommitFile.Name}} > /tmp/$(basename {{.SelectedCommitFile.Name}}) && nvim /tmp/$(basename {{.SelectedCommitFile.Name}}) && rm /tmp/$(basename {{.SelectedCommitFile.Name}})"
+    output: terminal
+  - key: "<c-s-p>"
+    description: Force push safely
+    context: global
+    command: "git push --force-with-lease --force-if-includes origin HEAD"
+  - key: "D"
+    context: files
+    description: Open file diff in Neovim
+    command: 'nvim -c "DiffviewOpen HEAD -- {{.SelectedPath}}"'
+    output: terminal
+  - key: "D"
+    context: commitFiles
+    description: Open commit diff in Neovim
+    command: 'nvim -c "DiffviewOpen \"{{.SelectedLocalCommit.Sha}}^1\"..\"{{.SelectedLocalCommit.Sha}}\" -- {{.SelectedCommitFile.Name}}"'
+    output: terminal
+  - key: "D"
+    context: commits
+    description: Open commit diff in Neovim
+    command: 'nvim -c "DiffviewOpen \"{{.SelectedLocalCommit.Sha}}^1\"..\"{{.SelectedLocalCommit.Sha}}\""'
+    output: terminal
+  - key: "<c-m>"
+    context: commits
+    description: Copy commit markdown link
+    command: 'sha={{.SelectedLocalCommit.Sha | quote}}; msg=$(git log -1 --format=%s "$sha"); repo_url=$(gh repo view --json url -q .url); printf "[%s](%s/commit/%s)" "$msg" "$repo_url" "$sha" | pbcopy'
+  - key: "w"
+    context: "localBranches"
+    description: "Create worktree in ~/worktrees/<repo>/<branch>"
+    command: 'repo=$(basename "$(git rev-parse --show-toplevel)"); branch={{.SelectedLocalBranch.Name | quote}}; mkdir -p "$HOME/worktrees/$repo" && git worktree add "$HOME/worktrees/$repo/$branch" "$branch"'
+    output: "terminal"
