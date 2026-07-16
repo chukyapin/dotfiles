@@ -23,7 +23,7 @@
     gibo
     git-secrets
     lefthook
-    czg
+    # czg
     mergiraf # syntax-aware git merge driver
 
     # エディタ/ターミナル
@@ -41,10 +41,10 @@
     deno
     rumdl # Markdown linter
     nodejs # for Mason LSP servers
-    playwright-cli
+    # playwright-cli
     go # for gopls etc.
     rustup # for building sniprun.nvim, etc.
-    portless # dev サーバーのポート自動割り当て
+    # portless # dev サーバーのポート自動割り当て
 
     # ビルドツール
     cmake
@@ -73,11 +73,11 @@
     presenterm # Terminal slideshow
     yazi
     lazydocker
-    skanehira-ghost # Background process manager
-    version-lsp # Package version checker LSP
-    yaskkserv2 # SKK server
-    safe-chain # Block malicious packages
-    ccsession # claude --resume の fzf フロントエンド
+    # skanehira-ghost # Background process manager
+    # version-lsp # Package version checker LSP
+    # yaskkserv2 # SKK server
+    # safe-chain # Block malicious packages
+    # ccsession # claude --resume の fzf フロントエンド
 
     # ネタ系
     cowsay
@@ -94,7 +94,7 @@
 
     # ノート
     nb
-    ntn # Notion CLI
+    # ntn # Notion CLI
 
     # その他
     translate-shell

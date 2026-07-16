@@ -330,7 +330,7 @@
 
     # Homebrew ディレクトリの作成とパーミッション修正
     # ユーザー名をNix設定から直接取得（SUDO_USERはnix run経由では空になるため）
-    BREW_USER="${config.system.primaryUser}"
+    BREW_USER="${config.hostSpec.username}"
     echo "BREW_USER=$BREW_USER"
 
     if [[ -n "$BREW_USER" ]]; then

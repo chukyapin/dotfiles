@@ -2,12 +2,13 @@
   description = "Home Manager configuration of chukyapin";
 
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,19 +28,18 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      # Home Manager (ユーザー環境)
+      # Home Manager（ユーザー環境）
       homeConfigurations."chukyapin" =
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
+
+          # ここには hostSpec を入れない
           modules = [
             ./nix/modules/home/default.nix
           ];
-         hostSpec = {
-            username = "chukyapin";
-         };
         };
 
-      # nix-darwin (macOS システム設定)
+      # nix-darwin（macOS システム設定）
       darwinConfigurations."katayamanoMacBook-Pro" =
         nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
