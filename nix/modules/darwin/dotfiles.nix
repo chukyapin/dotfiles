@@ -31,19 +31,6 @@ in
 
       link_force "${dotfilesDir}/karabiner" "${configHome}/karabiner"
 
-      # # Finicky configuration
-      # link_force "${dotfilesDir}/finicky.js" "${homeDirectory}/.finicky.js"
-      #
-      # # Xcode key bindings
-      # $DRY_RUN_CMD mkdir -p "${homeDirectory}/Library/Developer/Xcode/UserData/KeyBindings"
-      # link_force "${dotfilesDir}/xcode/Default.idekeybindings" "${homeDirectory}/Library/Developer/Xcode/UserData/KeyBindings/Default.idekeybindings"
-      #
-      # # Yabai window manager
-      # link_force "${dotfilesDir}/yabai" "${configHome}/yabai"
-      #
-      # # Skhd hotkey daemon
-      # link_force "${dotfilesDir}/skhd" "${configHome}/skhd"
-
       # Pip configuration (macOS paths)
       $DRY_RUN_CMD mkdir -p "${homeDirectory}/Library/Application Support/pip"
       link_force "${dotfilesDir}/pip/pip.conf" "${homeDirectory}/Library/Application Support/pip/pip.conf"

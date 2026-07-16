@@ -12,38 +12,37 @@ let
   };
 in
 {
-  macOS-specific Nix packages (home-manager)
+  # macOS-specific Nix packages (home-manager)
   home.packages =
     with pkgs;
     [
       # CLI tools
-      # blueutil
-      # audio-priority-bar
-      # tailscale
+      blueutil
+      audio-priority-bar
+      tailscale
 
       # GUI applications (available in nixpkgs)
-      # cyberduck
+      cyberduck
       keycastr
       obsidian
     ]
-
     # brew-nix packages (Homebrew casks managed via Nix)
     ++ (with pkgs.brewCasks; [
-      # alt-tab
+      alt-tab
       appcleaner
-      # beekeeper-studio
-      # betterdisplay
-      # bluesnooze
-      # cursor
+      beekeeper-studio
+      betterdisplay
+      bluesnooze
+      cursor
       dockdoor
-      # figma
-      # istherenet
-      # maestral
-      # obs
-      # signal
-      # stats
-      # vlc
-      # zed
+      figma
+      istherenet
+      maestral
+      obs
+      signal
+      stats
+      vlc
+      zed
       zoom
     ])
     # brew-nix packages requiring overrides

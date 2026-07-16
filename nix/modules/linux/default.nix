@@ -9,10 +9,10 @@
 }:
 {
   imports = [
-    # macOS-specific packages
+    # Linux-specific packages
     ./packages.nix
 
-    # macOS-specific dotfiles
+    # Linux-specific dotfiles
     (import ./dotfiles.nix {
       inherit
         pkgs
@@ -22,8 +22,9 @@
         helpers
         ;
     })
-
-    # Docker configuration (OrbStack)
-    ./programs/docker.nix
   ];
+
+  # nix-index for command-not-found and comma
+  programs.nix-index.enable = true;
+  programs.nix-index-database.comma.enable = true;
 }
