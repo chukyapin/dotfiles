@@ -1,15 +1,21 @@
-{ config, pkgs, ... }:
+# nix/modules/darwin/default.nix みたいなイメージ
+{ config, pkgs, lib, ... }:
 
 {
-  # ここでだけ hostSpec を定義
-  hostSpec = {
-    username = "chukyapin";
-  };
-
-  # いつもの nix-darwin 設定
-  system.primaryUser = "chukyapin";
-  # ほかの darwin モジュールや imports...
+  # 先に hostSpec オプションを定義するモジュールを読み込む
   imports = [
+    ../hostspec.nix
     ./system.nix
   ];
+
+  # ここで hostSpec に「値」を入れる
+  hostSpec = {
+    username = "chukyapin";
+    # 必要なら他もここで上書き
+    hostName = "katayamanoMacBook-Pro";
+    system = "aarch64-darwin";
+  };
+
+  # nix-darwin の標準オプション
+  system.primaryUser = config.hostSpec.username;
 }

@@ -22,12 +22,12 @@
     # --------------------------------------------------------------------------
     dock = {
       # Dockのサイズ
-      tilesize = 34;
+      tilesize = 20;
       # 拡大機能
       magnification = true;
       largesize = 65;
       # Dockの位置 ("left", "bottom", "right")
-      orientation = "bottom";
+      orientation = "left";
       # 自動的に非表示
       autohide = true;
       # 非表示/表示のアニメーション時間 (0で即時)
