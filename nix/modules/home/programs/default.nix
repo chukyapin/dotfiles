@@ -10,7 +10,7 @@
 }:
 {
   imports = [
-    AI tools
+    # AI tools
     ./ai-tools.nix
 
     # Fish shell plugin configuration
@@ -23,7 +23,7 @@
         ;
     })
 
-    Claude Code configuration
+    # Claude Code configuration
     (import ./claude-code {
       inherit
         pkgs
@@ -33,7 +33,7 @@
         ;
     })
 
-    Codex configuration
+    # Codex configuration
     (import ./codex.nix {
       inherit
         pkgs
