@@ -1,8 +1,6 @@
 { 
-  lib,
   config,
   pkgs,
-  hostSpec,
   ...
 }:
 
@@ -11,8 +9,7 @@
     ./packages.nix
   ];
 
-  # home.username = "chukyapin";
-  home.username = hostSpec.username;
+  home.username = "chukyapin";
   home.homeDirectory = "/Users/chukyapin";
 
   home.stateVersion = "26.05"; # Please read the comment before changing.

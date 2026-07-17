@@ -324,64 +324,64 @@
   # ============================================================================
   # Activation Scripts
   # ============================================================================
-
-  system.activationScripts.extraActivation.text = ''
-    echo "=== extraActivation: Starting ==="
-
-    # Homebrew ディレクトリの作成とパーミッション修正
-    # ユーザー名をNix設定から直接取得（SUDO_USERはnix run経由では空になるため）
-    BREW_USER="${config.hostSpec.username}"
-    echo "BREW_USER=$BREW_USER"
-
-    if [[ -n "$BREW_USER" ]]; then
-      # ARM Homebrew
-      if [[ ! -d "/opt/homebrew" ]]; then
-        echo "Creating Homebrew directory for $BREW_USER..."
-        /bin/mkdir -p /opt/homebrew
-      fi
-      echo "Fixing Homebrew directory permissions for $BREW_USER..."
-      /usr/sbin/chown -R "$BREW_USER":admin /opt/homebrew
-
-      # Intel Homebrew (Rosetta)
-      if [[ -d "/usr/local/Homebrew" ]]; then
-        echo "Fixing Intel Homebrew directory permissions for $BREW_USER..."
-        /usr/sbin/chown -R "$BREW_USER":admin /usr/local/Homebrew
-        /usr/sbin/chown -R "$BREW_USER":admin /usr/local/bin 2>/dev/null || true
-      fi
-    else
-      echo "WARNING: BREW_USER is not set (config.hostSpec.username is empty)"
-    fi
-
-    # Xcode Command Line Tools のチェックとインストール
-    if ! /usr/bin/xcrun -f clang >/dev/null 2>&1; then
-      echo "Installing Xcode Command Line Tools..."
-      touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-      PROD=$(/usr/sbin/softwareupdate -l | grep "\*.*Command Line" | tail -n 1 | sed 's/^[^C]* //')
-      /usr/sbin/softwareupdate -i "$PROD" --verbose
-      rm -f /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-    fi
-
-    # Rosetta 2 のインストール (Apple Silicon)
-    if [[ "$(uname -m)" == "arm64" ]] && ! /usr/bin/pgrep -q oahd; then
-      echo "Installing Rosetta 2..."
-      /usr/sbin/softwareupdate --install-rosetta --agree-to-license
-    fi
-
-    echo "=== extraActivation: Done ==="
-  '';
-
-  # F8キーなどの誤操作で Apple Music (Music.app) が勝手に起動するのを防ぐ。
-  # rcd (Remote Control Daemon) が再生キーをフックして Music.app を起動するため、
-  # ユーザーの launchd から無効化する。
-  # 参考: https://zenn.dev/catnose99/scraps/9c9858cc2d9f70
-  system.activationScripts.disableAppleMusicRcd.text = ''
-    USER_NAME="${config.hostSpec.username}"
-    if [[ -n "$USER_NAME" ]]; then
-      USER_UID="$(/usr/bin/id -u "$USER_NAME")"
-      if [[ -n "$USER_UID" ]]; then
-        echo "Disabling com.apple.rcd for uid=$USER_UID ($USER_NAME)..."
-        /bin/launchctl disable "gui/$USER_UID/com.apple.rcd" || true
-      fi
-    fi
-  '';
+  #
+  # system.activationScripts.extraActivation.text = ''
+  #   echo "=== extraActivation: Starting ==="
+  #
+  #   # Homebrew ディレクトリの作成とパーミッション修正
+  #   # ユーザー名をNix設定から直接取得（SUDO_USERはnix run経由では空になるため）
+  #   BREW_USER="${config.hostSpec.username}"
+  #   echo "BREW_USER=$BREW_USER"
+  #
+  #   if [[ -n "$BREW_USER" ]]; then
+  #     # ARM Homebrew
+  #     if [[ ! -d "/opt/homebrew" ]]; then
+  #       echo "Creating Homebrew directory for $BREW_USER..."
+  #       /bin/mkdir -p /opt/homebrew
+  #     fi
+  #     echo "Fixing Homebrew directory permissions for $BREW_USER..."
+  #     /usr/sbin/chown -R "$BREW_USER":admin /opt/homebrew
+  #
+  #     # Intel Homebrew (Rosetta)
+  #     if [[ -d "/usr/local/Homebrew" ]]; then
+  #       echo "Fixing Intel Homebrew directory permissions for $BREW_USER..."
+  #       /usr/sbin/chown -R "$BREW_USER":admin /usr/local/Homebrew
+  #       /usr/sbin/chown -R "$BREW_USER":admin /usr/local/bin 2>/dev/null || true
+  #     fi
+  #   else
+  #     echo "WARNING: BREW_USER is not set (config.hostSpec.username is empty)"
+  #   fi
+  #
+  #   # Xcode Command Line Tools のチェックとインストール
+  #   if ! /usr/bin/xcrun -f clang >/dev/null 2>&1; then
+  #     echo "Installing Xcode Command Line Tools..."
+  #     touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+  #     PROD=$(/usr/sbin/softwareupdate -l | grep "\*.*Command Line" | tail -n 1 | sed 's/^[^C]* //')
+  #     /usr/sbin/softwareupdate -i "$PROD" --verbose
+  #     rm -f /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+  #   fi
+  #
+  #   # Rosetta 2 のインストール (Apple Silicon)
+  #   if [[ "$(uname -m)" == "arm64" ]] && ! /usr/bin/pgrep -q oahd; then
+  #     echo "Installing Rosetta 2..."
+  #     /usr/sbin/softwareupdate --install-rosetta --agree-to-license
+  #   fi
+  #
+  #   echo "=== extraActivation: Done ==="
+  # '';
+  #
+  # # F8キーなどの誤操作で Apple Music (Music.app) が勝手に起動するのを防ぐ。
+  # # rcd (Remote Control Daemon) が再生キーをフックして Music.app を起動するため、
+  # # ユーザーの launchd から無効化する。
+  # # 参考: https://zenn.dev/catnose99/scraps/9c9858cc2d9f70
+  # system.activationScripts.disableAppleMusicRcd.text = ''
+  #   USER_NAME="${config.hostSpec.username}"
+  #   if [[ -n "$USER_NAME" ]]; then
+  #     USER_UID="$(/usr/bin/id -u "$USER_NAME")"
+  #     if [[ -n "$USER_UID" ]]; then
+  #       echo "Disabling com.apple.rcd for uid=$USER_UID ($USER_NAME)..."
+  #       /bin/launchctl disable "gui/$USER_UID/com.apple.rcd" || true
+  #     fi
+  #   fi
+  # '';
 }

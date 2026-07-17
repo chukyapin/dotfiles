@@ -25,12 +25,12 @@ users.users."chukyapin" = {
   ];
 
   # ここで hostSpec に「値」を入れる
-  hostSpec = {
-    username = "chukyapin";
-    # 必要なら他もここで上書き
-    hostName = "katayamanoMacBook-Pro";
-    system = "aarch64-darwin";
-  };
+  # hostSpec = {
+  #   username = "chukyapin";
+  #   # 必要なら他もここで上書き
+  #   hostName = "katayamanoMacBook-Pro";
+  #   system = "aarch64-darwin";
+  # };
 
   # nix-darwin の標準オプション
   system.primaryUser = config.hostSpec.username;
