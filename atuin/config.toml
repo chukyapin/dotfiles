@@ -66,7 +66,7 @@ inline_height = 20
 
 ## enable or disable showing a preview of the selected command
 ## useful when the command is longer than the terminal width and is cut off
-show_preview = true
+# show_preview = false
 
 ## what to do when the escape key is pressed when searching
 ## possible values: return-original, return-query
@@ -114,17 +114,6 @@ show_preview = true
 ## amount of commands in your history.
 # show_help = true
 
-deduplicate = "full"
-filter = "exit_code == 0"
-
-
-store_failed = false
-
-history_filter = [
-  "^rm ",
-  "^a ",
-  "^z ",
-]
 ## Defaults to true. This matches history against a set of default regex, and will not save it if we get a match. Defaults include
 ## 1. AWS key id
 ## 2. Github pat (old and new)
@@ -136,37 +125,3 @@ history_filter = [
 ## Defaults to true. If enabled, upon hitting enter Atuin will immediately execute the command. Press tab to return to the shell and edit.
 # This applies for new installs. Old installs will keep the old behaviour unless configured otherwise.
 enter_accept = true
-
-[keymap]
-mode = "vim"  # emacs / vim の切り替え
-
-[keymap.vim-normal]
-j = "down"
-k = "up"
-gg = "top"
-G = "bottom"
-i = "insert"
-a = "insert-after"
-o = "insert-at-end"
-O = "insert-at-start"
-u = "undo"
-ctrl-r = "redo"
-n = "next-search"
-N = "prev-search"
-slash = "search"          # /
-question = "reverse-search" # ?
-h = "left"
-l = "right"
-x = "delete-char"
-dd = "delete-line"
-yy = "yank-line"
-p = "paste-after"
-P = "paste-before"
-ctrl-c = "exit"
-esc = "exit"
-
-[keymap.vim-insert]
-esc = "normal-mode"
-ctrl-c = "normal-mode"
-ctrl-n = "next"
-ctrl-p = "prev"
