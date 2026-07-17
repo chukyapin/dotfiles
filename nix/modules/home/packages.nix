@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs; [
     # シェルツール
+    atuin
     bat
     eza
     fd
@@ -31,9 +32,13 @@
     starship
     tmux
     herdr
+    
 
     # 開発ツール
     lua # wezterm の preview スクリプト等で使用
+    nixd
+    nixfmt
+    xh
     stylua
     typos
     actionlint
@@ -72,6 +77,7 @@
     glow
     presenterm # Terminal slideshow
     yazi
+    lazygit
     lazydocker
     # skanehira-ghost # Background process manager
     # version-lsp # Package version checker LSP
@@ -101,5 +107,10 @@
     nkf
     rename
     inetutils # telnet
+
+    # GUI アプリ
+    obsidian
+    spotify
+    raycast
   ];
 }

@@ -3,9 +3,14 @@
 
 {
 
+# unfree を全て許可する場合
+  nixpkgs.config.allowUnfree = true;
+
 nix.enable = false;
 
-users.users."chukyapin".home = "/Users/chukyapin";
+users.users."chukyapin" = {
+  home = "/Users/chukyapin";
+};
   # home.packages = with pkgs; [
   # nixfmt
   # git
@@ -13,7 +18,7 @@ users.users."chukyapin".home = "/Users/chukyapin";
 
   # 先に hostSpec オプションを定義するモジュールを読み込む
   imports = [
-    ../hostspec.nix
+    ../hostSpec.nix
     ./system.nix
     ./home-manager.nix
     ./homebrew.nix
