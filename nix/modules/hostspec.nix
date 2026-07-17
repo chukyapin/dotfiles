@@ -1,5 +1,3 @@
-
-# nix/modules/common/host-spec-options.nix
 { lib, ... }:
 {
   options.hostSpec = {
