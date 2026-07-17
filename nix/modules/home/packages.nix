@@ -1,4 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, lib, osConfig ? null, ... }:
+let
+  hostSpec = if osConfig != null then osConfig.hostSpec else {
+    enableGUI = true;
+    isMinimal = false;
+    isWork = false;
+  };
+in
 {
   home.packages = with pkgs; [
     # シェルツール
@@ -49,7 +56,7 @@
     # playwright-cli
     go # for gopls etc.
     rustup # for building sniprun.nvim, etc.
-    # portless # dev サーバーのポート自動割り当て
+    # portless # dev サーバー of port allocation
 
     # ビルドツール
     cmake
@@ -107,10 +114,10 @@
     nkf
     rename
     inetutils # telnet
-
+  ] ++ (lib.optionals hostSpec.enableGUI [
     # GUI アプリ
     obsidian
     spotify
     raycast
-  ];
+  ]);
 }

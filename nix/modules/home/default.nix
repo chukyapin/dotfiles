@@ -1,6 +1,7 @@
-{ 
+{
   config,
   pkgs,
+  osConfig ? null,
   ...
 }:
 
@@ -9,11 +10,10 @@
     ./packages.nix
   ];
 
-  home.username = "chukyapin";
-  home.homeDirectory = "/Users/chukyapin";
+  home.username = if osConfig != null then osConfig.hostSpec.username else "chukyapin";
+  home.homeDirectory = if osConfig != null then "/Users/${osConfig.hostSpec.username}" else "/Users/chukyapin";
 
   home.stateVersion = "26.05"; # Please read the comment before changing.
-
 
   home.file = {
   };

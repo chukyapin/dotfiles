@@ -1,17 +1,14 @@
-{
-  nix-homebrew,
-  ...
-}:
+{ config, ... }:
 {
   nix-homebrew = {
     enable = true;
-    user = "chukyapin";
+    user = config.hostSpec.username;
     enableRosetta = false;
     autoMigrate = true;
   };
 
   homebrew = {
     enable = true;
-    user = "chukyapin";
+    user = config.hostSpec.username;
   };
 }

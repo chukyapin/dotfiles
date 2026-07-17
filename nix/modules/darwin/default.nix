@@ -1,36 +1,24 @@
-# nix/modules/darwin/default.nix みたいなイメージ
-{ config, pkgs, lib, ... }:
+{ config, ... }:
 
 {
-
-# unfree を全て許可する場合
+  # unfree を全て許可する場合
   nixpkgs.config.allowUnfree = true;
 
-nix.enable = false;
+  # Nix デーモンの設定
+  nix.enable = false;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-users.users."chukyapin" = {
-  home = "/Users/chukyapin";
-};
-  # home.packages = with pkgs; [
-  # nixfmt
-  # git
-  # ];
+  users.users."${config.hostSpec.username}" = {
+    home = "/Users/${config.hostSpec.username}";
+  };
 
-  # 先に hostSpec オプションを定義するモジュールを読み込む
+  # 関連モジュールのインポート
   imports = [
     ../hostSpec.nix
     ./system.nix
     ./home-manager.nix
     ./homebrew.nix
   ];
-
-  # ここで hostSpec に「値」を入れる
-  # hostSpec = {
-  #   username = "chukyapin";
-  #   # 必要なら他もここで上書き
-  #   hostName = "katayamanoMacBook-Pro";
-  #   system = "aarch64-darwin";
-  # };
 
   # nix-darwin の標準オプション
   system.primaryUser = config.hostSpec.username;

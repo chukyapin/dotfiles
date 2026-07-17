@@ -37,18 +37,27 @@
           };
 
           modules = [
-            # あなたの darwin 側メインモジュール
+            # darwin 側メインモジュール
             ./nix/modules/darwin/default.nix
-
-            # もし zenn どおりに configuration.nix / home_manager.nix / homebrew.nix
-            # を使っているなら、そちらを読む構成でもよい:
-            # ./nix-darwin/configuration.nix
 
             # Home Manager を nix-darwin に組み込む
             home-manager.darwinModules.home-manager
 
             # nix-homebrew を組み込む
             nix-homebrew.darwinModules.nix-homebrew
+
+            # ホスト固有の設定
+            {
+              hostSpec = {
+                hostName = "katayamanoMacBook-Pro";
+                username = "chukyapin";
+                system = "aarch64-darwin";
+                isDarwin = true;
+                isMinimal = false;
+                isWork = false;
+                enableGUI = true;
+              };
+            }
           ];
         };
     };
