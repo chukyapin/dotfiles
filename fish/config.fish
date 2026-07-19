@@ -32,7 +32,12 @@ fish_add_path /var/lib/flatpak/exports/bin/
 fish_add_path ~/.dotnet/tools
 fish_add_path ~/.local/share/mise/shims
 fish_add_path ~/.local/share/bob/nvim-used/bin
-# fish_add_path ~/.local/share/bob/nvim-bin/nvim
+
+if [ -e ~/.local/share/bob/nvim-used ]
+    fish_add_path ~/.local/share/bob/nvim-used/bin
+else
+    fish_add_path ~/.local/share/bob/nvim-bin/
+end
 
 set -gx DENO_INSTALL "~/.deno"
 fish_add_path ~/.deno/bin

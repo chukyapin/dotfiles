@@ -17,8 +17,8 @@ abbr cp "cp -riv"
 abbr mkdir "mkdir -vp"
 alias tree "eza --icons -T --no-user"
 alias ls "eza --color=always --icons --group-directories-first"
-alias la 'eza --color=always --icons --group-directories-first --all'
-alias ll 'eza --color=always --icons --group-directories-first --all --long'
+alias la "eza --color=always --icons --group-directories-first --all"
+alias ll "eza --color=always --icons --group-directories-first --all --long"
 abbr l ll
 abbr lg lazygit
 abbr ld lazydocker
