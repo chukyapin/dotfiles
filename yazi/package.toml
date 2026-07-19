@@ -22,3 +22,8 @@ hash = "36a484acf6a0a0219c543ccb4cee218f"
 use = "stelcodes/bunny"
 rev = "71b14a3"
 hash = "18a2829738214fe9bca99a2fef19113d"
+
+[[flavor.deps]]
+use = "BennyOe/tokyo-night"
+rev = "8e6296f"
+hash = "d9da921c3bd37ba32ee27a8a7a40461f"
