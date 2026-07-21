@@ -14,6 +14,7 @@ in
     eza
     fd
     fzf
+    mise
     hyperfine
     ripgrep
     zoxide
