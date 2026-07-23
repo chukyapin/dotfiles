@@ -1,0 +1,12 @@
+[experimental]
+kitty_graphics = true
+
+[theme]
+name = "catppuccin"
+auto_switch = false
+
+[update]
+channel = "stable" # For Nix management
+version_check = false # For Nix management
+
+
