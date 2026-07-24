@@ -1,6 +1,5 @@
 [tools]
 biome = "latest"
-bob = "latest"
 go = "latest"
 gofumpt = "latest"
 golangci-lint = "latest"
