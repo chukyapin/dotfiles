@@ -9,8 +9,8 @@ require("keys").setup(config)
 
 config.automatically_reload_config = true
 config.window_close_confirmation = "NeverPrompt" -- AlwaysPrompt or NeverPrompt
-config.window_background_opacity = 0.70
-config.macos_window_background_blur = 30
+config.window_background_opacity = 0.80
+config.macos_window_background_blur = 40
 config.audible_bell = "Disabled"
 
 config.hide_mouse_cursor_when_typing = true
