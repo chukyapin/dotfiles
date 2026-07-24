@@ -9,11 +9,12 @@ in
 {
   home.packages = with pkgs; [
     # シェルツール
+    atuin
     bat
     eza
     fd
     fzf
-    mise
+    # mise
     hyperfine
     ripgrep
     zoxide
@@ -39,6 +40,7 @@ in
     starship
     tmux
     herdr
+    wezterm
     
 
     # 開発ツール
@@ -49,7 +51,6 @@ in
     stylua
     typos
     actionlint
-    tree-sitter
     deno
     rumdl # Markdown linter
     nodejs # for Mason LSP servers
