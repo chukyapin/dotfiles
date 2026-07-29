@@ -10,7 +10,7 @@ end
 # Cursor styles
 set -gx fish_vi_force_cursor 1
 set -gx fish_cursor_default block
-set -gx fish_cursor_inseert line blink
+set -gx fish_cursor_insert line blink
 set -gx fish_cursor_visual block
 set -gx fish_cursor_replace_one underscore
 
@@ -31,7 +31,6 @@ fish_add_path ~/.local/share/bob-nvim/nvim-linux64/bin
 fish_add_path /var/lib/flatpak/exports/bin/
 fish_add_path ~/.dotnet/tools
 fish_add_path ~/.local/share/mise/shims
-fish_add_path ~/.local/share/bob/nvim-used/bin
 
 if [ -e ~/.local/share/bob/nvim-used ]
     fish_add_path ~/.local/share/bob/nvim-used/bin
@@ -42,8 +41,6 @@ end
 set -gx DENO_INSTALL "~/.deno"
 fish_add_path ~/.deno/bin
 
-# set -Ux PATH $HOME/.emacs.d/bin $PATH
-fish_add_path ~/.emacs.d/bin
 
 set -gx EDITOR (which nvim)
 set -gx VISUAL $EDITOR
