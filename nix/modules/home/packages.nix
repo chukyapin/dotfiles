@@ -18,6 +18,7 @@ in
     hyperfine
     ripgrep
     zoxide
+    television
     tree
     wget
     jq
@@ -36,11 +37,14 @@ in
     mergiraf # syntax-aware git merge driver
 
     # エディタ/ターミナル
+    emacs
     neovim
     starship
+    cmux
     tmux
     herdr
     wezterm
+    kanata
     
 
     # 開発ツール
@@ -48,7 +52,7 @@ in
     nixd
     nixfmt
     xh
-    stylua
+    # stylua
     typos
     actionlint
     deno
@@ -62,6 +66,7 @@ in
     # ビルドツール
     cmake
     ninja
+    just
 
     # インフラ/DevOps
     awscli2
@@ -117,6 +122,7 @@ in
     inetutils # telnet
   ] ++ (lib.optionals hostSpec.enableGUI [
     # GUI アプリ
+
     obsidian
     spotify
     raycast
