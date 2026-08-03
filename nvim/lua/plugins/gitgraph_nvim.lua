@@ -1,5 +1,5 @@
 return {
-  "isakbm/gitgraph.nvim",
+  "https://github.com/isakbm/gitgraph.nvim",
   cond = true,
   dependencies = { "sindrets/diffview.nvim" },
   opts = {

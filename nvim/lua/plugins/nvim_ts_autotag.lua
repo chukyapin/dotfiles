@@ -1,5 +1,5 @@
 return {
-  "windwp/nvim-ts-autotag",
+  "https://github.com/windwp/nvim-ts-autotag",
   ft = { "html", "vue", "svelte", "tsx" },
   opts = {
     opts = {

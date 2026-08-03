@@ -1,5 +1,5 @@
 return {
-  "stevearc/quicker.nvim",
+  "https://github.com/stevearc/quicker.nvim",
   event = "FileType qf",
   opts = {},
 }

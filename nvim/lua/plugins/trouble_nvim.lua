@@ -53,7 +53,7 @@ local function cprev_cyclic()
 end
 
 return {
-  "folke/trouble.nvim",
+  "https://github.com/folke/trouble.nvim",
   cmd = "Trouble",
   keys = {
     {

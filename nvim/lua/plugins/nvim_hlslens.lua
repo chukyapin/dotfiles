@@ -1,6 +1,6 @@
 return {
   {
-    "kevinhwang91/nvim-hlslens",
+    "https://github.com/kevinhwang91/nvim-hlslens",
     cond = true,
     event = { "VeryLazy" },
     config = function()

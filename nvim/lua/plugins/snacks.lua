@@ -51,7 +51,7 @@ end
 local git_recent = require("snacks.git_recent")
 
 return {
-  "folke/snacks.nvim",
+  "https://github.com/folke/snacks.nvim",
   priority = 1000,
   lazy = false,
   -- stylua: ignore start
