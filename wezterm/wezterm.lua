@@ -9,8 +9,8 @@ require("keys").setup(config)
 
 config.automatically_reload_config = true
 config.window_close_confirmation = "NeverPrompt" -- AlwaysPrompt or NeverPrompt
-config.window_background_opacity = 0.90
-config.macos_window_background_blur = 50
+config.window_background_opacity = 0.80
+config.macos_window_background_blur = 40
 config.audible_bell = "Disabled"
 
 config.hide_mouse_cursor_when_typing = true
@@ -28,10 +28,10 @@ config.window_decorations = "RESIZE"
 config.adjust_window_size_when_changing_font_size = false
 
 -- Fonts
-config.font_size = 16
+config.font_size = 15
 config.bold_brightens_ansi_colors = true
 
--- 英数字: Fira Code / 日本語: PlemolJP Console NF
+-- -- 英数字: Fira Code / 日本語: PlemolJP Console NF
 config.font = wezterm.font_with_fallback({
 	"Fira Code",
 	"PlemolJP Console NF",
