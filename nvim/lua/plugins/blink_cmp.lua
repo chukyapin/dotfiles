@@ -11,7 +11,7 @@ return {
   opts = {
     keymap = {
       preset = "enter",
-      ["<F5>"] = { "show", "show_documentation", "hide_documentation" },
+      ["<F7>"] = { "show", "show_documentation", "hide_documentation" },
     },
     completion = {
       documentation = { auto_show = true, window = { border = "rounded" } },
@@ -59,16 +59,26 @@ return {
     signature = { window = { border = "rounded" } },
     snippets = { preset = "luasnip" },
     sources = {
-      default = { "lsp", "path", "snippets", "buffer" },
+      default = { "dictionary", "lsp", "path", "snippets", "buffer" },
       per_filetype = {
-        lua = { "lazydev", "lsp", "path", "snippets", "buffer" },
-        markdown = { "lsp", "path", "snippets" },
+        lua = { "dictionary", "lazydev", "lsp", "path", "snippets", "buffer" },
+        markdown = { "dictionary", "lsp", "path", "snippets" },
       },
       providers = {
         lazydev = {
           name = "LazyDev",
           module = "lazydev.integrations.blink",
           score_offset = 100,
+        },
+        dictionary = {
+          module = "blink-cmp-dictionary",
+          name = "Dict",
+          min_keyword_length = 2,
+          -- opts = {
+          --   dictionary_files = {
+          --     vim.fn.stdpath("config") .. "/lua/envs/cmp-dictionary.txt",
+          --   },
+          -- },
         },
         -- FIXME: 初回に表示されないことがある問題
         -- snippets = {
