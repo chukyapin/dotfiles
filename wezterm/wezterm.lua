@@ -7,10 +7,11 @@ require("mouse").setup(config)
 require("links").setup(config)
 require("keys").setup(config)
 
+config.color_scheme = "Tokyo Night"
 config.automatically_reload_config = true
 config.window_close_confirmation = "NeverPrompt" -- AlwaysPrompt or NeverPrompt
-config.window_background_opacity = 0.80
-config.macos_window_background_blur = 40
+config.window_background_opacity = 0.88
+config.macos_window_background_blur = 30
 config.audible_bell = "Disabled"
 
 config.hide_mouse_cursor_when_typing = true
@@ -23,7 +24,7 @@ config.cursor_thickness = 4
 config.underline_position = -6
 config.enable_kitty_graphics = true
 
-config.max_fps = 120
+-- config.max_fps = 120
 config.window_decorations = "RESIZE"
 config.adjust_window_size_when_changing_font_size = false
 
@@ -63,6 +64,6 @@ config.scrollback_lines = 10000
 -- Command Palette
 config.command_palette_font_size = 18
 config.command_palette_bg_color = "#394b70"
-config.command_palette_fg_color = "#000001"
+config.command_palette_fg_color = "#828bb8"
 
 return config
