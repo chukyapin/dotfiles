@@ -1,8 +1,8 @@
 return {
   "https://github.com/stevearc/oil.nvim",
   keys = {
-    { "<Space>o", ":Oil --float<CR>", silent = true },
-    -- { "<Space>o", ":Oil<CR>", silent = true },
+    -- { "<Space>o", ":Oil --float<CR>", silent = true },
+    { "<Space>o", ":Oil<CR>", silent = true },
   },
   cmd = "Oil",
   opts = {
@@ -17,7 +17,7 @@ return {
       ["<C-t>"] = { "actions.select", opts = { tab = true } },
       ["<C-p>"] = "actions.preview",
       ["<C-l>"] = "actions.refresh",
-      ["<TAB>"] = { "actions.parent", mode = "n" }, -- Ctrl + i
+      ["<C-i>"] = { "actions.parent", mode = "n" }, -- Ctrl + i
       ["gh"] = { "actions.open_cwd", mode = "n" },
       ["g?"] = { "actions.show_help", mode = "n" },
       ["gs"] = { "actions.change_sort", mode = "n" },
@@ -53,6 +53,7 @@ return {
     },
     view_options = {
       show_open = true,
+      show_hidden = true,
     },
   },
 }
