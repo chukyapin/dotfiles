@@ -4,7 +4,7 @@ return {
   event = "InsertEnter",
   opts = {
     suggestion = {
-      aouto_trigger = true,
+      auto_trigger = true,
       keymap = {
         accept = "<D-k>",
         next = "<D-]>",
@@ -36,27 +36,3 @@ return {
     end, { silent = true, desc = "Copilot Accept" })
   end,
 }
--- return {
---   "zbirenbaum/copilot.lua",
---   cmd = "Copilot",
---   event = "InsertEnter",
---   config = function()
---     require("copilot").setup({
---       suggestion = { enabled = true },
---       panel = { enabled = true },
---       server_opts_overrides = {
---         trace = "verbose",
---         cmd = {
---           vim.fn.expand("~/.local/share/mise/shims/copilot-language-server"),
---           "--stdio",
---         },
---         settings = {
---           advanced = {
---             listCount = 10,
---             inlineSuggestCount = 3,
---           },
---         },
---       },
---     })
---   end,
--- }
