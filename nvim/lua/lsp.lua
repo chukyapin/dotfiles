@@ -11,30 +11,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
     local opts = { buffer = ev.buf }
-    -- 定義に移動 (Lspsaga goto_definition は期待しない定義に飛んでしまうことがある)
-    vim.keymap.set("n", "<C-'>", vim.lsp.buf.definition, opts)
-    -- vim.keymap.set("n", "v<C-'>", function()
-    --   vim.cmd([[ vsplit ]])
-    --   vim.lsp.buf.definition()
-    -- end, opts)
-    -- vim.keymap.set("n", "s<C-'>", function()
-    --   vim.cmd([[ split ]])
-    --   vim.lsp.buf.definition()
-    -- end, opts)
+    vim.keymap.set("n", "<localleader>'", vim.lsp.buf.definition, opts)
 
-    -- 実装へ移動
-    vim.keymap.set("n", "<leader>u", function()
+    vim.keymap.set("n", "<localleader>u", function()
       vim.lsp.buf.implementation()
     end, opts)
-
-    -- 実装をホバー
-    vim.keymap.set("n", "<S-C-d>", "<cmd>Lspsaga peek_definition<CR>", opts)
-
-    -- 型の実装をホバー
-    vim.keymap.set("n", "<S-C-i>", "<functioncmd>Lspsaga peek_type_definition<CR>", opts)
-
-    -- リネーム
-    vim.keymap.set({ "n", "i" }, "<S-A-r>", "<cmd>Lspsaga rename<CR>", opts)
 
     -- ファイルリネーム
     vim.keymap.set("n", "<S-C-r>", vim.lsp.buf.rename, opts)
