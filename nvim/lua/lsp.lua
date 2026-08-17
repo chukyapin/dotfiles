@@ -13,29 +13,25 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local opts = { buffer = ev.buf }
     -- 定義に移動 (Lspsaga goto_definition は期待しない定義に飛んでしまうことがある)
     vim.keymap.set("n", "<C-'>", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "v<C-'>", function()
-      vim.cmd([[ vsplit ]])
-      vim.lsp.buf.definition()
-    end, opts)
-    vim.keymap.set("n", "s<C-'>", function()
-      vim.cmd([[ split ]])
-      vim.lsp.buf.definition()
-    end, opts)
-
-    -- 定義をホバー
-    vim.keymap.set("n", "<S-C-s>", "<cmd>Lspsaga hover_doc<CR>", opts)
+    -- vim.keymap.set("n", "v<C-'>", function()
+    --   vim.cmd([[ vsplit ]])
+    --   vim.lsp.buf.definition()
+    -- end, opts)
+    -- vim.keymap.set("n", "s<C-'>", function()
+    --   vim.cmd([[ split ]])
+    --   vim.lsp.buf.definition()
+    -- end, opts)
 
     -- 実装へ移動
-    vim.keymap.set("n", "<C-y>i", vim.lsp.buf.implementation, opts)
+    vim.keymap.set("n", "<leader>u", function()
+      vim.lsp.buf.implementation()
+    end, opts)
 
     -- 実装をホバー
     vim.keymap.set("n", "<S-C-d>", "<cmd>Lspsaga peek_definition<CR>", opts)
 
     -- 型の実装をホバー
-    vim.keymap.set("n", "<S-c-i>", "<cmd>Lspsaga peek_type_definition<CR>", opts)
-
-    -- 呼び出し元の表示
-    vim.keymap.set("n", "<C-y>u", "<cmd>Lspsaga finder ref<CR>", opts)
+    vim.keymap.set("n", "<S-C-i>", "<functioncmd>Lspsaga peek_type_definition<CR>", opts)
 
     -- リネーム
     vim.keymap.set({ "n", "i" }, "<S-A-r>", "<cmd>Lspsaga rename<CR>", opts)
@@ -44,7 +40,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<S-C-r>", vim.lsp.buf.rename, opts)
 
     -- Code action
-    vim.keymap.set({ "n", "i" }, "<space><tab>", "<cmd>Lspsaga code_action<CR>", opts)
+    vim.keymap.set({ "n", "i" }, "<space><tab>", function()
+      vim.lsp.buf.code_action()
+    end, opts)
 
     -- 次の診断へ移動
     vim.keymap.set("n", "<C-f15>", function()
@@ -60,8 +58,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         scope = "cursor",
       })
     end, opts)
-
-    -- LSP再起動
     vim.keymap.set("n", "<Space><Space>r", "<cmd>LspRestart<CR>", opts)
 
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
@@ -92,9 +88,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 if not vim.g.vscode then
   vim.lsp.enable({
+    "astro",
     "bashls",
     "biome",
-    "copilot-language-server",
     "cssls",
     "denols",
     "emmet_language_server",
@@ -104,13 +100,14 @@ if not vim.g.vscode then
     "html",
     "jsonls",
     "lua_ls",
-    "oxfmt",
+    "oxlint",
+    "marksman",
     -- "pyright",
     "basedpyright",
     "ruff",
+    "sourcekit",
     "sqls",
     "svelte",
-    "sourcekit",
     "tailwindcss",
     -- "ty",
     "tinymist",
