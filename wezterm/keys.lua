@@ -27,8 +27,8 @@ function M.setup(config)
 
 		-- Splits
 		{ mods = M.mod, key = "Enter", action = M.smart_split },
-		{ mods = M.mod, key = "'", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-		{ mods = M.mod, key = ";", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+		{ mods = M.mod, key = "o", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+		{ mods = M.mod, key = "l", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 		{ mods = M.mod, key = "(", action = act.DecreaseFontSize },
 		{ mods = M.mod, key = ")", action = act.IncreaseFontSize },
 
@@ -72,10 +72,6 @@ function M.setup(config)
 	}
 end
 
----@param resize_or_move "resize" | "move"
----@param mods string
----@param key string
----@param dir "Right" | "Left" | "Up" | "Down"
 function M.split_nav(resize_or_move, mods, key, dir)
 	local event = "SplitNav_" .. resize_or_move .. "_" .. dir
 	wezterm.on(event, function(win, pane)
