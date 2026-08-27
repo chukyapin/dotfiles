@@ -56,16 +56,19 @@ return {
   lazy = false,
   -- stylua: ignore start
 	keys = {
-		{ "<space>q", function() Snacks.bufdelete() end, silent = true },
-		{ "<C-y>k", function() Snacks.picker.pickers() end, silent = true },
+		-- { "<space>q", function() Snacks.bufdelete() end },
+		{ "<C-y>d", function() Snacks.picker.diagnostics() end },
+		{ "<leader>p", function() Snacks.picker.pickers() end },
     { "<C-y>e", function() Snacks.picker.explorer({ layout = "sidebar" }) end, silent = true },
-		{ "<C-y>s", function() Snacks.picker.smart() end, silent = true },
-		{ "<C-y>f", function() Snacks.picker.files() end, desc = "find files", silent = true },
-		{ "<C-y>g", function() Snacks.picker.grep() end, desc = "grep", silen = true },
+		{ "<C-y>s", function() Snacks.picker.smart() end },
+		{ "<C-y>f", function() Snacks.picker.files() end, desc = "find files" },
+		{ "<C-y>g", function() Snacks.picker.grep() end, desc = "grep" },
     { "<C-y>w", function() Snacks.picker.grep_word() end, desc = "Word", mode = { "n", "x" } },
-		{ "<C-y>l", function() Snacks.picker.lines() end, desc = "lines", silent = true },
+		{ "<C-y>l", function() Snacks.picker.lines() end, desc = "lines" },
     { "<C-y>j", function() Snacks.picker.lsp_workspace_symbols() end, desc = "workspace_symbbols", silent = true },
-    { "<C-y>o", function() Snacks.picker.lsp_symbols() end, desc = "document_symbols", silent = true },
+    { "<C-y>o", function() Snacks.picker.lsp_symbols() end, desc = "document_symbols" },
+    { "<C-y>r", function() Snacks.picker.recent() end },
+		{ "<C-y>,", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
     {
       "<C-y><Space>f",
       mode = { "n", "i" },
@@ -79,12 +82,6 @@ return {
       silent = true
     },
 
-    -- { "<C-y>e", mode = { "n", "i" }, function()
-    --   git_recent.picker({max_commit_count = 30})
-    -- end, silent = true },
-    { "<C-y>r", mode = { "n", "i" }, function() Snacks.picker.recent() end, silent = true },
-    -- { "<C-y>t", mode = { "n", "i" }, function() Snacks.picker.explorer() end, silent = true },
-    { "<C-y>g", mode = { "n", "i" }, function() Snacks.picker.grep() end, silent = true },
     {
       "<C-y><Space>g",
       mode = { "n", "i" },
@@ -95,7 +92,6 @@ return {
           layout =  "ivy",
         })
       end,
-      silent = true
     },
     {
       "<C-y>v",
@@ -115,24 +111,56 @@ return {
         })
       end,
       desc = "Snacks picker buffers",
-      silent = true,
     },
 
 		{ "'g", function() Snacks.lazygit() end, desc = "Lazygit" },
-		{ ",,", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
 		{ "'b", function() Snacks.picker.git_branches({ layout = "select" }) end,       desc = "Branches" },
-		{ "'s", function() Snacks.picker.git_status() end,                              silent = true },
+		{ "'s", function() Snacks.picker.git_status() end },
 		{ "'l", function() Snacks.picker.git_log_line() end,                            silent = true },
     { "'d", function() Snacks.picker.git_diff() end, silent = true },
     { "'f", function() Snacks.picker.git_log_file() end, silent = true },
+    { "'e", mode = { "n", "i" }, function()
+      git_recent.picker({max_commit_count = 30})
+    end, silent = true },
 		-- { "<C-/>", mode = { "n", "i" }, function() Snacks.terminal() end,                                       desc = "Toggle Terminal" },
 		-- { "<C-j>:", mode = { "n", "i" }, function() Snacks.picker.command_history() end, silent = true },
 		-- { "<C-j>p", mode = { "n", "i" }, function() Snacks.picker.projects() end,        silent = true },
 		-- --- @diagnostic disable-next-line: undefined-field todo_commentsはsnacks以外に定義があるため無視
 		-- { "<C-j>m", mode = { "n", "i" }, () Snacks.picker.todo_comments() end,   silent = true },
-    { "wm", function() Snacks.zen.zoom() end, desc = "Maximize" },
-    { "<space>n", function() Snacks.notifier.show_history() end, desc = "Notification History" },
-    { "<space>nd", function() Snacks.notifier.hide() end, desc = "Dismiss All" },
+    -- { "wm", function() Snacks.zen.zoom() end, desc = "Maximize" },
+    { "<space>nn", function() Snacks.notifier.show_history() end, desc = "Notification History" },
+    -- { "<space>nd", function() Snacks.notifier.hide() end, desc = "Dismiss All" },
+{
+    "<leader>il",
+    function()
+      -- 【⚠️要変更】自身のObsidian Vaultのルートディレクトリ
+      local brain_dir = vim.fn.expand("~/develop/github.com/chukyapin/zettelkasten/")
+      -- 【⚠️要変更】検索から除外したいフォルダ（例: タグフォルダ）
+      local tags_dir = vim.fn.expand("~/Documents/Brain/02-Tags")
+
+      Snacks.picker({
+        title = "Insert Link",
+        finder = "proc",
+        cmd = "find",
+        -- findコマンドを使って特定のフォルダ（tags_dir）を除外
+        args = { brain_dir, "-type", "f", "-name", "*.md", "!", "-path", tags_dir .. "/*" },
+        transform = function(item)
+          item.file = item.text
+        end,
+        actions = {
+          confirm = function(picker, item)
+            picker:close()
+            if item then
+              local filename = vim.fn.fnamemodify(item.file, ":t:r")
+              local link = string.format("[[%s]]", filename)
+              vim.api.nvim_put({ link }, "", false, true)
+            end
+          end,
+        },
+      })
+    end,
+    desc = "Insert note link (excl. tags)",
+  },
    },
   -- stylua: ignore end
   ---@type snacks.Config
@@ -145,13 +173,14 @@ return {
       hidden = true,
     },
     indent = {
-      enabled = true,
+      -- enabled = false,
+      chunk = { enabled = true },
     },
     image = {
       force = false,
-      enabled = true,
+      -- enabled = false,
       math = { enabled = true },
-      doc = { inline = true, float = true },
+      -- doc = { inline = true, float = true },
     },
 
     dashboard = {
@@ -178,17 +207,17 @@ return {
         function()
           local in_git = Snacks.git.get_root() ~= nil
           local cmds = {
-            {
-              title = "Notifications",
-              cmd = "gh notify -s -a -n5",
-              action = function()
-                vim.ui.open("https://github.com/notifications")
-              end,
-              key = "n",
-              icon = " ",
-              height = 3,
-              enabled = true,
-            },
+            -- {
+            --   title = "Notifications",
+            --   cmd = "gh notify -s -a -n5",
+            --   action = function()
+            --     vim.ui.open("https://github.com/notifications")
+            --   end,
+            --   key = "n",
+            --   icon = " ",
+            --   height = 3,
+            --   enabled = true,
+            -- },
             {
               title = "Open Issues",
               cmd = "gh issue list -L 3",
@@ -288,7 +317,7 @@ return {
           },
         },
         explorer = {
-          -- focus = "input",
+          focus = "list", --list or focus
           auto_close = true,
           matcher = { sort_empty = false },
           hidden = true,
@@ -356,7 +385,8 @@ return {
       },
       previewers = {
         diff = {
-          style = "terminal",
+          -- style = "terminal",
+          style = "fancy",
           -- NOTE: side-by-sideにすると横幅がおかしくなるので諦める
         },
       },
