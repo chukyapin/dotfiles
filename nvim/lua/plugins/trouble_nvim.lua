@@ -40,13 +40,33 @@ local function has_trouble_item_in_direction(view, direction)
   return false
 end
 
+-- local function cnext_cyclic()
+--   if not pcall(vim.cmd, "cnext") then
+--     vim.cmd("cfirst")
+--   end
+-- end
+--
+-- local function cprev_cyclic()
+--   if not pcall(vim.cmd, "cprev") then
+--     vim.cmd("clast")
+--   end
+-- end
+
 local function cnext_cyclic()
+  if #vim.fn.getqflist() == 0 then
+    return
+  end
+
   if not pcall(vim.cmd, "cnext") then
     vim.cmd("cfirst")
   end
 end
 
 local function cprev_cyclic()
+  if #vim.fn.getqflist() == 0 then
+    return
+  end
+
   if not pcall(vim.cmd, "cprev") then
     vim.cmd("clast")
   end
@@ -60,10 +80,10 @@ return {
       "<C-y>h",
       "<cmd>Trouble lsp_references<cr>",
     },
-    -- {
-    --   "<C-j>w",
-    --   "<cmd>Trouble we<cr>",
-    -- },
+    {
+      "<C-j>w",
+      "<cmd>Trouble we<cr>",
+    },
     {
       ",j",
       function()
