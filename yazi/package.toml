@@ -14,14 +14,14 @@ rev = "de33976"
 hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[plugin.deps]]
-use = "yazi-rs/plugins:git"
-rev = "de33976"
-hash = "36a484acf6a0a0219c543ccb4cee218f"
-
-[[plugin.deps]]
 use = "stelcodes/bunny"
 rev = "71b14a3"
 hash = "18a2829738214fe9bca99a2fef19113d"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "de33976"
+hash = "36a484acf6a0a0219c543ccb4cee218f"
 
 [[flavor.deps]]
 use = "BennyOe/tokyo-night"
