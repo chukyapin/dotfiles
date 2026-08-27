@@ -7,6 +7,8 @@ function a
     rm -f -- "$tmp"
 end
 
+zoxide init fish --cmd j | source
+
 # Cursor styles
 set -gx fish_vi_force_cursor 1
 set -gx fish_cursor_default block
