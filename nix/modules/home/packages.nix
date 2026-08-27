@@ -37,11 +37,8 @@ in
     mergiraf # syntax-aware git merge driver
 
     # エディタ/ターミナル
-    emacs
     neovim
     starship
-    cmux
-    tmux
     herdr
     wezterm
     kanata
@@ -111,18 +108,14 @@ in
     # Slack
     slack-cli # Official Slack platform CLI
 
-    # ノート
-    nb
-    # ntn # Notion CLI
-
     # その他
     translate-shell
     nkf
     rename
     inetutils # telnet
   ] ++ (lib.optionals hostSpec.enableGUI [
-    # GUI アプリ
 
+    # GUI アプリ
     obsidian
     spotify
     raycast

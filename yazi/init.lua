@@ -19,9 +19,9 @@ require("bunny"):setup({
 	hops = {
 		{ key = "h", path = "~" },
 		{ key = "t", path = "/tmp" },
-		{ key = "n", path = "~/develop/github.com/chukyapin/zettelkasten/Literature_Note/農業日誌/" },
+		{ key = "n", path = "~/develop/github.com/chukyapin/zettelkasten/Literature_Note/daily/" },
 		{ key = "D", path = "~/Desktop", desc = "Desktop" },
-		{ key = "d", path = "~/Documents", desc = "Documents" },
+		{ key = "d", path = "~/develop/github.com/chukyapin/dotfiles/", desc = "dotfiles" },
 		{ key = "c", path = "~/.config", desc = "Config files" },
 		{ key = "i", path = "~/Library/Mobile Documents/com~apple~CloudDocs/image" },
 	},
