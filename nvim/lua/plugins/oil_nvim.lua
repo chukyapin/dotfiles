@@ -24,7 +24,7 @@ return {
       -- ["gx"] = "actions.open_external",
       ["g."] = { "actions.toggle_hidden", mode = "n" },
       ["gy"] = "actions.yank_entry",
-      ["<Space>y"] = {
+      ["<Space>a"] = {
         callback = function()
           local oil = require("oil")
           local current_path = oil.get_current_dir()
