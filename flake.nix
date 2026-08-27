@@ -26,6 +26,12 @@
 
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 
+
+    hunk = {
+      url = "github:modem-dev/hunk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs =
@@ -76,15 +82,18 @@
               # nix-darwin を先に。/etc/nix/nix.conf(substituters, trusted-users,
               # max-jobs 等)を先に反映させ、home-manager のビルドがその設定下で走るようにする。
               echo "Updating nix-darwin..."
-              nix run nix-darwin -- switch --flake .#kawarimidoll-darwin
-              echo "Updating home-manager..."
-              nix run nixpkgs#home-manager -- switch --flake .#myHomeConfig
+              sudo nix run nix-darwin -- switch --flake .#katayamanoMacBook-Pro
+
               echo "Update complete!"
             ''
           );
+
+          meta = {
+            description = "Update flake and apply nix-darwin configuration";
+          };
         };
         };
-    # {
+# {
       # nix-darwin（macOS システム設定＋Home Manager＋Homebrew）
       darwinConfigurations."katayamanoMacBook-Pro" =
         nix-darwin.lib.darwinSystem {
