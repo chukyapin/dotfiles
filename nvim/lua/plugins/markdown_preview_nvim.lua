@@ -3,3 +3,4 @@ return {
   ft = "markdown",
   build = ":call mkdp#util#install()",
 }
+

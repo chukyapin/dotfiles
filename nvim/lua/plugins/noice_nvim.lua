@@ -9,6 +9,11 @@ return {
     { "<C-y>n", ":NoicePick<CR>", silent = true },
   },
   opts = {
+    lsp = {
+      signature = {
+        enabled = false,
+      },
+    },
     presets = {
       command_palette = true,
       inc_rename = true,

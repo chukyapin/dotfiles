@@ -1,3 +1,11 @@
+local function manipulate(direction, mode)
+  if not vim.bo.modifiable then
+    return
+  end
+
+  require("dial.map").manipulate(direction, mode)
+end
+
 return {
   -- Better increase/descrease
   "monaqa/dial.nvim",
@@ -5,7 +13,8 @@ return {
     {
       "<C-a>",
       function()
-        require("dial.map").manipulate("increment", "normal")
+        -- require("dial.map").manipulate("increment", "normal")
+        manipulate("increment", "normal")
       end,
       mode = "n",
       desc = "dial increment",
@@ -13,7 +22,7 @@ return {
     {
       "<C-x>",
       function()
-        require("dial.map").manipulate("decrement", "normal")
+        manipulate("decrement", "normal")
       end,
       mode = "n",
       desc = "dial decrement",
@@ -21,7 +30,7 @@ return {
     {
       "g<C-a>",
       function()
-        require("dial.map").manipulate("increment", "gnormal")
+        manipulate("increment", "gnormal")
       end,
       mode = "n",
       desc = "dial increment",
@@ -29,7 +38,7 @@ return {
     {
       "g<C-x>",
       function()
-        require("dial.map").manipulate("decrement", "gnormal")
+        manipulate("decrement", "gnormal")
       end,
       mode = "n",
       desc = "dial decrement",
@@ -37,7 +46,7 @@ return {
     {
       "<C-a>",
       function()
-        require("dial.map").manipulate("increment", "visual")
+        manipulate("increment", "visual")
       end,
       mode = "v",
       desc = "dial increment",
@@ -45,7 +54,7 @@ return {
     {
       "<C-x>",
       function()
-        require("dial.map").manipulate("decrement", "visual")
+        manipulate("decrement", "visual")
       end,
       mode = "v",
       desc = "dial decrement",
@@ -53,7 +62,7 @@ return {
     {
       "g<C-a>",
       function()
-        require("dial.map").manipulate("increment", "gvisual")
+        manipulate("increment", "gvisual")
       end,
       mode = "v",
       desc = "dial increment",
@@ -61,7 +70,7 @@ return {
     {
       "g<C-x>",
       function()
-        require("dial.map").manipulate("decrement", "gvisual")
+        manipulate("decrement", "gvisual")
       end,
       mode = "v",
       desc = "dial decrement",

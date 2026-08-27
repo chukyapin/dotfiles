@@ -1,9 +1,9 @@
 return {
   "https://github.com/akinsho/bufferline.nvim",
   -- event = "VeryLazy",
-  event = { "BufAdd", "TabEnter" },
+  -- event = { "BufAdd", "TabEnter" },
   keys = {
-    { "<Tab>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next tab" },
+    -- { "<Tab>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next tab" },
     { "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", desc = "Prev tab" },
   },
   opts = {

@@ -1,6 +1,5 @@
 return {
   "https://github.com/folke/flash.nvim",
-  cond = true,
   event = "VeryLazy",
   opts = {
     label = {
@@ -15,24 +14,24 @@ return {
   },
   keys = {
     {
-      "<CR>",
-      mode = { "n", "x", "o", "v" },
+      "s",
+      mode = { "n", "x", "o" },
       function()
         require("flash").jump()
       end,
       desc = "Flash",
     },
     {
-      "R",
+      "<leader>r",
       mode = { "n", "x", "o" },
       function()
-        require("flash").treesitter()
+        require("fash").treesitter()
       end,
       desc = "Flash Treesitter",
     },
     {
-      "<TAB>",
-      mode = "o",
+      "r",
+      mode = { "o" },
       function()
         require("flash").remote()
       end,
