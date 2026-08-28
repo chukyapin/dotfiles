@@ -22,13 +22,3 @@ hash = "18a2829738214fe9bca99a2fef19113d"
 use = "yazi-rs/plugins:git"
 rev = "de33976"
 hash = "36a484acf6a0a0219c543ccb4cee218f"
-
-[[flavor.deps]]
-use = "BennyOe/tokyo-night"
-rev = "8e6296f"
-hash = "d9da921c3bd37ba32ee27a8a7a40461f"
-
-[[flavor.deps]]
-use = "matt-dong-123/gruvbox-material"
-rev = "e0fd2d8"
-hash = "8f46ca96c0bbe1bdfb4fa201dd5eed4b"
