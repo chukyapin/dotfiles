@@ -7,22 +7,33 @@ require("session"):setup({
 })
 
 require("git"):setup()
-
 require("full-border"):setup({
 	type = ui.Border.ROUNDED,
 })
 
-require("folder-rules"):setup()
-
--- `plugins/bunny-private.yazi/main.lua` に設定する
 require("bunny"):setup({
 	hops = {
-		{ key = "h", path = "~" },
-		{ key = "t", path = "/tmp" },
-		{ key = "n", path = "~/develop/github.com/chukyapin/zettelkasten/Literature_Note/daily/" },
+		{ key = "h", path = "~", desc = "Home" },
+		{ key = "t", path = "/tmp", desc = "tmp" },
+		{
+			key = "n",
+			path = "~/develop/github.com/chukyapin/zettelkasten/Literature_Note/daily/",
+			desc = "Daily",
+		},
 		{ key = "D", path = "~/Desktop", desc = "Desktop" },
 		{ key = "d", path = "~/develop/github.com/chukyapin/dotfiles/", desc = "dotfiles" },
 		{ key = "c", path = "~/.config", desc = "Config files" },
-		{ key = "i", path = "~/Library/Mobile Documents/com~apple~CloudDocs/image" },
+		{ key = "z", path = "~/develop/github.com/chukyapin/zettelkasten/", desc = "zettelkasten" },
+		{
+			key = "i",
+			path = "~/Library/Mobile Documents/com~apple~CloudDocs/image",
+			desc = "iCloud images",
+		},
 	},
+
+	desc_strategy = "path",
+	ephemeral = true,
+	tabs = true,
+	notify = false,
+	fuzzy_cmd = "fzf",
 })
